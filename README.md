@@ -24,7 +24,7 @@ Below is a preview of my portfolio website:
 
 ![Portfolio Preview](images/preview.png)
 
-You can view the [live site here.](https://jhwong19.github.io/jinghui-portfolio/)
+You can view the [live site here](http://www.jinghuiwong.com).
 
 ## Credits
 
