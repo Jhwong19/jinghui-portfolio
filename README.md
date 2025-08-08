@@ -37,6 +37,7 @@ Credits:
 
     Icons:
         Font Awesome (fontawesome.io)
+        Favicon: Artificial Intelligence icons created by Freepik - Flaticon (flaticon.com/free-icons/artificial-intelligence)
 
     Other:
         jQuery (jquery.com)
