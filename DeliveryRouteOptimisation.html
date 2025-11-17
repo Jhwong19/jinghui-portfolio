@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Technical Blog | AI-Powered Optimiser Scheduler</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Technical blog: Designing a Practical Last‑Mile Delivery Planner with OR‑Tools and Streamlit." />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <script>
+      window.MathJax = { tex: { inlineMath: [['$','$'], ['\\(','\\)']] } };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    <!-- Added inline style for centered, tight image captions -->
+    <style>
+      .post p.caption {
+        text-align: center;
+        margin-top: 0.25rem; /* minimal space above caption */
+        margin-bottom: 1.0rem; /* consistent space below caption */
+        font-style: italic; /* preserve emphasis */
+      }
+      .post span.image.fit + p.caption {
+        margin-top: 0.25rem; /* ensure directly below image */
+      }
+    </style>
+  </head>
+  <body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="fade-in">
+
+      <!-- Intro/Header Banner (optional minimal) -->
+      <div id="intro">
+        <h1>TECHNICAL BLOG</h1>
+        <p>Designing a Practical Last‑Mile Delivery Planner with OR‑Tools and Streamlit</p>
+        <ul class="actions">
+          <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Read</a></li>
+        </ul>
+      </div>
+
+      <!-- Nav (reusing same panel) -->
+      <nav id="nav">
+        <ul class="links">
+          <li><a href="index.html">Projects</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <ul class="icons">
+          <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+          <li><a href="https://github.com/Jhwong19" class="icon brands fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+        </ul>
+      </nav>
+
+      <!-- Main -->
+      <div id="main">
+
+        <!-- Blog Article (converted from BLOG copy.md) -->
+        <article class="post">
+          <header class="major">
+            <span class="date">Updated Nov, 2025</span>
+            <h1>Designing a Practical Last‑Mile Delivery Planner with OR‑Tools and Streamlit</h1>
+            <p>Effective last‑mile delivery planning is a balance of operational constraints and geography. This project turns that challenge into a focused, reproducible application: a Streamlit interface backed by Google OR‑Tools for route optimization, with road‑network travel times sourced from APIs (Google Maps Directions/Distance Matrix or OSRM) and results visualized on an interactive map.</p>
+          </header>
+
+          <span class="image fit"><img src="gif/delivery_route_optimisation.gif" alt="Delivery Route Optimisation Demo" /></span>
+
+          <h2>Problem Statement</h2>
+          <p>Last‑mile operations rarely match the simplicity of a whiteboard sketch. Vehicles differ in capacity and shift hours, customers require deliveries within specific time windows, and travel times vary by time of day and route conditions. Manual planning, static routes, or lightweight heuristics do not scale with growing demand or volatility. The result is missed windows, excess mileage, and operational strain.</p>
+          <p>This project addresses that gap with a constrained, data‑driven planner that respects time windows, capacity, depots, and traffic patterns—producing plans that are both defensible and easy to review.</p>
+
+          <!-- Before Value Proposition -->
+          <hr class="section-divider" />
+          <h2>Value Proposition</h2>
+          <h3>Route Optimization</h3>
+          <ul>
+            <li>Solves the Vehicle Routing Problem (VRP) to determine efficient routes</li>
+            <li>Incorporates constraints like time windows and vehicle capacity</li>
+            <li>Prioritizes deliveries based on importance and urgency</li>
+          </ul>
+          <h3>Map Visualization</h3>
+          <ul>
+            <li>Displays optimized routes on an interactive map</li>
+            <li>Highlights delivery stops and depot locations</li>
+            <li>Provides detailed route information and statistics</li>
+          </ul>
+          <h3>Calendar View</h3>
+          <ul>
+            <li>Calendar-based schedule for deliveries</li>
+            <li>Shows delivery timeline and workload distribution</li>
+            <li>Helps manage delivery schedules efficiently</li>
+          </ul>
+          <h3>Interactive Dashboard</h3>
+          <ul>
+            <li>Real-time delivery status monitoring</li>
+            <li>Data filtering and visualization options</li>
+            <li>Customizable optimization parameters</li>
+          </ul>
+
+          <!-- Before Architecture Overview
+          <hr class="section-divider" />
+          <h2>Architecture Overview</h2>
+          <pre><code>
+                        ┌─────────────────────┐
+                        │  User Frontend (UI) │
+                        │   Streamlit (Python)│
+                        └────────┬────────────┘
+                                 │
+                ┌────────────────────────────────┐
+                │  App Logic & Optimizer Service │
+                │  (OR-Tools, Validation, I/O)   │
+                └────────────────────────────────┘
+                                 │
+         ┌───────────────────────┼──────────────────────────┐
+         │                       │                          │
+ ┌────────────────┐     ┌──────────────────────┐    ┌───────────────────────┐
+ │ Data Ingestion │     │  Routing APIs        │    │  Map Renderer         │
+ │ (CSV: orders,  │────▶│  Google Directions & │    │  Folium/Leaflet       │
+ │ vehicles,      │     │  Distance Matrix,    │    │  (interactive map,    │
+ │ time-matrices) │     │  or OSRM             │    │  overlays & popups)   │
+ └────────────────┘     └──────────────────────┘    └───────────────────────┘
+                                 │
+                       ┌─────────▼─────────┐
+                       │  Route Planner &  │
+                       │  Export (CSV/JSON)│
+                       └────────────────────┘
+          </code></pre> -->
+
+          <!-- Before Features and Pages -->
+          <hr class="section-divider" />
+          <h2>Features and Pages</h2>
+
+          <h3>Map Page</h3>
+          
+          <span class="image fit"><img src="images/blog_1_map0.png" alt="Interactive map showing routes, depots, and delivery clusters" /></span>
+          <p class="caption"><em>Interactive map showing routes, depots, and delivery clusters</em></p>
+
+          <p>The map provides a clear, geographic view of your operation. Delivery locations and depot positions are drawn on an interactive base map, with filters in the sidebar to tailor the display to specific dates, vehicles, or status. At a glance, you can see how stops cluster, how routes traverse the network, and where potential bottlenecks may form. Key summary metrics (number of deliveries, assigned vs. unassigned, and late/on‑time breakdowns) accompany the map so you can correlate what you see with operational reality.</p>
+          <span class="image fit"><img src="images/blog_1_map.png" alt="Interactive map showing routes, depots, and delivery clusters" /></span>
+          <p class="caption"><em>Real‑time operational view: routes by color, stop markers with popups, and depot locations.</em></p>
+          <p>When routes are generated, the map highlights each vehicle’s path with distinct colors and markers. Popups reveal stop details—ETA, time window, priority, and demand—so you can review the sequence on the ground. A delivery schedule calendar complements the map by showing time spans across the day for each delivery, making it easy to spot overlaps, slack, and potential conflicts.</p>
+          <ul>
+            <li>Displays optimized routes on an interactive map</li>
+            <li>Highlights delivery stops and depot locations</li>
+            <li>Provides detailed route information and statistics</li>
+          </ul>
+
+          <h3>Optimizer Page: Step‑by‑Step Guide</h3>
+          <p>The optimizer assigns deliveries to vehicles to build efficient, feasible routes. Use the sidebar to set parameters, generate plans, review results, and iterate.</p>
+          <ol>
+            <li>
+              <strong>Set optimization parameters (sidebar)</strong>
+              <ul>
+                <li>Select Delivery Dates: Choose the dates to include; select “All” to include all.</li>
+                <li>Priority Importance: Higher values give more weight to high‑priority deliveries.</li>
+                <li>Time Window Importance: Higher values enforce stricter adherence to delivery windows.</li>
+                <li>Load Balancing vs. Distance: Higher values distribute deliveries more evenly across vehicles (less focus on pure distance minimization).</li>
+                <li>Maximum Vehicles: Limit the number of vehicles available to the solver.</li>
+                <li>Minimum Time Window Compliance: Set the minimum percentage of deliveries that must meet their time windows.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Generate routes</strong>
+              <ul>
+                <li>Review current delivery statistics and vehicle availability.</li>
+                <li>Click “Generate Optimal Routes” to run the solver.</li>
+                <li>The algorithm assigns deliveries to vehicles based on your parameters and travel‑time source.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Review results</strong>
+              <ul>
+                <li>Overall Performance: Assigned deliveries, vehicles used, time‑window compliance.</li>
+                <li>Time &amp; Distance Distribution: See how workload is spread across vehicles.</li>
+                <li>Route Map: An interactive map per date; hover for details, filter by day.</li>
+                <li>Calendar View: Delivery schedules by date. Legend: green = on‑time, orange = late, red = unassigned.</li>
+              </ul>
+              <span class="image fit"><img src="images/blog_1_optimizer1.png" alt="Optimization results overview with KPIs and charts" /></span>
+              <p class="caption"><em>Fast optimization with clear KPIs, route metrics, and distribution summaries.</em></p>
+            </li>
+            <li>
+              <strong>Adjust and refine</strong>
+              <ul>
+                <li>Not enough vehicles? Increase the maximum vehicles allowed.</li>
+                <li>Time windows not met? Decrease the time‑window importance or the minimum compliance target.</li>
+                <li>High‑priority deliveries not assigned? Increase priority importance.</li>
+                <li>Routes too unbalanced? Increase the load‑balancing parameter.</li>
+              </ul>
+            </li>
+          </ol>
+
+          <p>The route computation integrates road‑network travel times from Google Maps Directions/Distance Matrix or OSRM. The solver sequences stops to respect time windows, priorities, service times, and capacity limits while minimizing total travel time/distance.</p>
+          <span class="image fit"><img src="images/blog_1_optimizer2.png" alt="Routing with API‑derived travel times and optimal stop sequencing" /></span>
+          <p class="caption"><em>Under the hood: API‑derived ETAs drive a VRP‑TW solver to compute the best sequence and duration.</em></p>
+
+          <span class="image fit"><img src="images/blog_1_optimizer3.png.png" alt="Calendar schedule visualization by vehicle and date" /></span>
+          <p class="caption"><em>Calendar view: visualize and tune by duration, distance, and package importance to balance operations.</em></p>
+
+          <p><strong>Tip:</strong> Always click “Generate Optimal Routes” after changing parameters to apply updates.</p>
+
+          <!-- Before Data, Briefly -->
+          <hr class="section-divider" />
+          <h2>Data, Briefly</h2>
+          <p>Inputs are simple CSVs. Deliveries include IDs, coordinates or addresses, demand (weight/volume), and time windows. Vehicles include capacities, depot locations, and shift hours. Optional time‑of‑day matrices reflect traffic patterns for morning, midday, evening, and night. A locations index keeps coordinates aligned across matrices and outputs.</p>
+
+          <!-- Before Optimization Approach -->
+          <hr class="section-divider" />
+          <section class="post">
+            <h2>Optimization Approach</h2>
+            <p>Below is a compact formulation that captures the core elements used by the solver and the optimizer’s tunable preferences.</p>
+
+            <h3>Sets</h3>
+            <p>$N = \{1,\dots,n\}$ customers, depot indexed as $0$.<br/>
+            $K = \{1,\dots,m\}$ vehicles.</p>
+
+            <h3>Parameters</h3>
+            <p>$q_i$: demand at customer $i$; $Q_k$: capacity of vehicle $k$.<br/>
+            $[a_i, b_i]$: time window at customer $i$; $s_i$: service time at $i$.<br/>
+            $c_{ij}$: travel distance (or cost) from $i$ to $j$.<br/>
+            $t_{ij}$: travel time from $i$ to $j$ (from Google/OSRM or matrices).<br/>
+            $w_i$: priority weight for customer $i$ (higher = more important).<br/>
+            $M$: a large constant for time‑window constraints.<br/>
+            $V_{\max}$: maximum vehicles allowed by the user.<br/>
+            $\alpha, \beta, \gamma, \lambda \ge 0$: user‑tunable weights for distance, lateness, load balancing, and unassigned penalties.</p>
+
+            <h3>Decision Variables</h3>
+            <p>$x_{ij}^k \in \{0,1\}$: 1 if vehicle $k$ travels from $i$ to $j$, else 0.<br/>
+            $T_i^k \ge 0$: arrival time of vehicle $k$ at node $i$.<br/>
+            $L_i^k \ge 0$: load on vehicle $k$ upon arrival at node $i$.<br/>
+            $u_i \in \{0,1\}$: 1 if customer $i$ is served by any vehicle, else 0.<br/>
+            $z_k \in \{0,1\}$: 1 if vehicle $k$ is used, else 0.<br/>
+            $\ell_i \ge 0$: lateness at customer $i$.<br/>
+            $W_k \ge 0$: working time proxy for vehicle $k$ (optional balance term).</p>
+
+            <h3>Objective (multi‑term, user‑weighted)</h3>
+            <p>
+            $$
+            \min \; \alpha \sum_{k\in K}\sum_{i\in N_0}\sum_{j\in N_0} c_{ij} x_{ij}^k 
+            \; + \; \beta \sum_{i\in N} w_i\, \ell_i
+            \; + \; \gamma \sum_{k\in K} (W_k - \bar W)^2
+            \; + \; \lambda \sum_{i\in N} w_i (1 - u_i)
+            $$
+            where $N_0 = N \cup \{0\}$ and $\bar W$ is the mean of $W_k$ across vehicles (the balance term may be approximated or omitted in a purely linear model).
+            </p>
+
+            <div class="objective-intuition">
+              <h4>Objective intuition and UI links</h4>
+
+              <p><strong>Distance/travel cost:</strong> $\alpha \cdot \sum_{k\in K}\sum_{i\in N_0}\sum_{j\in N_0} c_{ij} x_{ij}^k$</p>
+              <ul>
+                <li>What it does: Rewards shorter routes (less distance/time).</li>
+                <li>Turn it up when you want the solver to strongly prefer compact routes and fewer detours.</li>
+              </ul>
+
+              <p><strong>Lateness penalty:</strong> $\beta \cdot \sum_{i\in N} w_i \, \ell_i$</p>
+              <ul>
+                <li>What it does: Punishes arriving after a stop’s time window; $w_i$ makes high‑priority stops “hurt” more when late.</li>
+                <li>Turn it up to push schedules to stay within windows, especially for important customers.</li>
+                <li>UI link: Time Window Importance (and Priority Importance via $w_i$).</li>
+              </ul>
+
+              <p><strong>Workload balance:</strong> $\gamma \cdot \sum_{k\in K} (W_k - \bar W)^2$</p>
+              <ul>
+                <li>What it does: Evens out work across vehicles. $W_k$ is a vehicle’s total work (e.g., route time/distance); $\bar W$ is the average across vehicles.</li>
+                <li>Turn it up to avoid one “hero” truck doing most of the work, even if it adds some distance.</li>
+                <li>UI link: Load Balancing vs Distance (trade‑off vs $\alpha$).</li>
+              </ul>
+
+              <p><strong>Unserved penalty:</strong> $\lambda \cdot \sum_{i\in N} w_i \cdot (1 - u_i)$</p>
+              <ul>
+                <li>What it does: Penalizes dropping deliveries; $w_i$ makes skipping high‑priority stops very expensive.</li>
+                <li>Turn it up to force serving more (or all) stops, accepting extra distance or more vehicles if feasible.</li>
+                <li>UI link: Priority Importance (via $w_i$). Complements Minimum Time Window Compliance.</li>
+              </ul>
+
+            <p><strong>Vehicle limit</strong>
+              <p>$\sum_k z_k \le V_{\max}$. Lower caps force consolidation; higher caps give slack to meet windows and reduce lateness.</p>
+            $$\sum_{k\in K} z_k \le V_{\max}$$
+            </p>
+            <p><strong>Working time proxy (optional, for balance term)</strong>
+              <p>Encourages similar total work per vehicle. Driven by Load Balancing vs Distance.</p>
+            $$W_k \ge \sum_{i\in N_0}\sum_{j\in N_0} t_{ij} x_{ij}^k \quad \forall k\in K$$
+            </p>
+            <p><strong>Domains</strong>
+              <p>Variable types and non‑negativity are fixed; parameters change costs and feasibility pressure, not domains.</p>
+            $$x_{ij}^k \in \{0,1\},\; u_i \in \{0,1\},\; z_k \in \{0,1\},\; T_i^k, L_i^k, \ell_i, W_k \ge 0$$
+            </p>
+
+            <h3>Assumptions</h3>
+            <ul>
+              <li>Single depot; each route starts and ends at the depot.</li>
+              <li>Deterministic travel times for a chosen time‑of‑day profile (or API snapshot).</li>
+              <li>Service times are known and additive; no precedence constraints.</li>
+              <li>Travel cost/time obeys triangle inequality (typical for road networks).</li>
+              <li>Penalties reflect business preferences: distance, on‑time performance, balance, and priority.</li>
+            </ul>
+          </section>
+
+          <!-- Before Road‑Network Travel Times -->
+          <hr class="section-divider" />
+          <h2>Road‑Network Travel Times (Google Maps or OSRM)</h2>
+          <p>Accurate ETAs require road‑network travel times, not straight lines. The app supports:</p>
+          <ul>
+            <li><strong>Google Maps Directions API</strong> and <strong>Distance Matrix API</strong>: highly reliable routing and travel time estimates, with traffic modeling where available. Requires an API key, billing, and adherence to Google’s Terms of Service.</li>
+            <li><strong>OSRM</strong>: an open‑source alternative with public or self‑hosted servers. Useful for prototyping, offline scenarios, or cost control.</li>
+          </ul>
+          <p>In practice, you can toggle between sources. For Google, configure your API key as an environment variable and select Directions/Distance Matrix for route and ETA computation. For OSRM, point to a table/route endpoint. The solver then consumes those times to produce realistic, feasible routes.</p>
+
+          <!-- Before Limitations and Roadmap -->
+          <hr class="section-divider" />
+          <h2>Limitations and Roadmap</h2>
+          <p>This implementation uses precomputed or API‑fetched travel times but does not continuously adapt to unexpected incidents without a refresh. It assumes a single depot and simplified service times. For very large instances, time‑bounded solves may be preferable to guarantee responsiveness. Future extensions include multi‑depot support, driver breaks/skills, EV energy constraints, scenario comparison, KPI dashboards, and live re‑optimization triggered by events.</p>
+
+          <!-- Before Summary -->
+          <hr class="section-divider" />
+          <h2>Summary</h2>
+          <p>By combining an accessible Streamlit UI, OR‑Tools for optimization, and road‑aware routing data from Google Maps or OSRM, this project turns a complex planning task into a repeatable workflow. The result is an operational plan that reflects constraints and traffic reality, is easy to validate on a map, and can be deployed reliably across environments.</p>
+
+          <!-- Before References -->
+          <hr class="section-divider" />
+          <h2>References</h2>
+          <ul>
+            <li><a href="https://developers.google.com/optimization/routing" target="_blank" rel="noopener">Google OR‑Tools Routing</a></li>
+            <li><a href="https://docs.streamlit.io/" target="_blank" rel="noopener">Streamlit</a></li>
+            <li><a href="https://python-visualization.github.io/folium/" target="_blank" rel="noopener">Folium</a></li>
+            <li><a href="http://project-osrm.org/" target="_blank" rel="noopener">OSRM</a></li>
+            <li><a href="https://developers.google.com/maps/documentation/directions" target="_blank" rel="noopener">Google Directions API</a></li>
+            <li><a href="https://developers.google.com/maps/documentation/distance-matrix" target="_blank" rel="noopener">Google Distance Matrix API</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Vehicle_routing_problem" target="_blank" rel="noopener">VRP overview (Wikipedia)</a></li>
+          </ul>
+        </article>
+
+      </div>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <section class="split contact">
+          <section>
+            <h3>Email</h3>
+            <p><a href="#">jinghui.me@gmail.com</a></p>
+          </section>
+          <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+              <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+              <li><a href="https://github.com/Jhwong19" class="icon brands alt fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+            </ul>
+          </section>
+        </section>
+      </footer>
+
+      <!-- Copyright -->
+      <div id="copyright">
+        <ul><li>JING HUI </li><li>DATA SCIENTIST</li></ul>
+      </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+  </body>
+</html>
