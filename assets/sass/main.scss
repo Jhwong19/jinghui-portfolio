@@ -69,3 +69,40 @@
 	@import 'layout/main';
 	@import 'layout/footer';
 	@import 'layout/navPanel';
+
+/* Responsive math / code tweaks: ensure wide formulas and pre blocks are visible on small screens */
+
+// Allow horizontal scrolling for wide math and code blocks (touch-friendly)
+.post .objective-intuition,
+.post .objective-intuition pre,
+.MathJax_Display,
+.mjx-chtml,
+.MathJax,
+pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+// Prevent MathJax from overflowing its container
+.MathJax_Display, .mjx-chtml, .MathJax {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+// Wrap long inline text/math where possible
+.post p {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+// Make displayed math slightly smaller on very small screens
+@media screen and (max-width: 736px) {
+  .MathJax_Display, .mjx-chtml {
+    font-size: 0.95em;
+  }
+  pre {
+    white-space: pre-wrap; /* allow wrapped pre blocks */
+  }
+}
