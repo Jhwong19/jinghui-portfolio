@@ -111,6 +111,18 @@ pre {
   max-width: 100%;
 }
 
+// MathJax v3 container fallback to ensure no clipping on mobile (CHTML/SVG)
+mjx-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+mjx-container[display="true"] {
+  display: block; /* ensure block-level for display math */
+}
+
 // Make displayed math slightly smaller on very small screens
 @media screen and (max-width: 736px) {
   .MathJax_Display, .mjx-chtml {
@@ -123,4 +135,5 @@ pre {
   .math-wrap .mjx-chtml {
     font-size: 0.9em; /* further reduce for narrow phones */
   }
+  mjx-container[display="true"] { font-size: 0.95em; }
 }

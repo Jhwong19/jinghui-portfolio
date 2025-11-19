@@ -239,15 +239,17 @@
             $W_k \ge 0$: working time proxy for vehicle $k$ (optional balance term).</p>
 
             <h3>Objective (multi‑term, user‑weighted)</h3>
-            <p>
-            $$
-            \min \; \alpha \sum_{k\in K}\sum_{i\in N_0}\sum_{j\in N_0} c_{ij} x_{ij}^k 
-            \; + \; \beta \sum_{i\in N} w_i\, \ell_i
-            \; + \; \gamma \sum_{k\in K} (W_k - \bar W)^2
-            \; + \; \lambda \sum_{i\in N} w_i (1 - u_i)
-            $$
-            where $N_0 = N \cup \{0\}$ and $\bar W$ is the mean of $W_k$ across vehicles (the balance term may be approximated or omitted in a purely linear model).
-            </p>
+            <div class="math-wrap">
+              <p>
+              $$
+              \min \, \alpha \sum_{k\in K}\sum_{i\in N_0}\sum_{j\in N_0} c_{ij} x_{ij}^k 
+              \, + \, \beta \sum_{i\in N} w_i\, \ell_i
+              \, + \, \gamma \sum_{k\in K} (W_k - \bar W)^2
+              \, + \, \lambda \sum_{i\in N} w_i (1 - u_i)
+              $$
+              where $N_0 = N \cup \{0\}$ and $\bar W$ is the mean of $W_k$ across vehicles (the balance term may be approximated or omitted in a purely linear model).
+              </p>
+            </div>
 
             <div class="objective-intuition">
               <h4>Objective intuition and UI links</h4>
@@ -287,10 +289,11 @@
               <p>Encourages similar total work per vehicle. Driven by Load Balancing vs Distance.</p>
             $$W_k \ge \sum_{i\in N_0}\sum_{j\in N_0} t_{ij} x_{ij}^k \quad \forall k\in K$$
             </p>
-            <p><strong>Domains</strong>
-              <p>Variable types and non‑negativity are fixed; parameters change costs and feasibility pressure, not domains.</p>
-            $$x_{ij}^k \in \{0,1\},\; u_i \in \{0,1\},\; z_k \in \{0,1\},\; T_i^k, L_i^k, \ell_i, W_k \ge 0$$
-            </p>
+            <h4>Domains</h4>
+            <p>Variable types and non‑negativity are fixed; parameters change costs and feasibility pressure, not domains.</p>
+            <div class="math-wrap">
+              <p>$$x_{ij}^k \in \{0,1\},\; u_i \in \{0,1\},\; z_k \in \{0,1\},\; T_i^k, L_i^k, \ell_i, W_k \ge 0$$</p>
+            </div>
 
             <h3>Assumptions</h3>
             <ul>
