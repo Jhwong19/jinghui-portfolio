@@ -97,6 +97,20 @@ pre {
   word-break: break-word;
 }
 
+// Math block wrapper to prevent clipping on mobile
+.math-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  padding: 0.5rem 0; /* slight breathing room */
+}
+
+// Ensure inner MathJax spans do not exceed container
+.math-wrap .MathJax_Display,
+.math-wrap .mjx-chtml {
+  max-width: 100%;
+}
+
 // Make displayed math slightly smaller on very small screens
 @media screen and (max-width: 736px) {
   .MathJax_Display, .mjx-chtml {
@@ -104,5 +118,9 @@ pre {
   }
   pre {
     white-space: pre-wrap; /* allow wrapped pre blocks */
+  }
+  .math-wrap .MathJax_Display,
+  .math-wrap .mjx-chtml {
+    font-size: 0.9em; /* further reduce for narrow phones */
   }
 }
