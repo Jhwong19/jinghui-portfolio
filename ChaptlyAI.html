@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Chaptly | Conversational Learning Assistant</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Chaptly AI: Serverless architecture notes for a conversational learning assistant that indexes long-form YouTube lectures." />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+    <style>
+      .post p.caption {
+        text-align: center;
+        margin-top: 0.25rem;
+        margin-bottom: 1rem;
+        font-style: italic;
+      }
+      .post span.image.fit + p.caption {
+        margin-top: 0.25rem;
+      }
+      ol.numbered-list {
+        list-style: none;
+        counter-reset: feature-counter;
+        padding-left: 0;
+      }
+      ol.numbered-list > li {
+        counter-increment: feature-counter;
+        margin-bottom: 1.5rem;
+      }
+      ol.numbered-list > li::before {
+        content: counter(feature-counter) ") ";
+      }
+       .feature-media {
+         margin-top: 1rem;
+       }
+    </style>
+  </head>
+  <body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper" class="fade-in">
+
+      <!-- Intro -->
+      <div id="intro">
+        <h1>TECHNICAL BLOG</h1>
+        <p>Chaptly AI — Turning long-form YouTube lectures into interactive study companions.</p>
+        <ul class="actions">
+          <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Read</a></li>
+        </ul>
+      </div>
+
+      <!-- Nav -->
+      <nav id="nav">
+        <ul class="links">
+          <li><a href="index.html">Projects</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+        <ul class="icons">
+          <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+          <li><a href="https://github.com/Jhwong19" class="icon brands fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+        </ul>
+      </nav>
+
+      <!-- Main -->
+      <div id="main">
+        <article class="post">
+          <header class="major">
+            <span class="date">Updated Nov, 2025</span>
+            <h1>Chaptly: Conversational Learning Assistant</h1>
+            <p>Chaptly ingests trusted educational YouTube channels, builds Gemini-powered embeddings, and exposes grounded search, Q&amp;A, bookmarks, and quizzes through a FastAPI backend running on AWS Lambda. The experience surfaces lecture knowledge in seconds across web and Hugging Face Space front-ends.</p>
+          </header>
+
+          <span class="image fit"><img src="images/cover_page.jpg" alt="Serverless AI data pipeline showing AWS and Google services" /></span>
+          <p class="caption"><em>Serverless AI data pipeline: AWS Lambda + API Gateway orchestrating Gemini, S3, and DynamoDB.</em></p>
+
+          <hr class="section-divider" />
+          <h2>Problem Statement</h2>
+          <p><strong>Your YouTube Tutor Chatbot.</strong> Chaptly turns any long lecture into productive, structured learning so you can talk to the video like a tutor.</p>
+          <p>If you’ve ever:</p>
+          <ul>
+            <li>parked a 2-hour lecture “for later” and never made it back 😅</li>
+            <li>lost the timestamp where the professor finally explained the key idea</li>
+            <li>wished you could ask the video a pointed question and get an exact answer</li>
+          </ul>
+          <p>…then Chaptly AI is for you. Educational videos are packed with value, but they’re hard to skim and easy to forget. Chaptly shrinks hours into minutes with sharp summaries, links every answer to the source moment, auto-builds chapters, and reinforces memory with instant quizzes and semantic search.</p>
+
+          <hr class="section-divider" />
+          <h2>Solution Overview</h2>
+          <p>Chaptly turns YouTube into a fast, interactive learning loop:</p>
+          <ul>
+            <li><strong>Shrink hours into minutes</strong> with timestamp-aware transcript ingestion &amp; smart chunking (time, paragraph, sliding window).</li>
+            <li><strong>Ask anything</strong> and get grounded Q&amp;A with citations to the exact transcript moment.</li>
+            <li><strong>Skip the fluff</strong> thanks to auto-generated chapters, bookmarks, and focused summaries.</li>
+            <li><strong>Actually remember</strong> by firing off instant quizzes and semantic search refreshers before exams or meetings.</li>
+            <li><strong>Stay fast</strong> because caching keeps processed videos warm for every client (web, Hugging Face Space, Streamlit).</li>
+          </ul>
+          <p>Under the hood we fetch transcripts (official or Whisper fallback), embed them with Gemini, store artifacts in S3, and serve everything via a FastAPI app on AWS Lambda + API Gateway managed by Terraform.</p>
+
+          <hr class="section-divider" />
+          <h2>Key Features</h2>
+          <ol class="numbered-list">
+             <li>
+               Paste a YouTube URL and watch an asynchronous ingestion pipeline wake up: transcripts are fetched, chunked, embedded with Gemini, and cached while you keep browsing.
+               <div class="feature-media">
+                 <span class="image fit"><img src="images/step1_1.png" alt="Step 1 interface showing YouTube URL input, metadata preview, and Run button" /></span>
+                 <p class="caption"><em>Drop in any YouTube URL to preview the channel metadata, video title, and kick off ingestion with a single Run.</em></p>
+                 <span class="image fit"><img src="images/step_1_2.png" alt="Cached video list with thumbnails and Use this video buttons" /></span>
+                 <p class="caption"><em>Alternatively, pick from cached videos for instant reuse when you need quick answers.</em></p>
+               </div>
+             </li>
+             <li>
+               Generate cinematic bookmarks with section titles, timestamps, and one-sentence recaps to turn a two-hour lecture into a scannable, hyperlinked timeline.
+               <div class="feature-media">
+                 <span class="image fit"><img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptly AI bookmark generation" /></span>
+                 <p class="caption"><em>Bookmark previews animate how Chaptly slices a lecture into timestamped chapters.</em></p>
+               </div>
+             </li>
+             <li>
+               Ask free-form questions and receive grounded answers backed by cited transcript snippets so fact-checking stays instant.
+               <div class="feature-media">
+                 <span class="image fit"><img src="gif/chaptly_qa.gif" alt="Animated view of Chaptly Q&amp;A highlighting grounded responses" /></span>
+                 <p class="caption"><em>Grounded answers highlight the exact transcript lines that justified each response.</em></p>
+               </div>
+             </li>
+             <li>
+               Spin up quizzes and executive summaries using Gemini prompts tuned for study guides, with UI sliders for difficulty and length.
+               <div class="feature-media">
+                 <span class="image fit"><img src="gif/chaptly_summary_quizzes.gif" alt="Animated demo of quiz and summary sliders" /></span>
+                 <p class="caption"><em>Adjust difficulty and summary length, then watch quizzes and recaps generate in seconds.</em></p>
+               </div>
+             </li>
+             <li>Restrict usage to approved educational channels; off-list submissions return a friendly warning plus Terms-of-Use context to keep the dataset compliant.</li>
+          </ol>
+
+          <hr class="section-divider" />
+          <h2>High-Level Architecture</h2>
+          <span class="image fit"><img src="images/user_flow_system_architecture.jpg" alt="User flow and system architecture diagram for Chaptly AI" /></span>
+          <p class="caption"><em>User submits a video, Lambda ingests and caches artifacts, front-ends query cached embeddings for real-time answers.</em></p>
+
+          <hr class="section-divider" />
+          <h2>Client–Server Interaction Flow</h2>
+          <ol>
+            <li>Client sends authenticated requests to API Gateway.</li>
+            <li>API Gateway proxies to Lambda, where Mangum boots FastAPI.</li>
+            <li>Ingestion pulls transcripts, chunks, embeds via Gemini, and stores artifacts (<code>chunks.json</code>, <code>embeddings.npy</code>, metadata) in S3.</li>
+            <li>DynamoDB tracks job state, TTL, and user quotas.</li>
+            <li>Search/QA requests reuse cached artifacts; only retrieval + Gemini generation run at request time.</li>
+            <li>Responses propagate back through API Gateway while logs/quotas land in CloudWatch and S3.</li>
+          </ol>
+
+          <hr class="section-divider" />
+          <h2>Infrastructure as Code (Terraform)</h2>
+          <ul>
+            <li>All components (S3 buckets, DynamoDB tables, IAM roles/policies, Lambda function, API Gateway, CloudWatch logs) are codified in <code>infra/terraform</code>.</li>
+            <li><code>terraform plan</code> / <code>terraform apply</code> wires environment variables, concurrency, throttles, and permissions without console work.</li>
+            <li><code>terraform state list</code> verifies S3 helpers, IAM policies, Lambda permissions, and API Gateway stages stay aligned; <code>terraform state show</code> inspects configuration drift before edits.</li>
+            <li>S3 artifact buckets are versioned, private, SSE-S3 encrypted, and lifecycle-managed (current objects expire in 30 days, non-current in 7).</li>
+            <li>Inputs such as <code>lambda_reserved_concurrency</code> or <code>artifact_expiration_days</code> can be overridden via <code>terraform.tfvars</code>.</li>
+          </ul>
+
+          <hr class="section-divider" />
+          <h2>System Design Goals &amp; Constraints</h2>
+          <ul>
+            <li><strong>Grounded answers:</strong> every response surfaces timestamped transcript snippets.</li>
+            <li><strong>Minimal footprint:</strong> single Lambda/API Gateway tier, DynamoDB for metadata, S3 for artifacts.</li>
+            <li><strong>Cold-start aware:</strong> all dependencies (including NLTK <code>punkt</code>) ship with the Lambda ZIP.</li>
+            <li><strong>Cost aware:</strong> PAY_PER_REQUEST DynamoDB, lifecycle S3 policies, 512&nbsp;MB Lambda sized for embedding workloads.</li>
+          </ul>
+
+          <hr class="section-divider" />
+          <h2>Whitelisted YouTube Channels</h2>
+          <p>Only pre-approved educational channels may be ingested to avoid redistribution of copyrighted material. The whitelist covers <strong><a href="https://www.youtube.com/@mitocw" target="_blank" rel="noopener">MIT OpenCourseWare</a></strong>, <strong><a href="https://www.youtube.com/@stanfordonline" target="_blank" rel="noopener">Stanford Online</a></strong>, <strong><a href="https://www.youtube.com/@harvard" target="_blank" rel="noopener">Harvard</a></strong>, <strong><a href="https://www.youtube.com/@YaleCourses" target="_blank" rel="noopener">Yale Courses</a></strong>, <strong><a href="https://www.youtube.com/@khanacademy" target="_blank" rel="noopener">Khan Academy</a></strong>, <strong><a href="https://www.youtube.com/@coursera" target="_blank" rel="noopener">Coursera</a></strong>, <strong><a href="https://www.youtube.com/@edXOnline" target="_blank" rel="noopener">edX</a></strong>, <strong><a href="https://www.youtube.com/@Udacity" target="_blank" rel="noopener">Udacity</a></strong>, <strong><a href="https://www.youtube.com/@crashcourse" target="_blank" rel="noopener">CrashCourse</a></strong>, <strong><a href="https://www.youtube.com/@TED" target="_blank" rel="noopener">TED</a></strong>, <strong><a href="https://www.youtube.com/@TEDEd" target="_blank" rel="noopener">TED-Ed</a></strong>, <strong><a href="https://www.youtube.com/@TEDx" target="_blank" rel="noopener">TEDx Talks</a></strong>, <strong><a href="https://www.youtube.com/@3blue1brown" target="_blank" rel="noopener">3Blue1Brown</a></strong>, <strong><a href="https://www.youtube.com/@numberphile" target="_blank" rel="noopener">Numberphile</a></strong>, <strong><a href="https://www.youtube.com/@Computerphile" target="_blank" rel="noopener">Computerphile</a></strong>, <strong><a href="https://www.youtube.com/@SciShow" target="_blank" rel="noopener">SciShow</a></strong>, <strong><a href="https://www.youtube.com/@veritasium" target="_blank" rel="noopener">Veritasium</a></strong>, <strong><a href="https://www.youtube.com/@minutephysics" target="_blank" rel="noopener">MinutePhysics</a></strong>, <strong><a href="https://www.youtube.com/@programmingwithmosh" target="_blank" rel="noopener">Programming with Mosh</a></strong>, and <strong><a href="https://www.youtube.com/@freecodecamp" target="_blank" rel="noopener">freeCodeCamp.org</a></strong>. Any other channel returns HTTP 403 together with the approved list for transparency.</p>
+
+          <hr class="section-divider" />
+          <h2>Data Model</h2>
+          <ul>
+            <li><strong>S3</strong>: <code>s3://chaptly-rag/&lt;video_id&gt;/</code> stores <code>chunks.json</code>, <code>embeddings.npy</code>, <code>artifacts.json</code>, quizzes, and summaries with lifecycle expiration.</li>
+            <li><strong>DynamoDB (ChaptlyJobs)</strong>: partition key <code>job_id</code> with TTL on <code>expires_at</code> for ingestion tracking.</li>
+          </ul>
+
+          <hr class="section-divider" />
+          <h2>Backend Execution Model (AWS Lambda + FastAPI)</h2>
+          <ul>
+            <li>FastAPI (<code>src/api/main.py</code>) runs inside Lambda via Mangum; the same code runs locally with <code>uvicorn</code>.</li>
+            <li><code>scripts/package_lambda.sh</code> builds an ARM64 ZIP in the SAM Python 3.11 container, prunes tests, bundles <code>nltk_data</code>, and emits <code>dist/chaptly-api.zip</code>.</li>
+            <li>The ZIP is uploaded to S3; Terraform points Lambda to the latest artifact.</li>
+            <li>Environment variables injected by Terraform include <code>ENV</code>, <code>S3_BUCKET</code>, <code>LOG_LEVEL</code>, Gemini credentials, and proxy settings.</li>
+          </ul>
+
+          <hr class="section-divider" />
+          <h2>Performance, Latency &amp; Scaling</h2>
+          <ul>
+            <li>Lambda memory: 512&nbsp;MB, timeout: 29&nbsp;s, architecture: ARM64.</li>
+            <li>Reserved concurrency is optional; default lets AWS manage bursts.</li>
+            <li>Artifact caching keeps online queries <code>O(k)</code> where <code>k</code> is the number of candidate chunks; ingestion is the heavy path but asynchronous.</li>
+            <li>Typical timings: ingestion 5–45&nbsp;s (transcript fetch + embeddings) vs. search/QA &lt;1&nbsp;s once cached. Cold starts land around 2–3&nbsp;s.</li>
+          </ul>
+
+          <hr class="section-divider" />
+          <h2>Concurrency, Rate Limiting &amp; Security</h2>
+          <ul>
+            <li>API Gateway throttling: burst 50 / steady 25 requests per second.</li>
+            <li>Application middleware enforces <code>MAX_REQUESTS_PER_MINUTE</code> (default 60) using a token bucket keyed by API key; quota events stream to <code>s3://chaptly-rag-usage/quota-logs/</code>.</li>
+            <li>Future HMAC verification (<code>chaptly-api-hmac-key</code>) enables tamper-proof requests.</li>
+            <li>CORS middleware only accepts configured origins (Hugging Face Space or corporate domains); API Gateway stage settings mirror the same allow-list.</li>
+            <li>All requests require API keys; unauthenticated calls receive HTTP&nbsp;401.</li>
+          </ul>
+
+          <hr class="section-divider" />
+          <h2>Idempotency &amp; Observability</h2>
+          <ul>
+            <li>Artifacts are written to deterministic S3 prefixes (<code>&lt;video_id&gt;/&lt;strategy&gt;.json</code>) so retries simply overwrite.</li>
+            <li>DynamoDB jobs reuse the same <code>job_id</code>; TTL cleans up historical rows.</li>
+            <li>CloudWatch log group <code>/aws/lambda/chaptly-api</code> retains 14 days (configurable) with structured logging (<code>request_id</code>, <code>video_id</code>, severity).</li>
+            <li>Quota middleware emits JSON events to S3 for offline usage analytics.</li>
+            <li>Terraform outputs the API URL, Lambda ARN, and secret names for observability dashboards.</li>
+          </ul>
+
+          <hr class="section-divider" />
+          <h2>Technology Stack</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>Tools</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Frontend clients</td><td>Hugging Face Space, Streamlit, or any HTTPS app</td></tr>
+                <tr><td>Backend</td><td>FastAPI, Mangum, Pydantic, AnyIO</td></tr>
+                <tr><td>Transcripts</td><td><code>youtube_transcript_api</code>, Whisper + FFmpeg fallback</td></tr>
+                <tr><td>Embeddings &amp; LLM</td><td>Gemini + Gemini Flash</td></tr>
+                <tr><td>Storage</td><td>AWS S3 (artifacts + Lambda ZIP), DynamoDB (jobs)</td></tr>
+                <tr><td>Deployment</td><td>Terraform, AWS Lambda, API Gateway, CloudWatch Logs</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <hr class="section-divider" />
+          <h2>Deployment &amp; Packaging (S3 ZIP Workflow)</h2>
+          <ol>
+            <li>Run <code>./scripts/package_lambda.sh</code> to build <code>dist/chaptly-api.zip</code> (manylinux/ARM64 container, pinned wheels, bundled <code>nltk_data</code>).</li>
+            <li>Upload the ZIP to S3 or whichever artifact bucket Terraform references.</li>
+            <li>Apply Terraform to refresh S3, DynamoDB, IAM, Lambda, and API Gateway; the stack pulls the new ZIP and updates env vars.</li>
+          </ol>
+          <hr class="section-divider" />
+          <h2>API Reference &amp; Usage</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Method &amp; Path</th>
+                  <th>Description</th>
+                  <th>Request Schema</th>
+                  <th>Response Schema</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>POST /videos/process</code></td><td>Queue ingestion for a YouTube URL.</td><td>Query param <code>url</code>.</td><td><code>ProcessAccepted</code> (job id + video id).</td></tr>
+                <tr><td><code>GET /videos/process/{job_id}</code></td><td>Poll ingestion status.</td><td>Path <code>job_id</code>.</td><td><code>ProcessStatus</code> (state, stats, message).</td></tr>
+                <tr><td><code>GET /videos/{video_id}/bookmarks</code></td><td>Retrieve inferred sections.</td><td>Query <code>min_sections</code>, <code>max_sections</code>.</td><td>List&lt;<code>Bookmark</code>&gt;.</td></tr>
+                <tr><td><code>POST /videos/{video_id}/qa</code></td><td>Ask a grounded question.</td><td><code>QARequest</code> (<code>query</code>, <code>limit</code>).</td><td><code>QAResponse</code> (answer + sources).</td></tr>
+                <tr><td><code>GET /videos/{video_id}/summary</code></td><td>Summarize transcript.</td><td>Query <code>max_words</code>.</td><td><code>SummaryResponse</code>.</td></tr>
+                <tr><td><code>GET /videos/{video_id}/quiz</code></td><td>Generate quiz items.</td><td>Query <code>num_questions</code>, <code>style</code>.</td><td>List&lt;<code>QuizItem</code>&gt;.</td></tr>
+                <tr><td><code>POST /search</code></td><td>Semantic search across cached chunks.</td><td><code>SearchRequest</code> (<code>query</code>, <code>video_id</code>, <code>limit</code>).</td><td>List&lt;<code>SearchResult</code>&gt;.</td></tr>
+                <tr><td><code>GET /health</code></td><td>Health probe.</td><td>None.</td><td><code>{"status":"ok"}</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <hr class="section-divider" />
+          <h2>Improvement Opportunities</h2>
+          <ol>
+            <li>Graduate ingestion from ad-hoc Lambda calls to Step Functions + SQS fan-out so multiple long videos process concurrently without throttling the API.</li>
+            <li>Layer a managed vector database (Qdrant or pgvector) on top of the S3 cache to enable cross-video retrieval and personalization.</li>
+            <li>Add multilingual transcript normalization and translation before embedding so non-English lectures share the same Gemini prompts.</li>
+            <li>Build automated regression evaluation (TruLens, Ragas, etc.) to score answer quality, hallucination risk, and latency on every deploy.</li>
+            <li>Ship proactive notifications (email, Slack, webhooks) when ingest jobs finish so Hugging Face Space users can leave the page while content backfills.</li>
+          </ol>
+
+          <hr class="section-divider" />
+          <h2>Repository &amp; References</h2>
+          <p>The demo is deployed in <a href="https://huggingface.co/spaces/Jing997/chaptly" target="_blank" rel="noopener">Hugging Face Spaces</a>. For infrastructure walkthroughs, see the <a href="https://github.com/Jhwong19/chaptly-ai-public" target="_blank" rel="noopener">GitHub repository</a>. For the complete project source, please reach out to me.</p>
+        </article>
+      </div>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <section>
+          <h3>Contact</h3>
+          <p>Jing Hui Wong — Data Scientist &amp; ML Engineer.<br />Based in Singapore, building ML-powered applications for operations and learning.</p>
+        </section>
+        <section>
+          <h3>Find me online</h3>
+          <ul class="icons alt">
+            <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://github.com/Jhwong19" class="icon brands alt fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+          </ul>
+        </section>
+      </footer>
+
+      <div id="copyright">
+        <ul><li>&copy; Jing Hui Wong</li><li>Design: HTML5 UP (Massively)</li></ul>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
