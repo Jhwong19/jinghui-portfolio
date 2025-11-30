@@ -102,13 +102,13 @@
             <li><strong>Actually remember</strong> by firing off instant quizzes and semantic search refreshers before exams or meetings.</li>
             <li><strong>Stay fast</strong> because caching keeps processed videos warm for every client (web, Hugging Face Space, Streamlit).</li>
           </ul>
-          <p>Under the hood we fetch transcripts (official or Whisper fallback), embed them with Gemini, store artifacts in S3, and serve everything via a FastAPI app on AWS Lambda + API Gateway managed by Terraform.</p>
+          <p>Under the hood we fetch transcripts, embed them with Gemini, store artifacts in S3, and serve everything via a FastAPI app on AWS Lambda + API Gateway managed by Terraform.</p>
 
           <hr class="section-divider" />
           <h2>Key Features</h2>
           <ol class="numbered-list">
              <li>
-               Paste a YouTube URL and watch an asynchronous ingestion pipeline wake up: transcripts are fetched, chunked, embedded with Gemini, and cached while you keep browsing.
+               Paste a YouTube URL and kickstart an asynchronous ingestion pipeline: transcripts are fetched, chunked, embedded with Gemini, and cached while you keep browsing.
                <div class="feature-media">
                  <span class="image fit"><img src="images/step1_1.png" alt="Step 1 interface showing YouTube URL input, metadata preview, and Run button" /></span>
                  <p class="caption"><em>Drop in any YouTube URL to preview the channel metadata, video title, and kick off ingestion with a single Run.</em></p>
@@ -117,7 +117,7 @@
                </div>
              </li>
              <li>
-               Generate cinematic bookmarks with section titles, timestamps, and one-sentence recaps to turn a two-hour lecture into a scannable, hyperlinked timeline.
+               Generate video bookmarks with section titles, timestamps, and one-sentence recaps to turn a two-hour lecture into a scannable, hyperlinked timeline.
                <div class="feature-media">
                  <span class="image fit"><img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptly AI bookmark generation" /></span>
                  <p class="caption"><em>Bookmark previews animate how Chaptly slices a lecture into timestamped chapters.</em></p>
@@ -295,21 +295,23 @@
 
       <!-- Footer -->
       <footer id="footer">
-        <section>
-          <h3>Contact</h3>
-          <p>Jing Hui Wong — Data Scientist &amp; ML Engineer.<br />Based in Singapore, building ML-powered applications for operations and learning.</p>
-        </section>
-        <section>
-          <h3>Find me online</h3>
-          <ul class="icons alt">
-            <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
-            <li><a href="https://github.com/Jhwong19" class="icon brands alt fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
-          </ul>
+        <section class="split contact">
+          <section>
+            <h3>Email</h3>
+            <p><a href="mailto:jinghui.me@gmail.com">jinghui.me@gmail.com</a></p>
+          </section>
+          <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+              <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
+              <li><a href="https://github.com/Jhwong19" class="icon brands alt fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+            </ul>
+          </section>
         </section>
       </footer>
 
       <div id="copyright">
-        <ul><li>&copy; Jing Hui Wong</li><li>Design: HTML5 UP (Massively)</li></ul>
+        <ul><li>JING HUI</li><li>DATA SCIENTIST</li></ul>
       </div>
     </div>
 
