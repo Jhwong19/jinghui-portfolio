@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Chaptly | Conversational Learning Assistant</title>
+    <title>Chaptive | Conversational Learning Assistant</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="Chaptly AI: Serverless architecture notes for a conversational learning assistant that indexes long-form YouTube lectures." />
+    <meta name="description" content="Chaptive AI: Serverless architecture notes for a conversational learning assistant that indexes long-form YouTube lectures." />
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
@@ -51,7 +51,7 @@
       <!-- Intro -->
       <div id="intro">
         <h1>TECHNICAL BLOG</h1>
-        <p>Chaptly AI — Turning long-form YouTube lectures into interactive study companions.</p>
+        <p>Chaptive AI — Turning long-form YouTube lectures into interactive study companions.</p>
         <ul class="actions">
           <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Read</a></li>
         </ul>
@@ -74,8 +74,8 @@
         <article class="post">
           <header class="major">
             <span class="date">Updated Nov, 2025</span>
-            <h1>Chaptly: Conversational Learning Assistant</h1>
-            <p>Chaptly ingests trusted educational YouTube channels, builds Gemini-powered embeddings, and exposes grounded search, Q&amp;A, bookmarks, and quizzes through a FastAPI backend running on AWS Lambda. The experience surfaces lecture knowledge in seconds across web and Hugging Face Space front-ends.</p>
+            <h1>Chaptive: Conversational Learning Assistant</h1>
+            <p>Chaptive ingests trusted educational YouTube channels, builds Gemini-powered embeddings, and exposes grounded search, Q&amp;A, bookmarks, and quizzes through a FastAPI backend running on AWS Lambda. The experience surfaces lecture knowledge in seconds across web and Hugging Face Space front-ends.</p>
           </header>
 
           <span class="image fit"><img src="images/cover_page.jpg" alt="Serverless AI data pipeline showing AWS and Google services" /></span>
@@ -83,18 +83,18 @@
 
           <hr class="section-divider" />
           <h2>Problem Statement</h2>
-          <p><strong>Your YouTube Tutor Chatbot.</strong> Chaptly turns any long lecture into productive, structured learning so you can talk to the video like a tutor.</p>
+          <p><strong>Your YouTube Tutor Chatbot.</strong> Chaptive turns any long lecture into productive, structured learning so you can talk to the video like a tutor.</p>
           <p>If you’ve ever:</p>
           <ul>
             <li>parked a 2-hour lecture “for later” and never made it back 😅</li>
             <li>lost the timestamp where the professor finally explained the key idea</li>
             <li>wished you could ask the video a pointed question and get an exact answer</li>
           </ul>
-          <p>…then Chaptly AI is for you. Educational videos are packed with value, but they’re hard to skim and easy to forget. Chaptly shrinks hours into minutes with sharp summaries, links every answer to the source moment, auto-builds chapters, and reinforces memory with instant quizzes and semantic search.</p>
+          <p>…then Chaptive AI is for you. Educational videos are packed with value, but they’re hard to skim and easy to forget. Chaptive shrinks hours into minutes with sharp summaries, links every answer to the source moment, auto-builds chapters, and reinforces memory with instant quizzes and semantic search.</p>
 
           <hr class="section-divider" />
           <h2>Solution Overview</h2>
-          <p>Chaptly turns YouTube into a fast, interactive learning loop:</p>
+          <p>Chaptive turns YouTube into a fast, interactive learning loop:</p>
           <ul>
             <li><strong>Shrink hours into minutes</strong> with timestamp-aware transcript ingestion &amp; smart chunking (time, paragraph, sliding window).</li>
             <li><strong>Ask anything</strong> and get grounded Q&amp;A with citations to the exact transcript moment.</li>
@@ -119,14 +119,14 @@
              <li>
                Generate video bookmarks with section titles, timestamps, and one-sentence recaps to turn a two-hour lecture into a scannable, hyperlinked timeline.
                <div class="feature-media">
-                 <span class="image fit"><img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptly AI bookmark generation" /></span>
-                 <p class="caption"><em>Bookmark previews animate how Chaptly slices a lecture into timestamped chapters.</em></p>
+                 <span class="image fit"><img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptive AI bookmark generation" /></span>
+                 <p class="caption"><em>Bookmark previews animate how Chaptive slices a lecture into timestamped chapters.</em></p>
                </div>
              </li>
              <li>
                Ask free-form questions and receive grounded answers backed by cited transcript snippets so fact-checking stays instant.
                <div class="feature-media">
-                 <span class="image fit"><img src="gif/chaptly_qa.gif" alt="Animated view of Chaptly Q&amp;A highlighting grounded responses" /></span>
+                 <span class="image fit"><img src="gif/chaptly_qa.gif" alt="Animated view of Chaptive Q&amp;A highlighting grounded responses" /></span>
                  <p class="caption"><em>Grounded answers highlight the exact transcript lines that justified each response.</em></p>
                </div>
              </li>
@@ -142,7 +142,7 @@
 
           <hr class="section-divider" />
           <h2>High-Level Architecture</h2>
-          <span class="image fit"><img src="images/user_flow_system_architecture.jpg" alt="User flow and system architecture diagram for Chaptly AI" /></span>
+          <span class="image fit"><img src="images/user_flow_system_architecture.jpg" alt="User flow and system architecture diagram for Chaptive AI" /></span>
           <p class="caption"><em>User submits a video, Lambda ingests and caches artifacts, front-ends query cached embeddings for real-time answers.</em></p>
 
           <hr class="section-divider" />
@@ -182,15 +182,15 @@
           <hr class="section-divider" />
           <h2>Data Model</h2>
           <ul>
-            <li><strong>S3</strong>: <code>s3://chaptly-rag/&lt;video_id&gt;/</code> stores <code>chunks.json</code>, <code>embeddings.npy</code>, <code>artifacts.json</code>, quizzes, and summaries with lifecycle expiration.</li>
-            <li><strong>DynamoDB (ChaptlyJobs)</strong>: partition key <code>job_id</code> with TTL on <code>expires_at</code> for ingestion tracking.</li>
+            <li><strong>S3</strong>: <code>s3://chaptive-rag/&lt;video_id&gt;/</code> stores <code>chunks.json</code>, <code>embeddings.npy</code>, <code>artifacts.json</code>, quizzes, and summaries with lifecycle expiration.</li>
+            <li><strong>DynamoDB (ChaptiveJobs)</strong>: partition key <code>job_id</code> with TTL on <code>expires_at</code> for ingestion tracking.</li>
           </ul>
 
           <hr class="section-divider" />
           <h2>Backend Execution Model (AWS Lambda + FastAPI)</h2>
           <ul>
             <li>FastAPI (<code>src/api/main.py</code>) runs inside Lambda via Mangum; the same code runs locally with <code>uvicorn</code>.</li>
-            <li><code>scripts/package_lambda.sh</code> builds an ARM64 ZIP in the SAM Python 3.11 container, prunes tests, bundles <code>nltk_data</code>, and emits <code>dist/chaptly-api.zip</code>.</li>
+            <li><code>scripts/package_lambda.sh</code> builds an ARM64 ZIP in the SAM Python 3.11 container, prunes tests, bundles <code>nltk_data</code>, and emits <code>dist/chaptive-api.zip</code>.</li>
             <li>The ZIP is uploaded to S3; Terraform points Lambda to the latest artifact.</li>
             <li>Environment variables injected by Terraform include <code>ENV</code>, <code>S3_BUCKET</code>, <code>LOG_LEVEL</code>, Gemini credentials, and proxy settings.</li>
           </ul>
@@ -208,8 +208,8 @@
           <h2>Concurrency, Rate Limiting &amp; Security</h2>
           <ul>
             <li>API Gateway throttling: burst 50 / steady 25 requests per second.</li>
-            <li>Application middleware enforces <code>MAX_REQUESTS_PER_MINUTE</code> (default 60) using a token bucket keyed by API key; quota events stream to <code>s3://chaptly-rag-usage/quota-logs/</code>.</li>
-            <li>Future HMAC verification (<code>chaptly-api-hmac-key</code>) enables tamper-proof requests.</li>
+            <li>Application middleware enforces <code>MAX_REQUESTS_PER_MINUTE</code> (default 60) using a token bucket keyed by API key; quota events stream to <code>s3://chaptive-rag-usage/quota-logs/</code>.</li>
+            <li>Future HMAC verification (<code>chaptive-api-hmac-key</code>) enables tamper-proof requests.</li>
             <li>CORS middleware only accepts configured origins (Hugging Face Space or corporate domains); API Gateway stage settings mirror the same allow-list.</li>
             <li>All requests require API keys; unauthenticated calls receive HTTP&nbsp;401.</li>
           </ul>
@@ -219,7 +219,7 @@
           <ul>
             <li>Artifacts are written to deterministic S3 prefixes (<code>&lt;video_id&gt;/&lt;strategy&gt;.json</code>) so retries simply overwrite.</li>
             <li>DynamoDB jobs reuse the same <code>job_id</code>; TTL cleans up historical rows.</li>
-            <li>CloudWatch log group <code>/aws/lambda/chaptly-api</code> retains 14 days (configurable) with structured logging (<code>request_id</code>, <code>video_id</code>, severity).</li>
+            <li>CloudWatch log group <code>/aws/lambda/chaptive-api</code> retains 14 days (configurable) with structured logging (<code>request_id</code>, <code>video_id</code>, severity).</li>
             <li>Quota middleware emits JSON events to S3 for offline usage analytics.</li>
             <li>Terraform outputs the API URL, Lambda ARN, and secret names for observability dashboards.</li>
           </ul>
@@ -248,7 +248,7 @@
           <hr class="section-divider" />
           <h2>Deployment &amp; Packaging (S3 ZIP Workflow)</h2>
           <ol>
-            <li>Run <code>./scripts/package_lambda.sh</code> to build <code>dist/chaptly-api.zip</code> (manylinux/ARM64 container, pinned wheels, bundled <code>nltk_data</code>).</li>
+            <li>Run <code>./scripts/package_lambda.sh</code> to build <code>dist/chaptive-api.zip</code> (manylinux/ARM64 container, pinned wheels, bundled <code>nltk_data</code>).</li>
             <li>Upload the ZIP to S3 or whichever artifact bucket Terraform references.</li>
             <li>Apply Terraform to refresh S3, DynamoDB, IAM, Lambda, and API Gateway; the stack pulls the new ZIP and updates env vars.</li>
           </ol>
@@ -289,7 +289,7 @@
 
           <hr class="section-divider" />
           <h2>Repository &amp; References</h2>
-          <p>The demo is deployed in <a href="https://huggingface.co/spaces/Jing997/chaptly" target="_blank" rel="noopener">Hugging Face Spaces</a>. For infrastructure walkthroughs, see the <a href="https://github.com/Jhwong19/chaptly-ai-public" target="_blank" rel="noopener">GitHub repository</a>. For the complete project source, please reach out to me.</p>
+          <p>The demo is deployed in <a href="https://huggingface.co/spaces/Jing997/chaptive" target="_blank" rel="noopener">Hugging Face Spaces</a>. For infrastructure walkthroughs, see the <a href="https://github.com/Jhwong19/chaptive-ai-public" target="_blank" rel="noopener">GitHub repository</a>. For the complete project source, please reach out to me.</p>
         </article>
       </div>
 
