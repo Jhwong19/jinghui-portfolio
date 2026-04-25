@@ -18,12 +18,6 @@ The site is based on the **Massively** template by HTML5 UP, customized to prese
 └── ...             # Other supporting files and configuration
 ```
 
-## Preview
-
-Below is a preview of my portfolio website:
-
-![Portfolio Preview](images/preview.png)
-
 You can view the [live site here](http://www.jinghuiwong.com).
 
 ## Credits
