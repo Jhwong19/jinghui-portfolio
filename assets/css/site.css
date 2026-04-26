@@ -77,7 +77,8 @@
   /* Typography */
   --font-display: 'Roobert', 'Inter', system-ui, sans-serif;
   --font-body: 'Raleway', 'Manrope', system-ui, sans-serif;
-  --fs-display: clamp(48px, 9vw, 140px);
+  --fs-display: clamp(3.5rem, 9vw, 8rem);
+  --fs-mega: clamp(5rem, 14vw, 12rem);
   --fs-h1: clamp(36px, 6vw, 88px);
   --fs-h2: clamp(28px, 4vw, 56px);
   --fs-body: clamp(16px, 1.1vw, 18px);
@@ -140,6 +141,35 @@ html {
 
 .site-mark:hover,
 .site-mark:focus { color: #fff; opacity: 0.8; }
+
+/* v2 — Inline desktop nav (≥768px) */
+.site-header__links {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-4);
+}
+.site-header__links li { margin: 0; }
+.site-header__links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+.site-header__links a:hover,
+.site-header__links a:focus-visible { opacity: 0.6; }
+.site-header__links a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 6px;
+}
+
+@media (min-width: 768px) {
+  .site-header__links { display: flex; }
+  .burger { display: none; }
+}
 
 /* Hamburger button */
 .burger {
@@ -335,9 +365,9 @@ body.nav-open { overflow: hidden; }
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: clamp(48px, 9vw, 140px);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: var(--fs-mega);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
   font-weight: 500;
   color: #fff;
   max-width: 18ch;
@@ -356,14 +386,14 @@ body.nav-open { overflow: hidden; }
 
 .hero__badge {
   position: absolute;
-  left: 1.5rem;
-  bottom: 2rem;
-  width: 110px;
-  height: 110px;
+  left: var(--space-3);
+  bottom: var(--space-4);
+  width: 96px;
+  height: 96px;
   z-index: 3;
   display: inline-block;
   text-decoration: none;
-  animation: hero-badge-rotate 20s linear infinite;
+  animation: hero-badge-rotate 30s linear infinite;
   transform-origin: 50% 50%;
 }
 
@@ -373,9 +403,8 @@ body.nav-open { overflow: hidden; }
   display: block;
   fill: #fff;
   font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  /* m3 — bumped from 16 to 20 for legibility at 110px */
-  font-size: 20px;
-  letter-spacing: 0.18em;
+  font-size: 17px;
+  letter-spacing: 0.22em;
 }
 
 .hero__badge:hover,
