@@ -13,9 +13,15 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
 		<link rel="manifest" href="favicon/site.webmanifest">
 		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Manrope:wght@400;500;700&display=swap">
+
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/site.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 	</head>
 	<body class="is-preload">
 		<header class="site-header">
@@ -68,40 +74,46 @@
 				<!-- Main -->
 					<div id="main">
 
-						<!-- Featured Post -->
-							<article class="post featured">
-								<header class="major">
-									<span class="date">April, 2025</span>
-									<h2><a href="DeliveryRouteOptimisation.html">AI-Powered Optimiser Scheduler</a></h2>
-									<p>Explore my Streamlit application for intelligent task scheduling, 
-										built to optimize workflows and boost productivity. 
-										Hosted on Hugging Face Spaces, this app leverages AI to help you efficiently plan 
-										and prioritize your daily activities. Check out the code and try the live demo!</p>
-								</header>
-								<a href="DeliveryRouteOptimisation.html" class="image main"><img src="gif/delivery_route_optimisation.gif" alt="Delivery Route Optimisation Demo" /></a>
-                                <ul class="actions special">
-                                    <li><a href="https://huggingface.co/spaces/Jing997/DeliveryRouteOptimisation" class="button large" target="_blank" rel="noopener">Demo</a></li>
-                                    <li><a href="DeliveryRouteOptimisation.html" class="button large">Blog</a></li>
-                                </ul>
-							</article>
+						<!-- Selected projects -->
+							<section class="selected-projects" data-reveal>
+								<h2 class="eyebrow">Selected project</h2>
+								<article class="project-card">
+									<a class="project-card__media" href="DeliveryRouteOptimisation.html">
+										<img src="gif/delivery_route_optimisation.gif" alt="Delivery Route Optimisation demo" />
+									</a>
+									<div class="project-card__body">
+										<span class="project-card__date">April 2025</span>
+										<h3 class="project-card__title"><a href="DeliveryRouteOptimisation.html">AI-Powered Optimiser Scheduler</a></h3>
+										<p class="project-card__meta">Streamlit &middot; Hugging Face &middot; Optimisation</p>
+										<ul class="project-card__actions">
+											<li><a class="btn-pill" href="https://huggingface.co/spaces/Jing997/DeliveryRouteOptimisation" target="_blank" rel="noopener">Demo &#8599;</a></li>
+											<li><a class="btn-pill" href="DeliveryRouteOptimisation.html">Blog</a></li>
+										</ul>
+									</div>
+								</article>
+								<article class="project-card">
+									<a class="project-card__media" href="ChaptiveAI.html">
+										<img src="gif/chaptly_ai.gif" alt="ChaptiveAI demo" />
+									</a>
+									<div class="project-card__body">
+										<span class="project-card__date">August 2025</span>
+										<h3 class="project-card__title"><a href="ChaptiveAI.html">Chaptive: Video Intelligence Explorer</a></h3>
+										<p class="project-card__meta">Streamlit &middot; Hugging Face &middot; LLM</p>
+										<ul class="project-card__actions">
+											<li><a class="btn-pill" href="https://huggingface.co/spaces/Jing997/chaptive" target="_blank" rel="noopener">Demo &#8599;</a></li>
+											<li><a class="btn-pill" href="ChaptiveAI.html">Blog</a></li>
+										</ul>
+									</div>
+								</article>
+							</section>
 
-						<!-- Second Featured Post -->
-							<article class="post featured">
-								<header class="major">
-									<span class="date">August, 2025</span>
-									<h2><a href="ChaptiveAI.html">Chaptive: Video Intelligence Explorer</a></h2>
-									<p>Chaptive is a conversational learning assistant that turns long-form YouTube lectures into an interactive study companion.</p>
-								</header>
-								<a href="ChaptiveAI.html" class="image main"><img src="gif/chaptly_ai.gif" alt="Chaptive AI Demo GIF" /></a>
-								<ul class="actions special">
-									<li><a href="https://huggingface.co/spaces/Jing997/chaptive" class="button large" target="_blank" rel="noopener">Demo</a></li>
-									<li><a href="ChaptiveAI.html" class="button large">Blog</a></li>
-								</ul>
-							</article>
-
-						<!-- Posts -->
-							<section class="posts">
-								<!-- Additional projects would go here -->
+						<!-- Tooling -->
+							<section class="tooling" data-reveal>
+								<p class="tooling__eyebrow">Built with</p>
+								<p class="tooling__list">
+									Python, SQL, GCP, AWS, Hugging Face, Streamlit, LangChain, FastAPI, PyTorch, scikit-learn, pandas.
+								</p>
+								<a class="btn-pill btn-pill--gradient" href="https://github.com/Jhwong19" target="_blank" rel="noopener">More on GitHub &#8599;</a>
 							</section>
 
 					</div>
