@@ -1543,3 +1543,35 @@ body[data-page-transitions] {
 .project-page__body .feature-media {
   margin-top: 1rem;
 }
+
+/* ---- Hugging Face live-demo embed (project pages) ---------------------- */
+.hf-embed {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-3) var(--space-3);
+}
+.hf-embed .eyebrow {
+  margin-bottom: var(--space-2);
+}
+.hf-embed__frame {
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #111;
+}
+.hf-embed__frame iframe {
+  display: block;
+  width: 100%;
+  height: 720px;
+  border: 0;
+}
+.hf-embed__fallback {
+  margin-top: var(--space-2);
+  font-size: var(--fs-eyebrow);
+  color: var(--color-muted);
+}
+@media (max-width: 736px) {
+  .hf-embed__frame iframe { height: 560px; }
+}
