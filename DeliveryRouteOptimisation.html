@@ -208,90 +208,82 @@
             <p>Below is a compact formulation that captures the core elements used by the solver and the optimizer’s tunable preferences.</p>
 
             <h3>Sets</h3>
-            <p>$N = \{1,\dots,n\}$ customers, depot indexed as $0$.<br/>
-            $K = \{1,\dots,m\}$ vehicles.</p>
+            <p><var>N</var> = {1, …, <var>n</var>} customers, depot indexed as <var>0</var>.<br/>
+            <var>K</var> = {1, …, <var>m</var>} vehicles.</p>
 
             <h3>Parameters</h3>
-            <p>$q_i$: demand at customer $i$; $Q_k$: capacity of vehicle $k$.<br/>
-            $[a_i, b_i]$: time window at customer $i$; $s_i$: service time at $i$.<br/>
-            $c_{ij}$: travel distance (or cost) from $i$ to $j$.<br/>
-            $t_{ij}$: travel time from $i$ to $j$ (from Google/OSRM or matrices).<br/>
-            $w_i$: priority weight for customer $i$ (higher = more important).<br/>
-            $M$: a large constant for time‑window constraints.<br/>
-            $V_{\max}$: maximum vehicles allowed by the user.<br/>
-            $\alpha, \beta, \gamma, \lambda \ge 0$: user‑tunable weights for distance, lateness, load balancing, and unassigned penalties.</p>
+            <p><var>q</var><sub>i</sub>: demand at customer <var>i</var>; <var>Q</var><sub>k</sub>: capacity of vehicle <var>k</var>.<br/>
+            [<var>a</var><sub>i</sub>, <var>b</var><sub>i</sub>]: time window at customer <var>i</var>; <var>s</var><sub>i</sub>: service time at <var>i</var>.<br/>
+            <var>c</var><sub>ij</sub>: travel distance (or cost) from <var>i</var> to <var>j</var>.<br/>
+            <var>t</var><sub>ij</sub>: travel time from <var>i</var> to <var>j</var> (from Google/OSRM or matrices).<br/>
+            <var>w</var><sub>i</sub>: priority weight for customer <var>i</var> (higher = more important).<br/>
+            <var>M</var>: a large constant for time‑window constraints.<br/>
+            <var>V</var><sub>max</sub>: maximum vehicles allowed by the user.<br/>
+            α, β, γ, λ ≥ 0: user‑tunable weights for distance, lateness, load balancing, and unassigned penalties.</p>
 
             <h3>Decision Variables</h3>
-            <p>$x_{ij}^k \in \{0,1\}$: 1 if vehicle $k$ travels from $i$ to $j$, else 0.<br/>
-            $T_i^k \ge 0$: arrival time of vehicle $k$ at node $i$.<br/>
-            $L_i^k \ge 0$: load on vehicle $k$ upon arrival at node $i$.<br/>
-            $u_i \in \{0,1\}$: 1 if customer $i$ is served by any vehicle, else 0.<br/>
-            $z_k \in \{0,1\}$: 1 if vehicle $k$ is used, else 0.<br/>
-            $\ell_i \ge 0$: lateness at customer $i$.<br/>
-            $W_k \ge 0$: working time proxy for vehicle $k$ (optional balance term).</p>
+            <p><var>x</var><sub>ij</sub><sup>k</sup> ∈ {0, 1}: 1 if vehicle <var>k</var> travels from <var>i</var> to <var>j</var>, else 0.<br/>
+            <var>T</var><sub>i</sub><sup>k</sup> ≥ 0: arrival time of vehicle <var>k</var> at node <var>i</var>.<br/>
+            <var>L</var><sub>i</sub><sup>k</sup> ≥ 0: load on vehicle <var>k</var> upon arrival at node <var>i</var>.<br/>
+            <var>u</var><sub>i</sub> ∈ {0, 1}: 1 if customer <var>i</var> is served by any vehicle, else 0.<br/>
+            <var>z</var><sub>k</sub> ∈ {0, 1}: 1 if vehicle <var>k</var> is used, else 0.<br/>
+            ℓ<sub>i</sub> ≥ 0: lateness at customer <var>i</var>.<br/>
+            <var>W</var><sub>k</sub> ≥ 0: working time proxy for vehicle <var>k</var> (optional balance term).</p>
 
             <h3>Objective (multi‑term, user‑weighted)</h3>
             <div class="math-wrap">
-              <p>
-              $$
-              \begin{array}{l}
-              \min\; \alpha \sum_{k\in K}\sum_{i\in N_0}\sum_{j\in N_0} c_{ij} x_{ij}^k
-              \; +\; \beta \sum_{i\in N} w_i\, \ell_i \\
-              \quad +\; \gamma \sum_{k\in K} (W_k - \bar W)^2
-              \; +\; \lambda \sum_{i\in N} w_i (1 - u_i)
-              \end{array}
-              $$
-              where $N_0 = N \cup \{0\}$ and $\bar W$ is the mean of $W_k$ across vehicles (the balance term may be approximated or omitted in a purely linear model).
+              <p class="math-display">
+                min&nbsp; α ∑<sub>k∈K</sub> ∑<sub>i∈N<sub>0</sub></sub> ∑<sub>j∈N<sub>0</sub></sub> <var>c</var><sub>ij</sub> <var>x</var><sub>ij</sub><sup>k</sup>
+                &nbsp;+&nbsp; β ∑<sub>i∈N</sub> <var>w</var><sub>i</sub> ℓ<sub>i</sub><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;+&nbsp; γ ∑<sub>k∈K</sub> (<var>W</var><sub>k</sub> − <var>W̄</var>)<sup>2</sup>
+                &nbsp;+&nbsp; λ ∑<sub>i∈N</sub> <var>w</var><sub>i</sub> (1 − <var>u</var><sub>i</sub>)
               </p>
+              <p>where <var>N</var><sub>0</sub> = <var>N</var> ∪ {0} and <var>W̄</var> is the mean of <var>W</var><sub>k</sub> across vehicles (the balance term may be approximated or omitted in a purely linear model).</p>
             </div>
 
             <h4>Objective intuition and UI links</h4>
 
-              <p><strong>Distance/travel cost:</strong> $\alpha \cdot \sum_{k\in K}\sum_{i\in N_0}\sum_{j\in N_0} c_{ij} x_{ij}^k$</p>
+              <p><strong>Distance/travel cost:</strong> α · ∑<sub>k∈K</sub> ∑<sub>i∈N<sub>0</sub></sub> ∑<sub>j∈N<sub>0</sub></sub> <var>c</var><sub>ij</sub> <var>x</var><sub>ij</sub><sup>k</sup></p>
               <ul>
                 <li>What it does: Rewards shorter routes (less distance/time).</li>
                 <li>Turn it up when you want the solver to strongly prefer compact routes and fewer detours.</li>
               </ul>
 
-              <p><strong>Lateness penalty:</strong> $\beta \cdot \sum_{i\in N} w_i \, \ell_i$</p>
+              <p><strong>Lateness penalty:</strong> β · ∑<sub>i∈N</sub> <var>w</var><sub>i</sub> ℓ<sub>i</sub></p>
               <ul>
-                <li>What it does: Punishes arriving after a stop’s time window; $w_i$ makes high‑priority stops “hurt” more when late.</li>
+                <li>What it does: Punishes arriving after a stop’s time window; <var>w</var><sub>i</sub> makes high‑priority stops “hurt” more when late.</li>
                 <li>Turn it up to push schedules to stay within windows, especially for important customers.</li>
-                <li>UI link: Time Window Importance (and Priority Importance via $w_i$).</li>
+                <li>UI link: Time Window Importance (and Priority Importance via <var>w</var><sub>i</sub>).</li>
               </ul>
 
-              <p><strong>Workload balance:</strong> $\gamma \cdot \sum_{k\in K} (W_k - \bar W)^2$</p>
+              <p><strong>Workload balance:</strong> γ · ∑<sub>k∈K</sub> (<var>W</var><sub>k</sub> − <var>W̄</var>)<sup>2</sup></p>
               <ul>
-                <li>What it does: Evens out work across vehicles. $W_k$ is a vehicle’s total work (e.g., route time/distance); $\bar W$ is the average across vehicles.</li>
+                <li>What it does: Evens out work across vehicles. <var>W</var><sub>k</sub> is a vehicle’s total work (e.g., route time/distance); <var>W̄</var> is the average across vehicles.</li>
                 <li>Turn it up to avoid one “hero” truck doing most of the work, even if it adds some distance.</li>
-                <li>UI link: Load Balancing vs Distance (trade‑off vs $\alpha$).</li>
+                <li>UI link: Load Balancing vs Distance (trade‑off vs α).</li>
               </ul>
 
-              <p><strong>Unserved penalty:</strong> $\lambda \cdot \sum_{i\in N} w_i \cdot (1 - u_i)$</p>
+              <p><strong>Unserved penalty:</strong> λ · ∑<sub>i∈N</sub> <var>w</var><sub>i</sub> · (1 − <var>u</var><sub>i</sub>)</p>
               <ul>
-                <li>What it does: Penalizes dropping deliveries; $w_i$ makes skipping high‑priority stops very expensive.</li>
+                <li>What it does: Penalizes dropping deliveries; <var>w</var><sub>i</sub> makes skipping high‑priority stops very expensive.</li>
                 <li>Turn it up to force serving more (or all) stops, accepting extra distance or more vehicles if feasible.</li>
-                <li>UI link: Priority Importance (via $w_i$). Complements Minimum Time Window Compliance.</li>
+                <li>UI link: Priority Importance (via <var>w</var><sub>i</sub>). Complements Minimum Time Window Compliance.</li>
               </ul>
 
-            <p><strong>Vehicle limit</strong>
-              <p>$\sum_k z_k \le V_{\max}$. Lower caps force consolidation; higher caps give slack to meet windows and reduce lateness.</p>
-            $$\sum_{k\in K} z_k \le V_{\max}$$
-            </p>
-            <p><strong>Working time proxy (optional, for balance term)</strong>
-              <p>Encourages similar total work per vehicle. Driven by Load Balancing vs Distance.</p>
-            $$W_k \ge \sum_{i\in N_0}\sum_{j\in N_0} t_{ij} x_{ij}^k \quad \forall k\in K$$
-            </p>
+            <p><strong>Vehicle limit</strong></p>
+            <p>∑<sub>k</sub> <var>z</var><sub>k</sub> ≤ <var>V</var><sub>max</sub>. Lower caps force consolidation; higher caps give slack to meet windows and reduce lateness.</p>
+            <p class="math-display">∑<sub>k∈K</sub> <var>z</var><sub>k</sub> ≤ <var>V</var><sub>max</sub></p>
+
+            <p><strong>Working time proxy (optional, for balance term)</strong></p>
+            <p>Encourages similar total work per vehicle. Driven by Load Balancing vs Distance.</p>
+            <p class="math-display"><var>W</var><sub>k</sub> ≥ ∑<sub>i∈N<sub>0</sub></sub> ∑<sub>j∈N<sub>0</sub></sub> <var>t</var><sub>ij</sub> <var>x</var><sub>ij</sub><sup>k</sup> &nbsp;&nbsp; ∀ <var>k</var> ∈ <var>K</var></p>
+
             <h4>Domains</h4>
             <p>Variable types and non‑negativity are fixed; parameters change costs and feasibility pressure, not domains.</p>
             <div class="math-wrap">
-              <p>
-              $$
-              \begin{array}{l}
-              x_{ij}^k \in \{0,1\},\; u_i \in \{0,1\},\; z_k \in \{0,1\}, \\
-              T_i^k,\; L_i^k,\; \ell_i,\; W_k \ge 0
-              \end{array}
-              $$
+              <p class="math-display">
+                <var>x</var><sub>ij</sub><sup>k</sup> ∈ {0, 1},&nbsp; <var>u</var><sub>i</sub> ∈ {0, 1},&nbsp; <var>z</var><sub>k</sub> ∈ {0, 1},<br/>
+                <var>T</var><sub>i</sub><sup>k</sup>,&nbsp; <var>L</var><sub>i</sub><sup>k</sup>,&nbsp; ℓ<sub>i</sub>,&nbsp; <var>W</var><sub>k</sub> ≥ 0
               </p>
             </div>
 

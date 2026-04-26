@@ -1615,3 +1615,24 @@ body[data-page-transitions] {
 @media (max-width: 736px) {
   .hf-embed__frame iframe { height: 560px; }
 }
+
+/* ---- Inline math (no MathJax — pure HTML/Unicode) ----------------------- */
+.project-page__body var {
+  font-family: 'JetBrains Mono', 'Cambria Math', Cambria, serif;
+  font-style: italic;
+}
+.project-page__body sub,
+.project-page__body sup {
+  font-size: 0.75em;
+  line-height: 0;
+}
+.project-page__body .math-display,
+.project-page__body .math-wrap {
+  margin: var(--space-3) 0;
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid var(--color-muted);
+  font-family: 'Cambria Math', Cambria, 'Times New Roman', serif;
+  line-height: 1.8;
+  overflow-x: auto;
+}
