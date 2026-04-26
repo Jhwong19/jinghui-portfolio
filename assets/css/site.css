@@ -1,1 +1,175 @@
 /* Redesign source of truth. All new styles go here. Loaded after main.css. */
+
+:root {
+  --header-height: 64px;
+}
+
+html {
+  scroll-padding-top: var(--header-height);
+}
+
+/* ---------- F1.2 — Global sticky header ---------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  pointer-events: none;
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.site-header > * { pointer-events: auto; }
+
+.site-mark {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-mark:hover,
+.site-mark:focus { color: #fff; opacity: 0.8; }
+
+/* Hamburger button */
+.burger {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.burger span {
+  display: block;
+  width: 26px;
+  height: 1.5px;
+  background: #fff;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.burger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(3.75px) rotate(45deg);
+}
+.burger[aria-expanded="true"] span:nth-child(2) {
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+.burger:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+/* ---------- F1.3 — Fullscreen overlay nav ---------- */
+.overlay-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6rem 1.5rem 2rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-2%);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.overlay-nav[aria-hidden="false"] {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0s;
+}
+
+.overlay-nav__links,
+.overlay-nav__socials {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.overlay-nav__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.overlay-nav__links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: clamp(2.5rem, 9vw, 6rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.3s ease;
+}
+
+.overlay-nav__links li a:hover,
+.overlay-nav__links li a:focus {
+  color: #8a8a8a;
+}
+
+.overlay-nav__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 1.5rem;
+}
+
+.overlay-nav__socials li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.overlay-nav__socials li a:hover,
+.overlay-nav__socials li a:focus { color: #8a8a8a; }
+
+/* Lock body scroll while overlay is open */
+body.nav-open { overflow: hidden; }
+
+@media (min-width: 768px) {
+  .site-header { padding: 1.75rem 2.5rem; }
+  .overlay-nav { padding: 8rem 2.5rem 2.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay-nav,
+  .overlay-nav[aria-hidden="false"],
+  .burger span,
+  .overlay-nav__links li a {
+    transition: none;
+  }
+  .overlay-nav,
+  .overlay-nav[aria-hidden="false"] {
+    transform: none;
+  }
+}

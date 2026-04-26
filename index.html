@@ -18,6 +18,23 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
+		<header class="site-header">
+		  <a class="site-mark" href="index.html">JHW</a>
+		  <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="overlay-nav">
+		    <span></span><span></span>
+		  </button>
+		</header>
+		<nav id="overlay-nav" class="overlay-nav" aria-hidden="true" aria-label="Primary">
+		  <ul class="overlay-nav__links">
+		    <li><a href="index.html">Projects</a></li>
+		    <li><a href="profile.html">Profile</a></li>
+		    <li><a href="index.html#footer">Contact</a></li>
+		  </ul>
+		  <ul class="overlay-nav__socials">
+		    <li><a href="https://www.linkedin.com/in/jinghuiwong/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+		    <li><a href="https://github.com/Jhwong19" target="_blank" rel="noopener">GitHub ↗</a></li>
+		  </ul>
+		</nav>
 
 		<!-- Wrapper -->
 			<div id="wrapper" class="fade-in">
@@ -36,7 +53,7 @@
 					</div>
 
 				<!-- Nav -->
-					<nav id="nav">
+					<nav id="nav" aria-label="Section">
 						<ul class="links">
 							<li class="active"><a href="index.html">Projects</a></li>
 							<li><a href="profile.html">Profile</a></li>
