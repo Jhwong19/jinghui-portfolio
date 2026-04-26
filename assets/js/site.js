@@ -125,3 +125,64 @@
     observer.observe(el);
   });
 })();
+
+// ---------- F4.3 — Member card "+" expand toggle ----------
+(function () {
+  'use strict';
+
+  var buttons = document.querySelectorAll('.member__expand');
+  if (!buttons.length) return;
+
+  Array.prototype.forEach.call(buttons, function (btn) {
+    btn.addEventListener('click', function () {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var targetId = btn.getAttribute('aria-controls');
+      var target = targetId ? document.getElementById(targetId) : null;
+
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      btn.setAttribute('aria-label', expanded ? 'Expand bio' : 'Collapse bio');
+
+      if (target) {
+        if (expanded) {
+          target.setAttribute('hidden', '');
+        } else {
+          target.removeAttribute('hidden');
+        }
+      }
+    });
+  });
+})();
+
+// ---------- F4.2 — Manifesto line-draw on intersection ----------
+(function () {
+  'use strict';
+
+  var lines = document.querySelectorAll('.manifesto-line');
+  if (!lines.length) return;
+
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReduced || typeof IntersectionObserver === 'undefined') {
+    Array.prototype.forEach.call(lines, function (el) {
+      el.classList.add('is-drawn');
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-drawn');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.3,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  Array.prototype.forEach.call(lines, function (el) {
+    observer.observe(el);
+  });
+})();
