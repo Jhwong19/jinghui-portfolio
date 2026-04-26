@@ -1246,3 +1246,300 @@ body.nav-open { overflow: hidden; }
     transform: none;
   }
 }
+
+/* ---------- F6.1 / F6.2 — Project detail pages ---------- */
+.project-page__hero {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-3) var(--space-5);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-fg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.project-page__hero .eyebrow { margin: 0; }
+
+.project-page__title {
+  margin: 0;
+  font-size: var(--fs-display);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  color: var(--color-fg);
+}
+
+.project-page__meta {
+  margin: var(--space-3) 0 0;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.project-page__media {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+.project-page__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  background: #111;
+}
+
+.project-page__body {
+  max-width: 60ch;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-3);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-fg);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+.project-page__body > * + * { margin-top: var(--space-3); }
+
+.project-page__lede {
+  font-size: 1.25em;
+  line-height: 1.55;
+  color: var(--color-fg);
+  margin: 0 0 var(--space-4);
+}
+
+.project-page__body h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-fg);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+}
+
+.project-page__body h3 {
+  font-size: calc(var(--fs-body) * 1.4);
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--color-fg);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+  letter-spacing: -0.01em;
+}
+
+.project-page__body h4 {
+  font-size: calc(var(--fs-body) * 1.1);
+  font-weight: 500;
+  color: var(--color-fg);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+
+.project-page__body p {
+  margin: 0 0 var(--space-3);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.project-page__body ul,
+.project-page__body ol {
+  margin: 0 0 var(--space-3);
+  padding-left: 1.4em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.project-page__body li {
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
+
+.project-page__body a {
+  color: var(--color-fg);
+  text-decoration: none;
+  background-image: var(--accent-gradient);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--motion-base) var(--ease-standard);
+}
+
+.project-page__body a:hover,
+.project-page__body a:focus-visible {
+  background-size: 100% 2px;
+}
+
+.project-page__body img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  margin: var(--space-3) 0;
+}
+
+.project-page__body span.image.fit {
+  display: block;
+  margin: var(--space-3) 0;
+}
+
+.project-page__body .caption {
+  font-size: 0.9em;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: 0.25rem;
+  margin-bottom: var(--space-3);
+  font-style: italic;
+}
+
+.project-page__body hr,
+.project-page__body .section-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: var(--space-5) 0;
+}
+
+.project-page__body code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.project-page__body pre {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: var(--space-2);
+  overflow-x: auto;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.project-page__body pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.project-page__body .table-wrapper {
+  overflow-x: auto;
+  margin: var(--space-3) 0;
+}
+
+.project-page__body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+.project-page__body th,
+.project-page__body td {
+  text-align: left;
+  padding: 0.6em 0.8em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: top;
+}
+
+.project-page__body th {
+  color: var(--color-fg);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.project-page__body .math-wrap {
+  overflow-x: auto;
+  padding: var(--space-2) 0;
+}
+
+.project-page__pager {
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.project-page__pager a {
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
+  text-decoration: none;
+  background-image: var(--accent-gradient);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--motion-base) var(--ease-standard);
+}
+
+.project-page__pager a:hover,
+.project-page__pager a:focus-visible {
+  background-size: 100% 2px;
+}
+
+@media (min-width: 900px) {
+  .project-page__hero {
+    padding: var(--space-7) var(--space-4) var(--space-5);
+  }
+  .project-page__media {
+    padding: 0 var(--space-4);
+  }
+  .project-page__body {
+    padding: var(--space-6) var(--space-3);
+  }
+  .project-page__pager {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-page__body a,
+  .project-page__pager a {
+    transition: none;
+  }
+}
+
+/* ---------- F6.3 — Page transitions (feature-flagged via data-page-transitions) ---------- */
+body[data-page-transitions].is-leaving,
+body[data-page-transitions].is-entering {
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--ease-standard);
+}
+
+body[data-page-transitions] {
+  opacity: 1;
+  transition: opacity var(--motion-base) var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page-transitions].is-leaving,
+  body[data-page-transitions].is-entering,
+  body[data-page-transitions] {
+    transition: none;
+    opacity: 1;
+  }
+}
+
+/* ---------- ChaptiveAI feature list (moved from inline <style>) ---------- */
+.project-page__body ol.numbered-list {
+  list-style: none;
+  counter-reset: feature-counter;
+  padding-left: 0;
+}
+.project-page__body ol.numbered-list > li {
+  counter-increment: feature-counter;
+  margin-bottom: 1.5rem;
+}
+.project-page__body ol.numbered-list > li::before {
+  content: counter(feature-counter) ") ";
+}
+.project-page__body .feature-media {
+  margin-top: 1rem;
+}
