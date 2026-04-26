@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
-    <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/site.css" />
   </head>
   <body>
@@ -39,11 +38,8 @@
       </ul>
     </nav>
 
-    <!-- Wrapper -->
-    <div id="wrapper" class="fade-in">
-
       <!-- Main -->
-      <main id="main">
+      <main>
 
         <section class="project-page__hero" data-reveal>
           <p class="eyebrow">/WORK · Selected project · <time>August 2025</time></p>
@@ -100,30 +96,30 @@
              <li>
                Paste a YouTube URL and kickstart an asynchronous ingestion pipeline: transcripts are fetched, chunked, embedded with Gemini, and cached while you keep browsing.
                <div class="feature-media">
-                 <span class="image fit"><img src="images/step1_1.png" alt="Step 1 interface showing YouTube URL input, metadata preview, and Run button" /></span>
+                 <img src="images/step1_1.png" alt="Step 1 interface showing YouTube URL input, metadata preview, and Run button" />
                  <p class="caption"><em>Drop in any YouTube URL to preview the channel metadata, video title, and kick off ingestion with a single Run.</em></p>
-                 <span class="image fit"><img src="images/step_1_2.png" alt="Cached video list with thumbnails and Use this video buttons" /></span>
+                 <img src="images/step_1_2.png" alt="Cached video list with thumbnails and Use this video buttons" />
                  <p class="caption"><em>Alternatively, pick from cached videos for instant reuse when you need quick answers.</em></p>
                </div>
              </li>
              <li>
                Generate video bookmarks with section titles, timestamps, and one-sentence recaps to turn a two-hour lecture into a scannable, hyperlinked timeline.
                <div class="feature-media">
-                 <span class="image fit"><img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptive AI bookmark generation" /></span>
+                 <img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptive AI bookmark generation" />
                  <p class="caption"><em>Bookmark previews animate how Chaptive slices a lecture into timestamped chapters.</em></p>
                </div>
              </li>
              <li>
                Ask free-form questions and receive grounded answers backed by cited transcript snippets so fact-checking stays instant.
                <div class="feature-media">
-                 <span class="image fit"><img src="gif/chaptly_qa.gif" alt="Animated view of Chaptive Q&amp;A highlighting grounded responses" /></span>
+                 <img src="gif/chaptly_qa.gif" alt="Animated view of Chaptive Q&amp;A highlighting grounded responses" />
                  <p class="caption"><em>Grounded answers highlight the exact transcript lines that justified each response.</em></p>
                </div>
              </li>
              <li>
                Spin up quizzes and executive summaries using Gemini prompts tuned for study guides, with UI sliders for difficulty and length.
                <div class="feature-media">
-                 <span class="image fit"><img src="gif/chaptly_summary_quizzes.gif" alt="Animated demo of quiz and summary sliders" /></span>
+                 <img src="gif/chaptly_summary_quizzes.gif" alt="Animated demo of quiz and summary sliders" />
                  <p class="caption"><em>Adjust difficulty and summary length, then watch quizzes and recaps generate in seconds.</em></p>
                </div>
              </li>
@@ -132,7 +128,7 @@
 
           <hr class="section-divider" />
           <h2>High-Level Architecture</h2>
-          <span class="image fit"><img src="images/user_flow_system_architecture.jpg" alt="User flow and system architecture diagram for Chaptive AI" /></span>
+          <img src="images/user_flow_system_architecture.jpg" alt="User flow and system architecture diagram for Chaptive AI" />
           <p class="caption"><em>User submits a video, Lambda ingests and caches artifacts, front-ends query cached embeddings for real-time answers.</em></p>
 
           <hr class="section-divider" />
@@ -305,7 +301,6 @@
   <button class="btn-to-top" aria-label="Scroll to top"><span aria-hidden="true">↑</span></button>
   <p class="site-footer__copyright">© Jing Hui Wong · Data Scientist</p>
 </footer>
-    </div>
 
     <!-- Scripts -->
     <script defer src="assets/js/site.js"></script>
