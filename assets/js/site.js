@@ -186,3 +186,22 @@
     observer.observe(el);
   });
 })();
+
+// ---------- F5.2 — Scroll-to-top button ----------
+(function () {
+  'use strict';
+
+  var buttons = document.querySelectorAll('.btn-to-top');
+  if (!buttons.length) return;
+
+  Array.prototype.forEach.call(buttons, function (btn) {
+    btn.addEventListener('click', function () {
+      var prefersReduced = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReduced ? 'auto' : 'smooth'
+      });
+    });
+  });
+})();
