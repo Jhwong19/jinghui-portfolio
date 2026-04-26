@@ -18,13 +18,12 @@ Reference assets (out of served root):
 
 ## Layered styling and JS
 
-The Massively template is **quarantined**, not deleted. Both layers load together until Sprint 7:
+The Massively template is partially retired. As of Sprint 7, all jQuery and Massively JS plugins (jquery, scrollex, scrolly, browser, breakpoints, util, main) are deleted, the SCSS source tree (`assets/sass/`) is gone, and `noscript.css` is gone. The CSS shell (`assets/css/main.css`) is still loaded because the four HTML pages still rely on its `#wrapper`, `#main`, `.fade-in`, and `.image.fit` rules — removing it would dump default browser styles back in and break post/image layout. A future HTML-cleanup beat can migrate those classes/IDs onto `site.css` primitives and finally drop `main.css`.
 
-- `assets/css/main.css` — Massively (legacy). **Do not edit.**
-- `assets/css/site.css` — redesign source of truth. **All new styles go here.** Loaded after `main.css` as an override.
-- `assets/js/site.js` — redesign source of truth (vanilla, IntersectionObserver, no jQuery).
-- `assets/js/jquery*.js`, `browser.min.js`, `breakpoints.min.js`, `util.js`, `main.js` — Massively (legacy). Removed in Sprint 7 by `feature-dev-polish`.
-- `assets/sass/` — Massively SCSS source. **No SCSS compiler is wired up.** Do not compile, do not edit.
+- `assets/css/main.css` — Massively (legacy). Still loaded; **do not edit.** Will be removed once HTML migrates off `#wrapper`/`#main`/`.image.fit`.
+- `assets/css/site.css` — redesign source of truth. **All new styles go here.** Loaded after `main.css` as an override; a few `!important` rules on `#main`/`#wrapper.fade-in:before` exist to neutralise Massively defaults.
+- `assets/js/site.js` — only JS loaded. Vanilla, IntersectionObserver, no jQuery.
+- `assets/css/fontawesome-all.min.css` and `assets/webfonts/` — orphaned: not `<link>`-ed anywhere, but the dead Massively `#nav` block in `index.html` still references `fa-linkedin`/`fa-github` class names. Leave alone until that nav block is removed.
 
 ## Pages
 
