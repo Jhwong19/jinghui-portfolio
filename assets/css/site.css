@@ -1,7 +1,61 @@
 /* Redesign source of truth. All new styles go here. Loaded after main.css. */
 
+/* ---------- F1.1 — Design tokens ---------- */
 :root {
+  /* Layout */
   --header-height: 64px;
+
+  /* Palette */
+  --color-bg: #000;
+  --color-fg: #fff;
+  --color-muted: #8a8a8a;
+  --accent-1: #5a6a3a;
+  --accent-2: #b8862a;
+  --accent-3: #ff8469;
+  --accent-gradient: linear-gradient(90deg, #5a6a3a 0%, #b8862a 50%, #ff8469 100%);
+
+  /* Typography */
+  --font-display: 'Roobert', 'Inter', system-ui, sans-serif;
+  --font-body: 'Raleway', 'Manrope', system-ui, sans-serif;
+  --fs-display: clamp(48px, 9vw, 140px);
+  --fs-h1: clamp(36px, 6vw, 88px);
+  --fs-h2: clamp(28px, 4vw, 56px);
+  --fs-body: clamp(16px, 1.1vw, 18px);
+  --fs-eyebrow: clamp(12px, 0.9vw, 14px);
+
+  /* Spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+  --space-7: 9rem;
+
+  /* Motion */
+  --motion-fast: 200ms;
+  --motion-base: 350ms;
+  --motion-slow: 700ms;
+  --ease-standard: cubic-bezier(.2,.7,.2,1);
+}
+
+/* M7 — apply token-driven body font/colors now that Inter/Manrope load */
+body {
+  font-family: var(--font-body);
+  color: var(--color-fg);
+  background: var(--color-bg);
+}
+
+/* B1 — override Massively's white #main panel so dark sections breathe full-bleed */
+#main {
+  background: #000 !important;
+  max-width: none !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+#main > * {
+  border-top: 0 !important;
+  padding: 0 !important;
 }
 
 html {
@@ -318,5 +372,294 @@ body.nav-open { overflow: hidden; }
   .hero__orb,
   .hero__badge {
     animation: none;
+  }
+}
+
+/* ---------- F3.1–F3.3 — Selected projects ---------- */
+.selected-projects {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-fg);
+}
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 var(--space-2);
+}
+
+/* B2 — render the arrow as a pseudo-element instead of inline glyph */
+.eyebrow::before {
+  content: "\2192";
+  display: inline-block;
+  margin-right: 0.5em;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+/* B3 — scoped overrides so Massively h2/h3 specificity can't bleed in */
+.selected-projects h2.eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.selected-projects .project-card__title {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.05;
+}
+.tooling .tooling__eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-muted);
+}
+.tooling .tooling__list {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: transform var(--motion-base) var(--ease-standard);
+  will-change: transform;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+}
+
+.project-card__media {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #111;
+  line-height: 0;
+}
+
+.project-card__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--motion-slow) var(--ease-standard);
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.02);
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0 var(--space-1);
+}
+
+.project-card__date {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.project-card__title {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--color-fg);
+}
+
+.project-card__title a {
+  color: inherit;
+  text-decoration: none;
+  background-image: var(--accent-gradient);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--motion-base) var(--ease-standard);
+}
+
+.project-card__title a:hover,
+.project-card__title a:focus {
+  background-size: 100% 2px;
+}
+
+.project-card__meta {
+  margin: 0;
+  font-size: var(--fs-eyebrow);
+  color: var(--color-muted);
+  letter-spacing: 0.02em;
+}
+
+.project-card__actions {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.btn-pill {
+  --pill-border: rgba(255, 255, 255, 0.4);
+  display: inline-block;
+  padding: 0.7em 1.6em;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-fg);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  position: relative;
+  border: 1px solid var(--pill-border);
+  transition: color var(--motion-base) var(--ease-standard),
+              border-color var(--motion-base) var(--ease-standard),
+              background var(--motion-base) var(--ease-standard);
+}
+
+.btn-pill:hover,
+.btn-pill:focus-visible {
+  border-color: transparent;
+  background:
+    linear-gradient(#000, #000) padding-box,
+    var(--accent-gradient) border-box;
+  border: 1px solid transparent;
+  color: var(--color-fg);
+}
+
+.btn-pill:focus-visible {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 4px;
+}
+
+@media (min-width: 900px) {
+  .selected-projects {
+    padding: var(--space-7) var(--space-4);
+    gap: var(--space-6);
+  }
+  .project-card {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: var(--space-5);
+  }
+  .project-card:nth-of-type(odd) .project-card__media {
+    order: 1;
+  }
+  .project-card:nth-of-type(even) .project-card__media {
+    order: 2;
+  }
+  .project-card__body {
+    padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-card__media img,
+  .project-card__title a,
+  .btn-pill {
+    transition: none;
+  }
+  .project-card:hover {
+    transform: none;
+  }
+  .project-card:hover .project-card__media img {
+    transform: none;
+  }
+}
+
+/* ---------- F1.4 — Reveal utility ---------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--motion-slow) var(--ease-standard),
+              transform var(--motion-slow) var(--ease-standard);
+}
+
+[data-reveal].is-inview {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- F3.4 — Tooling strip ---------- */
+.tooling {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-3);
+  color: var(--color-fg);
+}
+
+.tooling__eyebrow {
+  margin: 0;
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-muted);
+}
+
+.tooling__list {
+  margin: 0;
+  font-size: var(--fs-h2);
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--color-fg);
+  max-width: 18ch;
+}
+
+.btn-pill--gradient {
+  margin-top: var(--space-3);
+  border-color: transparent;
+  background: var(--accent-gradient);
+  color: var(--color-fg);
+}
+
+.btn-pill--gradient:hover,
+.btn-pill--gradient:focus-visible {
+  border: 1px solid transparent;
+  background: var(--accent-gradient);
+  color: var(--color-fg);
+  filter: brightness(1.08);
+}
+
+@media (min-width: 900px) {
+  .tooling {
+    padding: var(--space-7) var(--space-4);
+    gap: var(--space-4);
+  }
+  .tooling__list {
+    max-width: none;
   }
 }

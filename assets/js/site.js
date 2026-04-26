@@ -90,3 +90,38 @@
     }
   });
 })();
+
+// ---------- F1.4 — Reveal utility (IntersectionObserver) ----------
+(function () {
+  'use strict';
+
+  var targets = document.querySelectorAll('[data-reveal]');
+  if (!targets.length) return;
+
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReduced || typeof IntersectionObserver === 'undefined') {
+    // Short-circuit: reveal everything immediately, no observer.
+    Array.prototype.forEach.call(targets, function (el) {
+      el.classList.add('is-inview');
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-inview');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  Array.prototype.forEach.call(targets, function (el) {
+    observer.observe(el);
+  });
+})();
