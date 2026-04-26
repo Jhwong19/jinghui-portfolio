@@ -20,35 +20,8 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/site.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
-    <style>
-      .post p.caption {
-        text-align: center;
-        margin-top: 0.25rem;
-        margin-bottom: 1rem;
-        font-style: italic;
-      }
-      .post span.image.fit + p.caption {
-        margin-top: 0.25rem;
-      }
-      ol.numbered-list {
-        list-style: none;
-        counter-reset: feature-counter;
-        padding-left: 0;
-      }
-      ol.numbered-list > li {
-        counter-increment: feature-counter;
-        margin-bottom: 1.5rem;
-      }
-      ol.numbered-list > li::before {
-        content: counter(feature-counter) ") ";
-      }
-       .feature-media {
-         margin-top: 1rem;
-       }
-    </style>
   </head>
-  <body class="is-preload">
+  <body>
     <header class="site-header">
       <a class="site-mark" href="index.html">JHW</a>
       <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="overlay-nav">
@@ -70,40 +43,23 @@
     <!-- Wrapper -->
     <div id="wrapper" class="fade-in">
 
-      <!-- Intro -->
-      <div id="intro">
-        <h1>TECHNICAL BLOG</h1>
-        <p>Chaptive AI  —  Turning long-form YouTube lectures into interactive study companions.</p>
-        <ul class="actions">
-          <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Read</a></li>
-        </ul>
-      </div>
-
-      <!-- Nav -->
-      <nav id="nav" aria-label="Section">
-        <ul class="links">
-          <li><a href="index.html">Projects</a></li>
-          <li><a href="profile.html">Profile</a></li>
-        </ul>
-        <ul class="icons">
-          <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
-          <li><a href="https://github.com/Jhwong19" class="icon brands fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
-        </ul>
-      </nav>
-
       <!-- Main -->
-      <div id="main">
-        <article class="post">
-          <header class="major">
-            <span class="date">Updated Nov, 2025</span>
-            <h1>Chaptive: Conversational Learning Assistant</h1>
-            <p>Chaptive ingests trusted educational YouTube channels, builds Gemini-powered embeddings, and exposes grounded search, Q&amp;A, bookmarks, and quizzes through a FastAPI backend running on AWS Lambda. The experience surfaces lecture knowledge in seconds across web and Hugging Face Space front-ends.</p>
-          </header>
+      <main id="main">
 
-          <span class="image fit"><img src="images/cover_page.jpg" alt="Serverless AI data pipeline showing AWS and Google services" /></span>
-          <p class="caption"><em>Serverless AI data pipeline: AWS Lambda + API Gateway orchestrating Gemini, S3, and DynamoDB.</em></p>
+        <section class="project-page__hero" data-reveal>
+          <p class="eyebrow">/WORK · Selected project · <time>August 2025</time></p>
+          <h1 class="project-page__title">Chaptive:<br/>Video Intelligence Explorer</h1>
+          <p class="project-page__meta">Streamlit · Hugging Face · LLM</p>
+        </section>
 
-          <hr class="section-divider" />
+        <figure class="project-page__media" data-reveal>
+          <img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptive turning a YouTube lecture into bookmarks and Q&amp;A." />
+        </figure>
+
+        <article class="project-page__body" data-reveal>
+
+          <p class="project-page__lede">Chaptive ingests trusted educational YouTube channels, builds Gemini-powered embeddings, and exposes grounded search, Q&amp;A, bookmarks, and quizzes through a FastAPI backend running on AWS Lambda. The experience surfaces lecture knowledge in seconds across web and Hugging Face Space front-ends.</p>
+
           <h2>Problem Statement</h2>
           <p><strong>Your YouTube Tutor Chatbot.</strong> Chaptive turns any long lecture into productive, structured learning so you can talk to the video like a tutor.</p>
           <p>If you’ve ever:</p>
@@ -313,7 +269,13 @@
           <h2>Repository &amp; References</h2>
           <p>The demo is deployed in <a href="https://huggingface.co/spaces/Jing997/chaptive" target="_blank" rel="noopener">Hugging Face Spaces</a>. For infrastructure walkthroughs, see the <a href="https://github.com/Jhwong19/chaptive-ai-public" target="_blank" rel="noopener">GitHub repository</a>. For the complete project source, please reach out to me.</p>
         </article>
-      </div>
+
+        <nav class="project-page__pager" data-reveal aria-label="Project pager">
+          <a rel="prev" href="DeliveryRouteOptimisation.html">← Previous</a>
+          <a rel="next" href="index.html">Next →</a>
+        </nav>
+
+      </main>
 
       <!-- Contact -->
 <section id="contact" class="contact" data-reveal>
@@ -334,13 +296,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
     <script defer src="assets/js/site.js"></script>
   </body>
 </html>

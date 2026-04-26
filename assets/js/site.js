@@ -187,6 +187,83 @@
   });
 })();
 
+// ---------- F6.3 — Page transitions (feature-flagged via <body data-page-transitions>) ----------
+(function () {
+  'use strict';
+
+  if (!document.body || document.body.dataset.pageTransitions === undefined) return;
+
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Resolve transition duration from --motion-base (fallback 350ms).
+  function getDurationMs() {
+    try {
+      var raw = getComputedStyle(document.documentElement)
+        .getPropertyValue('--motion-base').trim();
+      if (!raw) return 350;
+      if (raw.indexOf('ms') !== -1) return parseFloat(raw);
+      if (raw.indexOf('s') !== -1) return parseFloat(raw) * 1000;
+      var n = parseFloat(raw);
+      return isNaN(n) ? 350 : n;
+    } catch (e) {
+      return 350;
+    }
+  }
+
+  // Briefly add is-entering on load, then remove next frame.
+  if (!prefersReduced) {
+    document.body.classList.add('is-entering');
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        document.body.classList.remove('is-entering');
+      });
+    });
+  }
+
+  function isInternalNav(a, e) {
+    if (!a || !a.href) return false;
+    if (e.defaultPrevented) return false;
+    if (e.button !== 0) return false;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
+    if (a.target && a.target !== '' && a.target !== '_self') return false;
+    var href = a.getAttribute('href') || '';
+    if (!href) return false;
+    if (/^(mailto:|tel:|javascript:|data:)/i.test(href)) return false;
+    if (href.charAt(0) === '#') return false;
+    // Same origin?
+    if (a.origin && a.origin !== window.location.origin) return false;
+    // Skip same-page anchor links (path/hash only)
+    if (a.pathname === window.location.pathname &&
+        a.search === window.location.search &&
+        a.hash) {
+      return false;
+    }
+    return true;
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    if (!isInternalNav(a, e)) return;
+    if (prefersReduced) return; // navigate normally
+
+    e.preventDefault();
+    var href = a.href;
+    document.body.classList.add('is-leaving');
+    window.setTimeout(function () {
+      window.location.href = href;
+    }, getDurationMs());
+  });
+
+  // Restore on bfcache restore
+  window.addEventListener('pageshow', function (evt) {
+    if (evt.persisted) {
+      document.body.classList.remove('is-leaving');
+    }
+  });
+})();
+
 // ---------- F5.2 — Scroll-to-top button ----------
 (function () {
   'use strict';

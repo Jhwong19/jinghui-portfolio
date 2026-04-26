@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Technical Blog</title>
+    <title>Delivery Route Optimisation | Jing Hui Wong</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta name="description" content="Technical blog: Architecture Overview of selected projects" />
@@ -20,27 +20,8 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/site.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <script>
-      window.MathJax = {
-        tex: { inlineMath: [['$','$'], ['\\(','\\)']] },
-        chtml: { linebreaks: { automatic: true, width: 'container' } }
-      };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-    <!-- Added inline style for centered, tight image captions -->
-    <style>
-      .post p.caption {
-        text-align: center;
-        margin-top: 0.25rem; /* minimal space above caption */
-        margin-bottom: 1.0rem; /* consistent space below caption */
-        font-style: italic; /* preserve emphasis */
-      }
-      .post span.image.fit + p.caption {
-        margin-top: 0.25rem; /* ensure directly below image */
-      }
-    </style>
   </head>
-  <body class="is-preload">
+  <body>
     <header class="site-header">
       <a class="site-mark" href="index.html">JHW</a>
       <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="overlay-nav">
@@ -62,39 +43,22 @@
     <!-- Wrapper -->
     <div id="wrapper" class="fade-in">
 
-      <!-- Intro/Header Banner (optional minimal) -->
-      <div id="intro">
-        <h1>TECHNICAL BLOG</h1>
-        <p>Designing a Practical Last‑Mile Delivery Planner with OR‑Tools and Streamlit</p>
-        <ul class="actions">
-          <li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Read</a></li>
-        </ul>
-      </div>
-
-      <!-- Nav (reusing same panel) -->
-      <nav id="nav" aria-label="Section">
-        <ul class="links">
-          <li><a href="index.html">Projects</a></li>
-          <li><a href="profile.html">Profile</a></li>
-        </ul>
-        <ul class="icons">
-          <li><a href="https://www.linkedin.com/in/jinghuiwong/" class="icon brands fa-linkedin" target="_blank" rel="noopener"><span class="label">LinkedIn</span></a></li>
-          <li><a href="https://github.com/Jhwong19" class="icon brands fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
-        </ul>
-      </nav>
-
       <!-- Main -->
-      <div id="main">
+      <main id="main">
 
-        <!-- Blog Article (converted from BLOG copy.md) -->
-        <article class="post">
-          <header class="major">
-            <span class="date">Updated Nov, 2025</span>
-            <h1>Designing a Practical Last‑Mile Delivery Planner with OR‑Tools and Streamlit</h1>
-            <p>Effective last‑mile delivery planning is a balance of operational constraints and geography. This project turns that challenge into a focused, reproducible application: a Streamlit interface backed by Google OR‑Tools for route optimization, with road‑network travel times sourced from APIs (Google Maps Directions/Distance Matrix or OSRM) and results visualized on an interactive map.</p>
-          </header>
+        <section class="project-page__hero" data-reveal>
+          <p class="eyebrow">/WORK · Selected project · <time>April 2025</time></p>
+          <h1 class="project-page__title">AI-Powered<br/>Optimiser Scheduler</h1>
+          <p class="project-page__meta">Streamlit · Hugging Face · Optimisation</p>
+        </section>
 
-          <span class="image fit"><img src="gif/delivery_route_optimisation.gif" alt="Delivery Route Optimisation Demo" /></span>
+        <figure class="project-page__media" data-reveal>
+          <img src="gif/delivery_route_optimisation.gif" alt="Animated demo of the optimiser scheduler producing routes on a map." />
+        </figure>
+
+        <article class="project-page__body" data-reveal>
+
+          <p class="project-page__lede">Effective last‑mile delivery planning is a balance of operational constraints and geography. This project turns that challenge into a focused, reproducible application: a Streamlit interface backed by Google OR‑Tools for route optimization, with road‑network travel times sourced from APIs (Google Maps Directions/Distance Matrix or OSRM) and results visualized on an interactive map.</p>
 
           <h2>Problem Statement</h2>
           <p>Last‑mile operations rarely match the simplicity of a whiteboard sketch. Vehicles differ in capacity and shift hours, customers require deliveries within specific time windows, and travel times vary by time of day and route conditions. Manual planning, static routes, or lightweight heuristics do not scale with growing demand or volatility. The result is missed windows, excess mileage, and operational strain.</p>
@@ -224,7 +188,7 @@
           <span class="image fit"><img src="images/blog_1_optimizer2.png" alt="Routing with API‑derived travel times and optimal stop sequencing" /></span>
           <p class="caption"><em>Under the hood: API‑derived ETAs drive a VRP‑TW solver to compute the best sequence and duration.</em></p>
 
-          <span class="image fit"><img src="images/blog_1_optimizer3.png.png" alt="Calendar schedule visualization by vehicle and date" /></span>
+          <span class="image fit"><img src="images/blog_1_optimizer3.png" alt="Calendar schedule visualization by vehicle and date" /></span>
           <p class="caption"><em>Calendar view: visualize and tune by duration, distance, and package importance to balance operations.</em></p>
 
           <p><strong>Tip:</strong> Always click “Generate Optimal Routes” after changing parameters to apply updates.</p>
@@ -236,7 +200,7 @@
 
           <!-- Before Optimization Approach -->
           <hr class="section-divider" />
-          <section class="post">
+          <section>
             <h2>Optimization Approach</h2>
             <p>Below is a compact formulation that captures the core elements used by the solver and the optimizer’s tunable preferences.</p>
 
@@ -376,7 +340,12 @@
           </ul>
         </article>
 
-      </div>
+        <nav class="project-page__pager" data-reveal aria-label="Project pager">
+          <a rel="prev" href="index.html">← Previous</a>
+          <a rel="next" href="ChaptiveAI.html">Next →</a>
+        </nav>
+
+      </main>
 
       <!-- Contact -->
 <section id="contact" class="contact" data-reveal>
@@ -398,13 +367,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
     <script defer src="assets/js/site.js"></script>
 
   </body>
