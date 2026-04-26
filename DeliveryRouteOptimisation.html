@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
-    <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/site.css" />
   </head>
   <body>
@@ -39,11 +38,8 @@
       </ul>
     </nav>
 
-    <!-- Wrapper -->
-    <div id="wrapper" class="fade-in">
-
       <!-- Main -->
-      <main id="main">
+      <main>
 
         <section class="project-page__hero" data-reveal>
           <p class="eyebrow">/WORK · Selected project · <time>April 2025</time></p>
@@ -139,11 +135,11 @@
 
           <h3>Map Page</h3>
           
-          <span class="image fit"><img src="images/blog_1_map0.png" alt="Interactive map showing routes, depots, and delivery clusters" /></span>
+          <img src="images/blog_1_map0.png" alt="Interactive map showing routes, depots, and delivery clusters" />
           <p class="caption"><em>Interactive map showing routes, depots, and delivery clusters</em></p>
 
           <p>The map provides a clear, geographic view of your operation. Delivery locations and depot positions are drawn on an interactive base map, with filters in the sidebar to tailor the display to specific dates, vehicles, or status. At a glance, you can see how stops cluster, how routes traverse the network, and where potential bottlenecks may form. Key summary metrics (number of deliveries, assigned vs. unassigned, and late/on‑time breakdowns) accompany the map so you can correlate what you see with operational reality.</p>
-          <span class="image fit"><img src="images/blog_1_map.png" alt="Interactive map showing routes, depots, and delivery clusters" /></span>
+          <img src="images/blog_1_map.png" alt="Interactive map showing routes, depots, and delivery clusters" />
           <p class="caption"><em>Real‑time operational view: routes by color, stop markers with popups, and depot locations.</em></p>
           <p>When routes are generated, the map highlights each vehicle’s path with distinct colors and markers. Popups reveal stop details—ETA, time window, priority, and demand—so you can review the sequence on the ground. A delivery schedule calendar complements the map by showing time spans across the day for each delivery, making it easy to spot overlaps, slack, and potential conflicts.</p>
           <ul>
@@ -182,7 +178,7 @@
                 <li>Route Map: An interactive map per date; hover for details, filter by day.</li>
                 <li>Calendar View: Delivery schedules by date. Legend: green = on‑time, orange = late, red = unassigned.</li>
               </ul>
-              <span class="image fit"><img src="images/blog_1_optimizer1.png" alt="Optimization results overview with KPIs and charts" /></span>
+              <img src="images/blog_1_optimizer1.png" alt="Optimization results overview with KPIs and charts" />
               <p class="caption"><em>Fast optimization with clear KPIs, route metrics, and distribution summaries.</em></p>
             </li>
             <li>
@@ -197,10 +193,10 @@
           </ol>
 
           <p>The route computation integrates road‑network travel times from Google Maps Directions/Distance Matrix or OSRM. The solver sequences stops to respect time windows, priorities, service times, and capacity limits while minimizing total travel time/distance.</p>
-          <span class="image fit"><img src="images/blog_1_optimizer2.png" alt="Routing with API‑derived travel times and optimal stop sequencing" /></span>
+          <img src="images/blog_1_optimizer2.png" alt="Routing with API‑derived travel times and optimal stop sequencing" />
           <p class="caption"><em>Under the hood: API‑derived ETAs drive a VRP‑TW solver to compute the best sequence and duration.</em></p>
 
-          <span class="image fit"><img src="images/blog_1_optimizer3.png" alt="Calendar schedule visualization by vehicle and date" /></span>
+          <img src="images/blog_1_optimizer3.png" alt="Calendar schedule visualization by vehicle and date" />
           <p class="caption"><em>Calendar view: visualize and tune by duration, distance, and package importance to balance operations.</em></p>
 
           <p><strong>Tip:</strong> Always click “Generate Optimal Routes” after changing parameters to apply updates.</p>
@@ -375,8 +371,6 @@
   <button class="btn-to-top" aria-label="Scroll to top"><span aria-hidden="true">↑</span></button>
   <p class="site-footer__copyright">© Jing Hui Wong · Data Scientist</p>
 </footer>
-
-    </div>
 
     <!-- Scripts -->
     <script defer src="assets/js/site.js"></script>
