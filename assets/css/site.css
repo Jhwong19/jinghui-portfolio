@@ -406,7 +406,7 @@ body.nav-open { overflow: hidden; }
 }
 
 /* B3 — scoped overrides so Massively h2/h3 specificity can't bleed in */
-.selected-projects h2.eyebrow {
+.selected-projects p.eyebrow {
   font-size: var(--fs-eyebrow);
   font-weight: 500;
   letter-spacing: 0.08em;
