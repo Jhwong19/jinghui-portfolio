@@ -663,3 +663,357 @@ body.nav-open { overflow: hidden; }
     max-width: none;
   }
 }
+
+/* ---------- F4.1 — Manifesto teaser (index.html) ---------- */
+.manifesto-teaser {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-fg);
+}
+
+.manifesto-teaser .eyebrow {
+  margin: 0;
+}
+
+.manifesto-teaser__title {
+  margin: 0;
+  font-size: var(--fs-h1);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-fg);
+  max-width: 22ch;
+}
+
+.manifesto-teaser__title em {
+  font-style: italic;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.manifesto-teaser__body {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 56ch;
+}
+
+@media (min-width: 900px) {
+  .manifesto-teaser {
+    padding: var(--space-7) var(--space-4);
+    gap: var(--space-4);
+  }
+}
+
+/* ---------- F4.2 — Full manifesto (profile.html) ---------- */
+.manifesto {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-fg);
+}
+
+.manifesto__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-display);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  color: var(--color-fg);
+  max-width: 14ch;
+}
+
+.manifesto__title em {
+  font-style: italic;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.manifesto__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+}
+
+.manifesto__label {
+  margin: 0;
+  font-size: var(--fs-eyebrow);
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.manifesto__body {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-fg);
+  max-width: 60ch;
+  background: linear-gradient(180deg, var(--color-fg) 0%, var(--color-fg) 50%, var(--color-muted) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifesto__body {
+    background: none;
+    color: var(--color-fg);
+    -webkit-text-fill-color: var(--color-fg);
+  }
+}
+
+.manifesto-line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  overflow: visible;
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+  opacity: 0.5;
+}
+
+.manifesto-line line {
+  stroke: currentColor;
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--motion-slow) var(--ease-standard);
+}
+
+.manifesto-line.is-drawn line {
+  stroke-dashoffset: 0;
+}
+
+@media (min-width: 768px) {
+  .manifesto__item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: var(--space-5);
+    row-gap: var(--space-3);
+    align-items: start;
+  }
+  .manifesto__label {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .manifesto__body {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .manifesto-line {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@media (min-width: 900px) {
+  .manifesto {
+    padding: var(--space-7) var(--space-4);
+    gap: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifesto-line line {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
+/* ---------- F4.3 — Member card (profile.html) ---------- */
+.member-intro {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-3) var(--space-6);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-fg);
+}
+
+.member-intro .eyebrow {
+  margin: 0 0 var(--space-3);
+}
+
+.member-intro h2 {
+  margin: 0;
+  font-size: var(--fs-h1);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-fg);
+  max-width: 18ch;
+}
+
+.member-intro__title {
+  margin: 0;
+  font-size: var(--fs-display);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+  color: var(--color-fg);
+  max-width: none;
+}
+
+.member-intro__title em {
+  font-style: italic;
+}
+
+.member-intro__title .indent {
+  display: inline-block;
+  margin-left: 1.5em;
+}
+
+.member {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-3) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-fg);
+}
+
+.member__portrait {
+  margin: 0;
+  width: 100%;
+}
+
+.member__portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.member__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.member__role {
+  margin: 0;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.member__name {
+  margin: 0;
+  font-size: var(--fs-h1);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-fg);
+}
+
+.member__expand {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--color-fg);
+  background: transparent;
+  color: var(--color-fg);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: inherit;
+  transition: transform var(--motion-fast) var(--ease-standard),
+              background var(--motion-fast) var(--ease-standard),
+              color var(--motion-fast) var(--ease-standard);
+}
+
+.member__expand > * {
+  transition: transform var(--motion-fast) var(--ease-standard);
+  display: inline-block;
+}
+
+/* Treat the button text-node via inner rotation: rotate the whole button content. */
+.member__expand {
+  position: relative;
+}
+
+.member__expand::before {
+  content: "";
+}
+
+.member__expand[aria-expanded="true"] {
+  transform: rotate(45deg);
+}
+
+.member__expand:hover,
+.member__expand:focus-visible {
+  background: var(--color-fg);
+  color: var(--color-bg);
+}
+
+.member__expand:focus-visible {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 4px;
+}
+
+.member__bio {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-fg);
+  max-width: 60ch;
+  padding-top: var(--space-3);
+}
+
+.member__bio p {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .member {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 900px) {
+  .member-intro {
+    padding: var(--space-7) var(--space-4) var(--space-6);
+  }
+  .member {
+    padding: 0 var(--space-4) var(--space-7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member__expand,
+  .member__expand > * {
+    transition: none;
+  }
+}
