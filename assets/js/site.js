@@ -574,3 +574,28 @@
     });
   }
 })();
+
+/* ---- v9.1 — Email obfuscation -------------------------------------- */
+/* Plain mailto:user@domain in HTML is harvested aggressively by spam
+   crawlers. We split the address into data-user / data-domain on the
+   anchor, leaving no @ in the static markup, then assemble the real
+   address client-side. Bots regex'ing for \w+@\w+\.\w+ find nothing.
+   Real users keep the click → mail-client UX. JS-disabled users get
+   a noscript "user dot name [at] domain dot com" fallback rendered
+   server-side in the markup. */
+(function () {
+  'use strict';
+  var anchors = document.querySelectorAll('a.contact__email[data-user][data-domain]');
+  Array.prototype.forEach.call(anchors, function (a) {
+    var user = a.getAttribute('data-user');
+    var dom  = a.getAttribute('data-domain');
+    if (!user || !dom) return;
+    var addr = user + '@' + dom;
+    a.href = 'mailto:' + addr;
+    a.textContent = addr;
+    // Drop the data-attrs once consumed so a curious DOM inspector
+    // doesn't see the obfuscated form mid-page.
+    a.removeAttribute('data-user');
+    a.removeAttribute('data-domain');
+  });
+})();
