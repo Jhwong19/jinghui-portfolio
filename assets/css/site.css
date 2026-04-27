@@ -77,6 +77,7 @@
   /* Typography */
   --font-display: 'Inter', system-ui, sans-serif;
   --font-body: 'Manrope', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --fs-display: clamp(3.5rem, 9vw, 8rem);
   --fs-mega: clamp(5rem, 14vw, 12rem);
   --fs-h1: clamp(36px, 6vw, 88px);
@@ -431,46 +432,44 @@ body.nav-open { overflow: hidden; }
   }
 }
 
-/* v3.1 — Hero title sized to match monopo (smaller than --fs-mega).
-   Wraps a .hero__title__inner span that handles the float-up swap. */
+/* v6.2 — Hero title in JetBrains Mono with a typewriter caret.
+   Single line, replace-in-place; min-width reserves enough space for
+   the longest phrase ("Building with AI") to prevent layout shift. */
 .hero__title {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: clamp(2.25rem, 5.2vw, 4.5rem);
-  line-height: 1.0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.75rem, 4.4vw, 3.5rem);
+  line-height: 1.1;
   letter-spacing: -0.02em;
   font-weight: 400;
   color: var(--color-fg);
   text-align: center;
-  /* Reserve enough vertical space so swaps don't reflow surroundings */
-  min-height: 1.2em;
-  overflow: hidden;
-  display: flex;
+  min-height: 1.3em;
+  min-width: min(90vw, 18ch);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 }
-.hero__title em {
-  font-style: italic;
-  font-weight: 400;
-}
-.hero__title__inner {
+.hero__title__char {
   display: inline-block;
-  will-change: transform, opacity;
-  transition:
-    transform var(--motion-base) var(--ease-standard),
-    opacity var(--motion-base) var(--ease-standard);
+  white-space: nowrap;
 }
-/* Outgoing — slides up out of frame */
-.hero__title__inner--out {
-  transform: translate3d(0, -150%, 0);
-  opacity: 0;
+.hero__title__caret {
+  display: inline-block;
+  margin-left: 0.06em;
+  color: var(--color-fg);
+  font-weight: 300;
+  animation: hero-caret-blink 1.2s steps(1, end) infinite;
 }
-/* Incoming — starts below frame, ready to slide up into place */
-.hero__title__inner--in {
-  transform: translate3d(0, 150%, 0);
-  opacity: 0;
-  transition: none;
+@keyframes hero-caret-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__title__caret { animation: none; opacity: 0.6; }
 }
 
 /* v3.3 — SCROLL DOWN badge with static centre JHW mark.

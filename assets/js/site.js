@@ -283,67 +283,88 @@
   });
 })();
 
-/* ---- v3.1 — Hero headline rotation (monopo float-up animation) --------- */
+/* ---- v6.2 — Hero typewriter rotation (monospace, single-line) --------- */
 (function () {
   'use strict';
   var host = document.querySelector('.hero__title[data-rotate]');
   if (!host) return;
 
-  // Each phrase ships as HTML so every "i" can be italicised in monopo style.
-  var phrases = [
-    'Hello',
-    'J<em>i</em>ng Hu<em>i</em> Wong',
-    'Bu<em>i</em>ld<em>i</em>ng w<em>i</em>th AI',
-    'Data Sc<em>i</em>ent<em>i</em>st'
-  ];
+  var phrases = ['Hello', 'Jing Hui Wong', 'Building with AI', 'AI Engineer'];
+
   var prefersReduced = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Render the initial phrase wrapped in an inner span that owns the
-  // transform/opacity animation. Final phrase is the static fallback
-  // for reduced-motion + no-JS users.
-  function render(html) {
-    host.innerHTML = '<span class="hero__title__inner">' + html + '</span>';
-    return host.firstChild;
+  // Two-span structure: a stable text node holds the typed characters,
+  // a sibling span renders the blinking caret. Replace the host's inner
+  // markup once on init; subsequent ticks only mutate textContent.
+  function mount(initialText) {
+    host.innerHTML =
+      '<span class="hero__title__char"></span>' +
+      '<span class="hero__title__caret" aria-hidden="true">|</span>';
+    var charEl = host.firstChild;
+    charEl.textContent = initialText;
+    return charEl;
   }
 
   if (prefersReduced) {
-    render(phrases[phrases.length - 1]);
+    mount(phrases[phrases.length - 1]);
     return;
   }
 
-  var index = 0;
-  var inner = render(phrases[0]);
+  var charEl = mount('');
 
-  var INTERVAL  = 2500;
-  var SLIDE_OUT = 450;
-  var SLIDE_IN  = 450;
-  var timer = null;
+  // State machine: TYPING → PAUSE_AFTER → DELETING → PAUSE_BEFORE → next
+  var TYPE_MS         = 70;
+  var DELETE_MS       = 40;
+  var PAUSE_AFTER_MS  = 1500;
+  var PAUSE_BEFORE_MS = 250;
 
-  function tick() {
-    // Slide current out
-    inner.classList.add('hero__title__inner--out');
-    setTimeout(function () {
-      // Swap to next phrase, mount it pre-positioned below
-      index = (index + 1) % phrases.length;
-      inner = render(phrases[index]);
-      inner.classList.add('hero__title__inner--in');
-      // Force layout, then remove the --in class so transition runs into place
-      // (next animation frame so the browser registers the start state).
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          inner.classList.remove('hero__title__inner--in');
-        });
-      });
-    }, SLIDE_OUT);
+  var phraseIdx = 0;
+  var charPos   = 0;
+  var mode      = 'typing'; // typing | deleting
+  var timer     = null;
+  var paused    = false;
+
+  function schedule(ms, fn) {
+    if (paused) return;
+    timer = setTimeout(fn, ms);
   }
 
-  function start() { if (!timer) timer = setInterval(tick, INTERVAL); }
-  function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+  function tick() {
+    timer = null;
+    var phrase = phrases[phraseIdx];
+
+    if (mode === 'typing') {
+      if (charPos < phrase.length) {
+        charPos++;
+        charEl.textContent = phrase.slice(0, charPos);
+        schedule(TYPE_MS, tick);
+      } else {
+        // Hold the full phrase, then start deleting.
+        mode = 'deleting';
+        schedule(PAUSE_AFTER_MS, tick);
+      }
+    } else { // deleting
+      if (charPos > 0) {
+        charPos--;
+        charEl.textContent = phrase.slice(0, charPos);
+        schedule(DELETE_MS, tick);
+      } else {
+        // Empty — advance to the next phrase, brief pause, then type it.
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        mode = 'typing';
+        schedule(PAUSE_BEFORE_MS, tick);
+      }
+    }
+  }
+
+  function start() { if (!timer && !paused) tick(); }
+  function stop()  { if (timer) { clearTimeout(timer); timer = null; } }
 
   start();
   document.addEventListener('visibilitychange', function () {
-    if (document.hidden) stop(); else start();
+    paused = document.hidden;
+    if (paused) stop(); else start();
   });
 })();
 
