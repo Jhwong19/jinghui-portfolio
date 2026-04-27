@@ -1262,6 +1262,20 @@ body.nav-open { overflow: hidden; }
   font-weight: 500;
 }
 
+/* v9.1 — fallback for JS-disabled visitors. Same gradient text as
+   the live link so the section still reads cleanly. */
+.contact__email-fallback {
+  display: block;
+  margin: var(--space-3) 0;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-fg);
+  opacity: 0.85;
+  user-select: text;
+}
+
 .contact__email {
   margin: var(--space-3) 0;
   font-size: var(--fs-h2);
