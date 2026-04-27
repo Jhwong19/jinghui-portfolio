@@ -416,3 +416,52 @@
     dot.classList.remove('cursor-dot--pressed');
   });
 })();
+
+/* ---- v4.3 — Scroll-spy active section in the right-side nav ----------- */
+(function () {
+  'use strict';
+  var items = Array.prototype.slice.call(
+    document.querySelectorAll('.site-nav li[data-spy]')
+  );
+  if (!items.length || typeof IntersectionObserver === 'undefined') return;
+
+  // Map each spy id to its <li> if a section with that id exists on this page.
+  var pairs = items
+    .map(function (li) {
+      var section = document.getElementById(li.getAttribute('data-spy'));
+      return section ? { li: li, section: section, ratio: 0 } : null;
+    })
+    .filter(Boolean);
+  if (!pairs.length) return;
+
+  function setActive(li) {
+    items.forEach(function (item) {
+      item.classList.toggle('is-active', item === li);
+    });
+  }
+
+  // Activate the section with the highest current intersection ratio.
+  // If nothing is intersecting (between sections), keep the last winner.
+  function pickWinner() {
+    var winner = null;
+    pairs.forEach(function (p) {
+      if (!winner || p.ratio > winner.ratio) winner = p;
+    });
+    if (winner && winner.ratio > 0) setActive(winner.li);
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var match = pairs.find(function (p) { return p.section === entry.target; });
+      if (match) match.ratio = entry.intersectionRatio;
+    });
+    pickWinner();
+  }, {
+    // Bias toward the section whose top has crossed roughly 1/3 down the
+    // viewport. Negative bottom margin pulls the trigger early.
+    rootMargin: '-25% 0px -55% 0px',
+    threshold: [0, 0.25, 0.5, 0.75, 1]
+  });
+
+  pairs.forEach(function (p) { observer.observe(p.section); });
+})();
