@@ -1051,6 +1051,10 @@ body.nav-open { overflow: hidden; }
   border-radius: 4px;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+  /* v6.1 — layered drop shadow lifts the portrait off the dark bg */
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.5),
+    0 8px 16px rgba(0, 0, 0, 0.35);
 }
 
 .member__footer {
@@ -1852,6 +1856,10 @@ body[data-page-transitions] {
   border-radius: 4px;
   aspect-ratio: 3 / 4;
   object-fit: cover;
+  /* v6.1 — same layered drop shadow as the profile portrait */
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.5),
+    0 8px 16px rgba(0, 0, 0, 0.35);
 }
 .passion__body {
   margin: 0;
