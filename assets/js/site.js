@@ -282,3 +282,50 @@
     });
   });
 })();
+
+/* ---- v2.2 — Hero headline rotation -------------------------------------- */
+(function () {
+  'use strict';
+  var el = document.querySelector('.hero__title[data-rotate]');
+  if (!el) return;
+
+  var phrases = ['Hello', 'Jing Hui Wong', 'Building with AI', 'Data Scientist'];
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReduced) {
+    el.textContent = phrases[phrases.length - 1];
+    return;
+  }
+
+  var index = 0;
+  el.textContent = phrases[0];
+
+  var INTERVAL = 2500;
+  var FADE = 350;
+  var timer = null;
+
+  function tick() {
+    el.classList.add('hero__title--out');
+    setTimeout(function () {
+      index = (index + 1) % phrases.length;
+      el.textContent = phrases[index];
+      el.classList.remove('hero__title--out');
+    }, FADE);
+  }
+
+  function start() {
+    if (timer) return;
+    timer = setInterval(tick, INTERVAL);
+  }
+  function stop() {
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+
+  start();
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+})();
