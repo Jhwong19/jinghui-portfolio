@@ -142,33 +142,56 @@ html {
 .site-mark:hover,
 .site-mark:focus { color: #fff; opacity: 0.8; }
 
-/* v2 — Inline desktop nav (≥768px) */
-.site-header__links {
-  display: none;
+/* v3.1 — Top-right vertical nav (desktop ≥768px) — monopo-style */
+.site-nav {
+  display: none; /* mobile uses overlay-nav; revealed at ≥768px below */
+  position: fixed;
+  top: var(--space-3);
+  right: var(--space-4);
+  z-index: 1100;
+  pointer-events: auto;
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.site-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
 }
-.site-header__links li { margin: 0; }
-.site-header__links a {
-  color: #fff;
+.site-nav li { margin: 0; position: relative; }
+.site-nav a {
+  display: inline-block;
+  color: var(--color-muted);
   text-decoration: none;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: opacity var(--motion-fast) var(--ease-standard);
+  padding: 0.15rem 0;
+  transition: color var(--motion-fast) var(--ease-standard);
 }
-.site-header__links a:hover,
-.site-header__links a:focus-visible { opacity: 0.6; }
-.site-header__links a:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 6px;
+.site-nav a:hover,
+.site-nav a:focus-visible { color: var(--color-fg); }
+.site-nav a:focus-visible {
+  outline: 1px solid var(--color-fg);
+  outline-offset: 4px;
+}
+.site-nav .is-active a { color: var(--color-fg); }
+.site-nav .is-active a::before {
+  content: "→";
+  display: inline-block;
+  margin-right: 0.5rem;
+  color: var(--color-fg);
 }
 
 @media (min-width: 768px) {
-  .site-header__links { display: flex; }
+  .site-nav { display: block; }
   .burger { display: none; }
+  /* Header is now just the JHW mark on the left; site-nav is fixed top-right */
+  .site-header { background: transparent; }
 }
 
 /* Hamburger button */
@@ -381,29 +404,46 @@ body.nav-open { overflow: hidden; }
   }
 }
 
+/* v3.1 — Hero title sized to match monopo (smaller than --fs-mega).
+   Wraps a .hero__title__inner span that handles the float-up swap. */
 .hero__title {
   position: relative;
   z-index: 2;
   margin: 0;
-  font-size: var(--fs-mega);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-  font-weight: 500;
-  color: #fff;
-  max-width: 18ch;
+  font-size: clamp(2.25rem, 5.2vw, 4.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--color-fg);
   text-align: center;
-  transition: opacity var(--motion-base) var(--ease-standard);
+  /* Reserve enough vertical space so swaps don't reflow surroundings */
+  min-height: 1.2em;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hero__title--out { opacity: 0; }
-
-.hero__sub {
-  position: relative;
-  z-index: 2;
-  margin: 1.5rem 0 0;
-  font-size: clamp(0.95rem, 1.4vw, 1.125rem);
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.75);
-  text-align: center;
+.hero__title em {
+  font-style: italic;
+  font-weight: 400;
+}
+.hero__title__inner {
+  display: inline-block;
+  will-change: transform, opacity;
+  transition:
+    transform var(--motion-base) var(--ease-standard),
+    opacity var(--motion-base) var(--ease-standard);
+}
+/* Outgoing — slides up out of frame */
+.hero__title__inner--out {
+  transform: translate3d(0, -150%, 0);
+  opacity: 0;
+}
+/* Incoming — starts below frame, ready to slide up into place */
+.hero__title__inner--in {
+  transform: translate3d(0, 150%, 0);
+  opacity: 0;
+  transition: none;
 }
 
 .hero__badge {

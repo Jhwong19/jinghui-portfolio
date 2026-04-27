@@ -283,46 +283,63 @@
   });
 })();
 
-/* ---- v2.2 — Hero headline rotation -------------------------------------- */
+/* ---- v3.1 — Hero headline rotation (monopo float-up animation) --------- */
 (function () {
   'use strict';
-  var el = document.querySelector('.hero__title[data-rotate]');
-  if (!el) return;
+  var host = document.querySelector('.hero__title[data-rotate]');
+  if (!host) return;
 
-  var phrases = ['Hello', 'Jing Hui Wong', 'Building with AI', 'Data Scientist'];
+  // Each phrase ships as HTML so one letter can be italicised in monopo style.
+  var phrases = [
+    'Hello',
+    'J<em>i</em>ng Hui Wong',
+    'Build<em>i</em>ng with AI',
+    'Data Sc<em>i</em>entist'
+  ];
   var prefersReduced = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Render the initial phrase wrapped in an inner span that owns the
+  // transform/opacity animation. Final phrase is the static fallback
+  // for reduced-motion + no-JS users.
+  function render(html) {
+    host.innerHTML = '<span class="hero__title__inner">' + html + '</span>';
+    return host.firstChild;
+  }
+
   if (prefersReduced) {
-    el.textContent = phrases[phrases.length - 1];
+    render(phrases[phrases.length - 1]);
     return;
   }
 
   var index = 0;
-  el.textContent = phrases[0];
+  var inner = render(phrases[0]);
 
-  var INTERVAL = 2500;
-  var FADE = 350;
+  var INTERVAL  = 2500;
+  var SLIDE_OUT = 450;
+  var SLIDE_IN  = 450;
   var timer = null;
 
   function tick() {
-    el.classList.add('hero__title--out');
+    // Slide current out
+    inner.classList.add('hero__title__inner--out');
     setTimeout(function () {
+      // Swap to next phrase, mount it pre-positioned below
       index = (index + 1) % phrases.length;
-      el.textContent = phrases[index];
-      el.classList.remove('hero__title--out');
-    }, FADE);
+      inner = render(phrases[index]);
+      inner.classList.add('hero__title__inner--in');
+      // Force layout, then remove the --in class so transition runs into place
+      // (next animation frame so the browser registers the start state).
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          inner.classList.remove('hero__title__inner--in');
+        });
+      });
+    }, SLIDE_OUT);
   }
 
-  function start() {
-    if (timer) return;
-    timer = setInterval(tick, INTERVAL);
-  }
-  function stop() {
-    if (!timer) return;
-    clearInterval(timer);
-    timer = null;
-  }
+  function start() { if (!timer) timer = setInterval(tick, INTERVAL); }
+  function stop()  { if (timer) { clearInterval(timer); timer = null; } }
 
   start();
   document.addEventListener('visibilitychange', function () {
