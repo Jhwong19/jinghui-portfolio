@@ -355,6 +355,20 @@ body.nav-open { overflow: hidden; }
   display: block;
 }
 
+/* v3.2 — Gentle edge fade overlay on the hero. Radial vignette pulls
+   the corners and bottom toward black so the chrome surface centre
+   reads as the focal point (matches the monopo screenshot). */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 65% 35%, transparent 0%, transparent 35%, rgba(0,0,0,0.55) 95%),
+    linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.5) 100%);
+}
+
 /* Once Three.js mounts successfully, fade out the CSS orb fallback */
 .hero--canvas-on .hero__orb {
   opacity: 0;
