@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 import { createBackground } from './background.js';
-import { createLens }       from './lens.js';
-import { createPointer }    from './pointer.js';
 
 (function bootstrap() {
   const heroSection = document.getElementById('hero');
@@ -27,15 +25,8 @@ import { createPointer }    from './pointer.js';
   const camera = new THREE.PerspectiveCamera(70, 1, 0.001, 1000);
   camera.position.set(0, 0, 1.3);
 
-  const bg   = createBackground();
-  const lens = createLens();
+  const bg = createBackground();
   scene.add(bg.mesh);
-  scene.add(lens.mesh);
-  // Stage the lens slightly forward of the background so refraction
-  // samples from a meaningful distance.
-  lens.mesh.position.set(0, 0, 0.6);
-
-  const pointer = createPointer(heroSection, camera, lens.mesh);
 
   function resize() {
     const rect = heroSection.getBoundingClientRect();
@@ -78,8 +69,6 @@ import { createPointer }    from './pointer.js';
     lastTime = now;
 
     bg.update(dt);
-    pointer.update();
-    lens.refresh(renderer, scene);
     renderer.render(scene, camera);
 
     if (!prefersReduced && inView && visible) {
@@ -94,7 +83,7 @@ import { createPointer }    from './pointer.js';
     raf = requestAnimationFrame(tick);
   }
 
-  // Always render at least one frame so the lens has content even if
-  // reduced-motion is on or the hero is offscreen on load.
+  // Always render at least one frame so the chrome surface paints
+  // even under reduced-motion or when the hero starts offscreen.
   tick(performance.now());
 })();
