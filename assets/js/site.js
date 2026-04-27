@@ -289,12 +289,12 @@
   var host = document.querySelector('.hero__title[data-rotate]');
   if (!host) return;
 
-  // Each phrase ships as HTML so one letter can be italicised in monopo style.
+  // Each phrase ships as HTML so every "i" can be italicised in monopo style.
   var phrases = [
     'Hello',
-    'J<em>i</em>ng Hui Wong',
-    'Build<em>i</em>ng with AI',
-    'Data Sc<em>i</em>entist'
+    'J<em>i</em>ng Hu<em>i</em> Wong',
+    'Bu<em>i</em>ld<em>i</em>ng w<em>i</em>th AI',
+    'Data Sc<em>i</em>ent<em>i</em>st'
   ];
   var prefersReduced = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;

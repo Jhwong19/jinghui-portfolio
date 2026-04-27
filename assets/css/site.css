@@ -142,12 +142,11 @@ html {
 .site-mark:hover,
 .site-mark:focus { color: #fff; opacity: 0.8; }
 
-/* v3.1 — Top-right vertical nav (desktop ≥768px) — monopo-style */
+/* v3.1 — Top-right vertical nav (visible at all viewports as of v4.1) */
 .site-nav {
-  display: none; /* mobile uses overlay-nav; revealed at ≥768px below */
   position: fixed;
   top: var(--space-3);
-  right: var(--space-4);
+  right: var(--space-3);
   z-index: 1100;
   pointer-events: auto;
   font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -159,14 +158,14 @@ html {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 .site-nav li { margin: 0; position: relative; }
 .site-nav a {
   display: inline-block;
   color: var(--color-muted);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -180,17 +179,22 @@ html {
   outline-offset: 4px;
 }
 .site-nav .is-active a { color: var(--color-fg); }
-.site-nav .is-active a::before {
+/* Reserve arrow space on every link so .is-active toggles fade in/out
+   without any layout shift. v4.3 will animate the arrow per scroll. */
+.site-nav a::before {
   content: "→";
   display: inline-block;
+  width: 1em;
   margin-right: 0.5rem;
   color: var(--color-fg);
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--ease-standard);
 }
+.site-nav .is-active a::before { opacity: 1; }
 
 @media (min-width: 768px) {
-  .site-nav { display: block; }
-  .burger { display: none; }
-  /* Header is now just the JHW mark on the left; site-nav is fixed top-right */
+  .site-nav { top: var(--space-3); right: var(--space-4); }
+  .site-nav a { font-size: 0.85rem; }
   .site-header { background: transparent; }
 }
 
@@ -571,7 +575,8 @@ body.nav-open { overflow: hidden; }
 }
 
 /* B2 — render the arrow as a pseudo-element instead of inline glyph */
-.eyebrow::before {
+.eyebrow::before,
+.eyebrow--with-arrow::before {
   content: "\2192";
   display: inline-block;
   margin-right: 0.5em;
@@ -1175,9 +1180,9 @@ body.nav-open { overflow: hidden; }
 
 .contact__email {
   margin: var(--space-3) 0;
-  font-size: var(--fs-display);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   font-weight: 500;
   text-decoration: none;
   background: var(--accent-gradient);
@@ -1744,4 +1749,29 @@ body[data-page-transitions] {
 }
 @media (prefers-reduced-motion: reduce) {
   .cursor-dot { display: none; }
+}
+
+/* ---- v4.1 — Profile / passion section on home -------------------------- */
+.passion {
+  max-width: 60ch;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.passion__body {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--color-fg);
+  font-weight: 400;
+}
+@media (min-width: 900px) {
+  .passion {
+    padding: var(--space-7) var(--space-4);
+    gap: var(--space-4);
+  }
 }
