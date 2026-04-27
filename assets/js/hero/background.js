@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 
 const vertexShader = /* glsl */ `
-  uniform float time;
   varying vec2 vUv;
   varying vec3 vPosition;
   void main() {
@@ -12,14 +11,16 @@ const vertexShader = /* glsl */ `
 `;
 
 const fragmentShader = /* glsl */ `
+  precision mediump float;
   uniform float time;
-  uniform vec4 resolution;
-  varying vec2 vUv;
-  varying vec3 vPosition;
+  uniform vec4  resolution;
+  varying vec2  vUv;
+  varying vec3  vPosition;
 
+  // Cheap value noise — same as the reference, used for color drift
   float mod289(float x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-  vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-  vec4 perm(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
+  vec4 mod289(vec4 x)   { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+  vec4 perm(vec4 x)     { return mod289(((x * 34.0) + 1.0) * x); }
 
   float noise(vec3 p) {
     vec3 a = floor(p);
@@ -38,38 +39,38 @@ const fragmentShader = /* glsl */ `
     return o4.y * d.y + o4.x * (1.0 - d.y);
   }
 
-  float lines(vec2 uv, float offset) {
-    return smoothstep(0.0, 0.5 + offset * 0.5,
-      0.5 * abs((sin(uv.x * 35.0) + offset * 2.0)));
-  }
-
-  mat2 rotate2D(float angle) {
-    return mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
-  }
-
   void main() {
-    vec3 baseFirst  = vec3(120.0/255.0, 158.0/255.0, 113.0/255.0);
-    vec3 accent     = vec3(0.0, 0.0, 0.0);
-    vec3 baseSecond = vec3(224.0/255.0, 148.0/255.0,  66.0/255.0);
+    // Palette tuned to monopo's olive / amber / black chrome look.
+    vec3 darkBase  = vec3(0.04, 0.05, 0.04);   // near-black background
+    vec3 olive     = vec3(120.0/255.0, 130.0/255.0,  85.0/255.0);
+    vec3 amber     = vec3(224.0/255.0, 148.0/255.0,  66.0/255.0);
 
-    float n = noise(vPosition + time);
-    vec2 baseUV = rotate2D(n) * vPosition.xy * 0.1;
-    float basePattern   = lines(baseUV, 0.5);
-    float secondPattern = lines(baseUV, 0.1);
+    // Two-octave smooth noise drives a soft chrome-like color blend.
+    float n1 = noise(vPosition * 1.4 + time * 0.4);
+    float n2 = noise(vPosition * 3.2 - time * 0.25);
+    float blend = smoothstep(0.25, 0.85, 0.6 * n1 + 0.4 * n2);
 
-    vec3 baseColor       = mix(baseSecond, baseFirst, basePattern);
-    vec3 secondBaseColor = mix(baseColor,  accent,    secondPattern);
+    vec3 metal = mix(darkBase, mix(olive, amber, blend), blend);
 
-    gl_FragColor = vec4(secondBaseColor, 1.0);
+    // Add a subtle highlight that lives in the upper-right of the
+    // sphere's surface so the visible portion looks "lit" from above
+    // and to the right (matches the monopo screenshot composition).
+    float ru = vPosition.x * 0.6 + vPosition.y * 0.6;
+    float highlight = smoothstep(0.6, 1.4, ru);
+    metal = mix(metal, amber * 1.1, highlight * 0.45);
+
+    gl_FragColor = vec4(metal, 1.0);
   }
 `;
 
 export function createBackground() {
-  const geometry = new THREE.SphereGeometry(1.5, 32, 32);
+  // Larger inner-facing sphere so the camera samples a big curved
+  // surface instead of a small object floating in space.
+  const geometry = new THREE.SphereGeometry(2.5, 64, 64);
   const material = new THREE.ShaderMaterial({
-    side: THREE.DoubleSide,
+    side: THREE.BackSide, // we look at the inner wall
     uniforms: {
-      time: { value: 0 },
+      time:       { value: 0 },
       resolution: { value: new THREE.Vector4() },
     },
     vertexShader,
@@ -81,6 +82,9 @@ export function createBackground() {
     mesh,
     update(deltaSeconds) {
       material.uniforms.time.value += deltaSeconds;
+      // Slow rotation so the highlight drifts across the visible area.
+      mesh.rotation.y += deltaSeconds * 0.04;
+      mesh.rotation.x += deltaSeconds * 0.02;
     },
     setResolution(w, h) {
       material.uniforms.resolution.value.set(w, h, 1, 1);
