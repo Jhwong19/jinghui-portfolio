@@ -465,3 +465,92 @@
 
   pairs.forEach(function (p) { observer.observe(p.section); });
 })();
+
+/* ---- v5.2 — Scroll-fill text reveal ----------------------------------- */
+/* Two modes:
+   - data-fill="line"  : transition the whole element from grey → white
+                         once it scrolls into view.
+   - data-fill="words" : split the element's text into per-word spans;
+                         each word transitions independently as it crosses
+                         the trigger line.                                  */
+(function () {
+  'use strict';
+  var lineEls = document.querySelectorAll('[data-fill="line"]');
+  var wordEls = document.querySelectorAll('[data-fill="words"]');
+  if (!lineEls.length && !wordEls.length) return;
+
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = typeof IntersectionObserver !== 'undefined';
+
+  // Reveal-everything fallback when reduced-motion is on or IO is missing.
+  if (prefersReduced || !hasIO) {
+    Array.prototype.forEach.call(lineEls, function (el) {
+      el.classList.add('is-revealed');
+    });
+    Array.prototype.forEach.call(wordEls, function (el) {
+      el.classList.add('is-revealed');
+    });
+    return;
+  }
+
+  // ---- line mode --------------------------------------------------------
+  if (lineEls.length) {
+    var lineObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          lineObs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.1 });
+    Array.prototype.forEach.call(lineEls, function (el) { lineObs.observe(el); });
+  }
+
+  // ---- words mode -------------------------------------------------------
+  // Split a plain-text element into <span class="fw">word</span> tokens
+  // (preserving the original whitespace pattern). We deliberately only
+  // handle pure text content for now — wrapping mixed inline HTML is fiddly
+  // and the only "words" target on the site is a plain prose paragraph.
+  function splitWords(el) {
+    var text = el.textContent;
+    if (!text) return [];
+    var parts = text.split(/(\s+)/);
+    el.textContent = '';
+    var out = [];
+    parts.forEach(function (chunk) {
+      if (!chunk) return;
+      if (/^\s+$/.test(chunk)) {
+        el.appendChild(document.createTextNode(chunk));
+      } else {
+        var s = document.createElement('span');
+        s.className = 'fw';
+        s.textContent = chunk;
+        el.appendChild(s);
+        out.push(s);
+      }
+    });
+    return out;
+  }
+
+  if (wordEls.length) {
+    var wordObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          wordObs.unobserve(entry.target);
+        }
+      });
+    }, {
+      // Trigger when the word's center crosses about 65% down the
+      // viewport — the same vertical band where monopo's reveal kicks in.
+      rootMargin: '0px 0px -35% 0px',
+      threshold: 0
+    });
+
+    Array.prototype.forEach.call(wordEls, function (el) {
+      var words = splitWords(el);
+      words.forEach(function (w) { wordObs.observe(w); });
+    });
+  }
+})();
