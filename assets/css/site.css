@@ -1891,21 +1891,28 @@ body[data-page-transitions] {
   }
 }
 
-/* ---- v5.2 — Scroll-fill text reveal ----------------------------------- */
-/* The full-element variant ("line"): grey at rest, transitions to white
-   the first time it scrolls into the trigger zone. */
+/* ---- v7.3 — Bidirectional scroll-fill text reveal --------------------- */
+/* The full-element variant ("line") — toggles grey ↔ white based on
+   intersection. Slower transition for a softer monopo-style fade. */
 [data-fill="line"] {
   color: rgba(255, 255, 255, 0.28);
-  transition: color var(--motion-slow) var(--ease-standard);
+  transition: color 900ms var(--ease-standard);
 }
 [data-fill="line"].is-revealed { color: var(--color-fg); }
 
-/* The per-word variant: each <span class="fw"> starts grey, transitions
-   to white when its own observer fires. JS adds .is-revealed per word. */
+/* Per-word variant. Each <span class="fw"> reverts to grey when the
+   user scrolls back up past it (the JS uses toggle, not unobserve).
+   --i is the word's 0-based index, set by JS. The transition-delay
+   formula gives a left-to-right cascade: word 0 starts immediately,
+   word 1 ~50ms later, word 2 ~100ms later, capped so very long
+   paragraphs don't stretch the cascade past ~1.2s. */
 [data-fill="words"] .fw {
   color: rgba(255, 255, 255, 0.28);
-  transition: color var(--motion-base) var(--ease-standard);
   display: inline;
+  transition: color 700ms var(--ease-standard);
+  /* Calc clamps the per-word delay so prose doesn't take forever to
+     finish revealing. min(--i * 50ms, 1200ms). */
+  transition-delay: min(calc(var(--i, 0) * 45ms), 1200ms);
 }
 [data-fill="words"] .fw.is-revealed { color: var(--color-fg); }
 

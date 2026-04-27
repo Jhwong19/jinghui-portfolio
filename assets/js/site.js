@@ -492,13 +492,15 @@
   pairs.forEach(function (p) { observer.observe(p.section); });
 })();
 
-/* ---- v5.2 — Scroll-fill text reveal ----------------------------------- */
-/* Two modes:
-   - data-fill="line"  : transition the whole element from grey → white
-                         once it scrolls into view.
-   - data-fill="words" : split the element's text into per-word spans;
-                         each word transitions independently as it crosses
-                         the trigger line.                                  */
+/* ---- v7.3 — Bidirectional scroll-fill text reveal --------------------- */
+/* Two modes (both REVERSIBLE — words / lines revert to grey when the
+   user scrolls back up past them):
+   - data-fill="line"  : the whole element transitions grey ↔ white.
+   - data-fill="words" : each word fades grey ↔ white independently as
+                         it enters or leaves the trigger band. A
+                         per-word transition-delay creates a left-to-
+                         right cascade so the line "fills" rather than
+                         all words flipping at once.                       */
 (function () {
   'use strict';
   var lineEls = document.querySelectorAll('[data-fill="line"]');
@@ -520,30 +522,34 @@
     return;
   }
 
+  // Helper: bidirectional toggle (no unobserve so the observer keeps
+  // firing both directions as the element crosses the trigger band).
+  function toggleObserver(rootMargin) {
+    return new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('is-revealed', entry.isIntersecting);
+      });
+    }, { rootMargin: rootMargin, threshold: 0 });
+  }
+
   // ---- line mode --------------------------------------------------------
   if (lineEls.length) {
-    var lineObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          lineObs.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.1 });
+    var lineObs = toggleObserver('0px 0px -25% 0px');
     Array.prototype.forEach.call(lineEls, function (el) { lineObs.observe(el); });
   }
 
   // ---- words mode -------------------------------------------------------
   // Split a plain-text element into <span class="fw">word</span> tokens
-  // (preserving the original whitespace pattern). We deliberately only
-  // handle pure text content for now — wrapping mixed inline HTML is fiddly
-  // and the only "words" target on the site is a plain prose paragraph.
+  // (preserving original whitespace). Sets a CSS custom property --i on
+  // each word equal to its index, so the stylesheet can apply a
+  // staggered transition-delay = --i * step → left-to-right cascade.
   function splitWords(el) {
     var text = el.textContent;
     if (!text) return [];
     var parts = text.split(/(\s+)/);
     el.textContent = '';
     var out = [];
+    var idx = 0;
     parts.forEach(function (chunk) {
       if (!chunk) return;
       if (/^\s+$/.test(chunk)) {
@@ -552,28 +558,17 @@
         var s = document.createElement('span');
         s.className = 'fw';
         s.textContent = chunk;
+        s.style.setProperty('--i', String(idx));
         el.appendChild(s);
         out.push(s);
+        idx++;
       }
     });
     return out;
   }
 
   if (wordEls.length) {
-    var wordObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          wordObs.unobserve(entry.target);
-        }
-      });
-    }, {
-      // Trigger when the word's center crosses about 65% down the
-      // viewport — the same vertical band where monopo's reveal kicks in.
-      rootMargin: '0px 0px -35% 0px',
-      threshold: 0
-    });
-
+    var wordObs = toggleObserver('0px 0px -30% 0px');
     Array.prototype.forEach.call(wordEls, function (el) {
       var words = splitWords(el);
       words.forEach(function (w) { wordObs.observe(w); });
