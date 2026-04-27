@@ -346,3 +346,73 @@
     if (document.hidden) stop(); else start();
   });
 })();
+
+/* ---- v3.3 — Vanilla cursor dot (small white circle, lerped) ----------- */
+(function () {
+  'use strict';
+
+  // Skip on touch / hover-less devices and when the user prefers reduced
+  // motion. Skip when no fine pointer (rules out tablets in tablet mode).
+  var hasFinePointer = window.matchMedia &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!hasFinePointer || prefersReduced) return;
+
+  var dot = document.createElement('div');
+  dot.className = 'cursor-dot';
+  dot.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(dot);
+
+  var targetX = window.innerWidth  / 2;
+  var targetY = window.innerHeight / 2;
+  var dotX    = targetX;
+  var dotY    = targetY;
+  var lerp    = 0.18;
+  var raf     = null;
+  var seen    = false;
+
+  function onMove(e) {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    if (!seen) {
+      seen = true;
+      dotX = targetX;
+      dotY = targetY;
+      dot.classList.add('cursor-dot--visible');
+    }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  function onLeave() {
+    dot.classList.remove('cursor-dot--visible');
+  }
+  function onEnter() {
+    if (seen) dot.classList.add('cursor-dot--visible');
+  }
+
+  function tick() {
+    raf = null;
+    dotX += (targetX - dotX) * lerp;
+    dotY += (targetY - dotY) * lerp;
+    dot.style.transform =
+      'translate3d(' + dotX + 'px, ' + dotY + 'px, 0) translate(-50%, -50%)';
+    var dx = targetX - dotX;
+    var dy = targetY - dotY;
+    if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+      raf = requestAnimationFrame(tick);
+    }
+  }
+
+  window.addEventListener('mousemove',  onMove,  { passive: true });
+  document.addEventListener('mouseleave', onLeave);
+  document.addEventListener('mouseenter', onEnter);
+  // Hide while interacting with form controls / links so the OS cursor
+  // change (text caret, pointer hand) is unambiguous.
+  document.addEventListener('mousedown', function () {
+    dot.classList.add('cursor-dot--pressed');
+  });
+  document.addEventListener('mouseup', function () {
+    dot.classList.remove('cursor-dot--pressed');
+  });
+})();

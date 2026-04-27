@@ -460,31 +460,50 @@ body.nav-open { overflow: hidden; }
   transition: none;
 }
 
+/* v3.3 — SCROLL DOWN badge with static centre JHW mark.
+   The wrapper does NOT rotate; the inner ring SVG rotates so the
+   centre mark stays upright while the text spins around it. */
 .hero__badge {
   position: absolute;
   left: var(--space-3);
   bottom: var(--space-4);
-  width: 96px;
-  height: 96px;
+  width: 88px;
+  height: 88px;
   z-index: 3;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  animation: hero-badge-rotate 30s linear infinite;
-  transform-origin: 50% 50%;
 }
 
-.hero__badge svg {
+.hero__badge__ring {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
   fill: #fff;
   font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 17px;
-  letter-spacing: 0.22em;
+  font-size: 19px;
+  letter-spacing: 0.18em;
+  animation: hero-badge-rotate 12s linear infinite;
+  transform-origin: 50% 50%;
 }
 
-.hero__badge:hover,
-.hero__badge:focus {
+.hero__badge__mark {
+  position: relative;
+  z-index: 1;
+  font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-fg);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.hero__badge:hover .hero__badge__ring,
+.hero__badge:focus .hero__badge__ring {
   animation-play-state: paused;
 }
 
@@ -1689,4 +1708,35 @@ body[data-page-transitions] {
   font-family: 'Cambria Math', Cambria, 'Times New Roman', serif;
   line-height: 1.8;
   overflow-x: auto;
+}
+
+/* ---- v3.3 — Vanilla cursor dot ----------------------------------------- */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  mix-blend-mode: difference;
+  transition: opacity var(--motion-fast) var(--ease-standard),
+              width var(--motion-fast) var(--ease-standard),
+              height var(--motion-fast) var(--ease-standard);
+  will-change: transform;
+}
+.cursor-dot--visible { opacity: 0.85; }
+.cursor-dot--pressed { width: 6px; height: 6px; }
+
+/* Touch-only / no-hover devices: never paint the dot. The JS already
+   skips creation but this is a defensive layer in case markup is
+   ever pre-rendered. */
+@media (hover: none) {
+  .cursor-dot { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot { display: none; }
 }
