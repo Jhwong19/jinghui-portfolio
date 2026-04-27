@@ -117,7 +117,12 @@
       }
     });
   }, {
-    threshold: 0.15,
+    // threshold 0 (not 0.15) so very tall containers — like a full
+    // project blog article — fire as soon as their top edge enters
+    // the viewport. The previous 0.15 required 15% of the element to
+    // intersect, which a 5000px article relative to an 800px viewport
+    // never reaches → element stays at opacity 0 → content invisible.
+    threshold: 0,
     rootMargin: '0px 0px -10% 0px'
   });
 
