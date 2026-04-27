@@ -439,15 +439,18 @@ body.nav-open { overflow: hidden; }
   position: relative;
   z-index: 2;
   margin: 0;
-  font-family: var(--font-mono);
-  font-size: clamp(1.75rem, 4.4vw, 3.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  /* v7.2 — reverted to monopo-style sans (Inter via --font-display)
+     while keeping the v6.2 typewriter behaviour. */
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5.2vw, 4.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.025em;
   font-weight: 400;
   color: var(--color-fg);
   text-align: center;
   min-height: 1.3em;
-  min-width: min(90vw, 18ch);
+  /* Inter is narrower than mono; 16ch is enough for "Building with AI" */
+  min-width: min(90vw, 16ch);
   display: inline-flex;
   align-items: center;
   justify-content: center;
