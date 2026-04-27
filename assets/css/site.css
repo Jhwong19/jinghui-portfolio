@@ -1628,6 +1628,20 @@ body.nav-open { overflow: hidden; }
   padding: 0;
 }
 
+/* v6.3 — ASCII architecture diagrams. Tighter line-height + explicit
+   monospace so the box-drawing characters connect cleanly. */
+.project-page__body pre.ascii-diagram {
+  line-height: 1.15;
+  font-size: 0.7rem;
+  letter-spacing: 0;
+}
+.project-page__body pre.ascii-diagram code {
+  font-family: var(--font-mono);
+  white-space: pre;
+  display: block;
+  color: var(--color-fg);
+}
+
 .project-page__body .table-wrapper {
   overflow-x: auto;
   margin: var(--space-3) 0;
