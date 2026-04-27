@@ -296,8 +296,12 @@
 
   var phrases = ['Hello', 'Jing Hui Wong', 'Building with AI', 'AI Engineer'];
 
-  var prefersReduced = window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // v8.1 — the typewriter no longer short-circuits under
+  // prefers-reduced-motion. The phrase cycle is essential motion
+  // (it's the page's identity, not decoration), and OS-level reduced
+  // motion settings (often inherited from iOS Low Power Mode) were
+  // freezing it on most mobile devices. The caret blink remains
+  // gated via CSS @media (prefers-reduced-motion).
 
   // Two-span structure: a stable text node holds the typed characters,
   // a sibling span renders the blinking caret. Replace the host's inner
@@ -309,11 +313,6 @@
     var charEl = host.firstChild;
     charEl.textContent = initialText;
     return charEl;
-  }
-
-  if (prefersReduced) {
-    mount(phrases[phrases.length - 1]);
-    return;
   }
 
   var charEl = mount('');

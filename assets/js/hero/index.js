@@ -15,8 +15,14 @@ import { createBackground } from './background.js';
     return;
   }
 
-  const prefersReduced = window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // v8.1 — the WebGL background no longer freezes under
+  // prefers-reduced-motion. The motion is a slow chrome-surface drift
+  // (no parallax, no fast pans, no flashing), and OS-level reduced
+  // motion settings — often inherited from iOS Low Power Mode —
+  // were freezing the hero on most mobile devices. Vestibular safety
+  // is preserved by the existing low velocity. Decorative effects
+  // that ARE high-velocity (caret blink, scroll-fill transitions)
+  // remain CSS-gated by @media (prefers-reduced-motion).
 
   const PIXEL_RATIO_CAP = 1.75;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, PIXEL_RATIO_CAP));
@@ -71,7 +77,7 @@ import { createBackground } from './background.js';
     bg.update(dt);
     renderer.render(scene, camera);
 
-    if (!prefersReduced && inView && visible) {
+    if (inView && visible) {
       raf = requestAnimationFrame(tick);
     }
   }
@@ -83,7 +89,8 @@ import { createBackground } from './background.js';
     raf = requestAnimationFrame(tick);
   }
 
-  // Always render at least one frame so the chrome surface paints
-  // even under reduced-motion or when the hero starts offscreen.
+  // Render the first frame and let kick()/IntersectionObserver own
+  // subsequent scheduling. If the hero starts offscreen we still get
+  // one paint so the surface is never blank.
   tick(performance.now());
 })();
