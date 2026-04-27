@@ -8,22 +8,23 @@ Static personal portfolio served by GitHub Pages at `www.jinghuiwong.com` (custo
 
 Local preview: `bash scripts/serve.sh` (or `python3 -m http.server 8000`) → `http://localhost:8000`.
 
-## Active work: monopo-inspired redesign
+## Active work: v2 monopo-inspired refresh
 
-The site is mid-migration from the HTML5 UP **Massively** template to a dark, monopo-inspired design. The plan, sprints, component map, and DoD live in **`prd.md`** at the repo root. Always read it before making changes.
+The original 8-sprint redesign (PRs #2–#14) shipped a dark monopo-inspired portfolio. **v2** (PRs #15–#17, ongoing) closes the visual gap with monopo.vn — adds an inline desktop nav, hero text rotation, full manifesto on the home page, and a WebGL hero (Three.js sphere-noise background + Fresnel cursor lens). Plan lives in **`prd-v2.md`**. The original `prd.md` documents the v1 sprint plan and is kept for history.
 
 Reference assets (out of served root):
 - `reference/new-website.html` — saved copy of `monopo.vn` used as the structural reference.
 - `reference/screens/image_0[1-9].png`, `image_10.png` — top-to-bottom scroll screenshots of the target design.
 
-## Layered styling and JS
+## Stack
 
-The Massively template is partially retired. As of Sprint 7, all jQuery and Massively JS plugins (jquery, scrollex, scrolly, browser, breakpoints, util, main) are deleted, the SCSS source tree (`assets/sass/`) is gone, and `noscript.css` is gone. The CSS shell (`assets/css/main.css`) is still loaded because the four HTML pages still rely on its `#wrapper`, `#main`, `.fade-in`, and `.image.fit` rules — removing it would dump default browser styles back in and break post/image layout. A future HTML-cleanup beat can migrate those classes/IDs onto `site.css` primitives and finally drop `main.css`.
+Fully vanilla, fully self-hosted. No build step, no CDN runtime calls.
 
-- `assets/css/main.css` — Massively (legacy). Still loaded; **do not edit.** Will be removed once HTML migrates off `#wrapper`/`#main`/`.image.fit`.
-- `assets/css/site.css` — redesign source of truth. **All new styles go here.** Loaded after `main.css` as an override; a few `!important` rules on `#main`/`#wrapper.fade-in:before` exist to neutralise Massively defaults.
-- `assets/js/site.js` — only JS loaded. Vanilla, IntersectionObserver, no jQuery.
-- `assets/css/fontawesome-all.min.css` and `assets/webfonts/` — orphaned: not `<link>`-ed anywhere, but the dead Massively `#nav` block in `index.html` still references `fa-linkedin`/`fa-github` class names. Leave alone until that nav block is removed.
+- `assets/css/site.css` — single stylesheet. `:root` design tokens (palette, accent gradient, type scale via `clamp`, spacing, motion, easing). All redesign rules live here.
+- `assets/js/site.js` — chrome JS: overlay-nav focus trap, IntersectionObserver reveal, member expand, manifesto line-draw, scroll-to-top, hero rotation. Loaded with `defer` on every page.
+- `assets/js/hero/` — **WebGL hero modules** (`index.js`, `background.js`, `lens.js`, `pointer.js`). Loaded only on `index.html` via `<script type="module">`. Imports `three` via `<script type="importmap">` from `assets/js/vendor/three.module.js` (pinned r163).
+- `assets/fonts/` — self-hosted woff2 (Inter 400/500/700, Manrope 400/500/700, JetBrains Mono 400/500). Wired via `@font-face` at the top of `site.css`.
+- Massively template fully removed (PR #12). No `main.css`, no jQuery, no FontAwebFonts.
 
 ## Pages
 
