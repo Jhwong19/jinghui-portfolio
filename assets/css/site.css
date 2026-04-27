@@ -322,6 +322,26 @@ body.nav-open { overflow: hidden; }
   font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* v2.3 — WebGL hero canvas; sits behind the text and badge */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+}
+
+/* Once Three.js mounts successfully, fade out the CSS orb fallback */
+.hero--canvas-on .hero__orb {
+  opacity: 0;
+  transition: opacity var(--motion-slow) var(--ease-standard);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero--canvas-on .hero__orb { transition: none; }
+}
+
 .hero__orb {
   position: absolute;
   top: 50%;
