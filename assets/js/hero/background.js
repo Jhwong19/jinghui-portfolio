@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 const vertexShader = /* glsl */ `
+  precision mediump float;
   varying vec2 vUv;
   varying vec3 vPosition;
   void main() {
