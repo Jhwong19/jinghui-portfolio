@@ -506,12 +506,20 @@
   var wordEls = document.querySelectorAll('[data-fill="words"]');
   if (!lineEls.length && !wordEls.length) return;
 
-  var prefersReduced = window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasIO = typeof IntersectionObserver !== 'undefined';
 
-  // Reveal-everything fallback when reduced-motion is on or IO is missing.
-  if (prefersReduced || !hasIO) {
+  // v9.2 — the scroll-fill effect no longer short-circuits under
+  // prefers-reduced-motion. The grey → white per-word reveal is
+  // colour-only (no parallax, no fast pans, no flashing), and the
+  // OS-level reduced-motion preference — frequently inherited from
+  // iOS Low Power Mode — was forcing it to render as plain white
+  // text on every mobile browser. Same root cause as the v8.1
+  // typewriter / WebGL fix.
+  //
+  // We still short-circuit when IntersectionObserver isn't available
+  // so JS-rich-but-IO-less environments (very old browsers) still
+  // see legible content.
+  if (!hasIO) {
     Array.prototype.forEach.call(lineEls, function (el) {
       el.classList.add('is-revealed');
     });

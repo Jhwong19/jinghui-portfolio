@@ -1930,10 +1930,10 @@ body[data-page-transitions] {
 }
 [data-fill="words"] .fw.is-revealed { color: var(--color-fg); }
 
-@media (prefers-reduced-motion: reduce) {
-  [data-fill="line"],
-  [data-fill="words"] .fw {
-    color: var(--color-fg);
-    transition: none;
-  }
-}
+/* v9.2 — the reduced-motion override on [data-fill] is intentionally
+   removed. The grey ↔ white transition is colour-only (no movement
+   of any kind) and conveys reading progress, so it sits well within
+   the WCAG carve-out for essential motion. The previous override
+   was forcing all words to stay white on every mobile browser whose
+   OS had reduced-motion enabled (often via Low Power Mode) — making
+   the effect look broken. Cf. v8.1 + v9.2 commit messages. */
