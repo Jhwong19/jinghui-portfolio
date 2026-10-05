@@ -701,6 +701,14 @@ body.nav-open { overflow: hidden; }
   letter-spacing: 0.02em;
 }
 
+.project-card__availability {
+  max-width: 58ch;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 .project-card__actions {
   list-style: none;
   margin: var(--space-2) 0 0;
@@ -1779,36 +1787,31 @@ body[data-page-transitions] {
   margin-top: 1rem;
 }
 
-/* ---- Hugging Face live-demo embed (project pages) ---------------------- */
-.hf-embed {
+/* ---- Private-demo callout (project pages) ------------------------------ */
+.project-demo-notice {
   max-width: 80ch;
   margin: 0 auto;
   padding: var(--space-5) var(--space-3) var(--space-3);
 }
-.hf-embed .eyebrow {
+.project-demo-notice .eyebrow {
   margin-bottom: var(--space-2);
 }
-.hf-embed__frame {
-  position: relative;
-  width: 100%;
+.project-demo-notice__panel {
+  padding: clamp(1.5rem, 4vw, 3rem);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
-  overflow: hidden;
-  background: #111;
+  background: rgba(255, 255, 255, 0.025);
 }
-.hf-embed__frame iframe {
-  display: block;
-  width: 100%;
-  height: 720px;
-  border: 0;
+.project-demo-notice__panel h2 {
+  margin-top: 0;
 }
-.hf-embed__fallback {
-  margin-top: var(--space-2);
-  font-size: var(--fs-eyebrow);
-  color: var(--color-muted);
-}
-@media (max-width: 736px) {
-  .hf-embed__frame iframe { height: 560px; }
+.project-demo-notice__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* ---- Inline math (no MathJax — pure HTML/Unicode) ----------------------- */

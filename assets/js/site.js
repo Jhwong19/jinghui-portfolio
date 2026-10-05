@@ -593,17 +593,20 @@
    server-side in the markup. */
 (function () {
   'use strict';
-  var anchors = document.querySelectorAll('a.contact__email[data-user][data-domain]');
+  var anchors = document.querySelectorAll('a.contact__email[data-user][data-domain], a[data-email-link][data-user][data-domain]');
   Array.prototype.forEach.call(anchors, function (a) {
     var user = a.getAttribute('data-user');
     var dom  = a.getAttribute('data-domain');
     if (!user || !dom) return;
     var addr = user + '@' + dom;
-    a.href = 'mailto:' + addr;
-    a.textContent = addr;
+    var subject = a.getAttribute('data-subject');
+    a.href = 'mailto:' + addr + (subject ? '?subject=' + encodeURIComponent(subject) : '');
+    if (a.classList.contains('contact__email')) a.textContent = addr;
     // Drop the data-attrs once consumed so a curious DOM inspector
     // doesn't see the obfuscated form mid-page.
     a.removeAttribute('data-user');
     a.removeAttribute('data-domain');
+    a.removeAttribute('data-subject');
+    a.removeAttribute('data-email-link');
   });
 })();

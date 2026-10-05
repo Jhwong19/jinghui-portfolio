@@ -33,17 +33,17 @@
           <img src="gif/chaptly_ai.gif" alt="Animated walkthrough of Chaptive turning a YouTube lecture into bookmarks and Q&amp;A." />
         </figure>
 
-        <section class="hf-embed" data-reveal>
-          <p class="eyebrow">Live demo</p>
-          <div class="hf-embed__frame">
-            <iframe
-              src="https://jing997-chaptive.hf.space"
-              title="Chaptive AI live demo on Hugging Face Spaces"
-              loading="lazy"
-              allow="clipboard-read; clipboard-write; fullscreen"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <section class="project-demo-notice" data-reveal>
+          <p class="eyebrow">Private demo available</p>
+          <div class="project-demo-notice__panel">
+            <h2>See the complete workflow</h2>
+            <p>The public deployment has been retired to avoid maintaining always-on infrastructure for a portfolio project. The application, architecture, and recorded demonstrations are preserved below.</p>
+            <p>Interested in seeing it live? I’d be happy to arrange a private walkthrough and discuss the engineering decisions behind it.</p>
+            <ul class="project-demo-notice__actions">
+              <li><a class="btn-pill" href="#contact" data-email-link data-user="jinghui.me" data-domain="gmail.com" data-subject="Chaptive private demo request">Request a private demo</a></li>
+              <li><a class="btn-pill" href="https://github.com/Jhwong19/chaptive-ai-public" target="_blank" rel="noopener">View public repository ↗</a></li>
+            </ul>
           </div>
-          <p class="hf-embed__fallback">If the Space is sleeping, give it a moment to wake up — or <a href="https://huggingface.co/spaces/Jing997/chaptive" target="_blank" rel="noopener">open it in a new tab ↗</a>.</p>
         </section>
 
         <article class="project-page__body" data-reveal>
@@ -73,7 +73,7 @@
           <p>Under the hood we fetch transcripts, embed them with Gemini, store artifacts in S3, and serve everything via a FastAPI app on AWS Lambda + API Gateway managed by Terraform.</p>
 
           <hr class="section-divider" />
-          <h2>Key Features</h2>
+          <h2>Product Walkthrough</h2>
           <ol class="numbered-list">
              <li>
                Paste a YouTube URL and kickstart an asynchronous ingestion pipeline: transcripts are fetched, chunked, embedded with Gemini, and cached while you keep browsing.
@@ -257,7 +257,7 @@
 
           <hr class="section-divider" />
           <h2>Repository &amp; References</h2>
-          <p>The demo is deployed in <a href="https://huggingface.co/spaces/Jing997/chaptive" target="_blank" rel="noopener">Hugging Face Spaces</a>. For infrastructure walkthroughs, see the <a href="https://github.com/Jhwong19/chaptive-ai-public" target="_blank" rel="noopener">GitHub repository</a>. For the complete project source, please reach out to me.</p>
+          <p>Chaptive was originally deployed through Hugging Face Spaces with a serverless AWS backend. The public deployment has since been retired to keep portfolio infrastructure lean, while the case study and selected source remain available. You can explore the <a href="https://github.com/Jhwong19/chaptive-ai-public" target="_blank" rel="noopener">public repository</a> or <a href="#contact" data-email-link data-user="jinghui.me" data-domain="gmail.com" data-subject="Chaptive private demo request">contact me for a private technical walkthrough and live demonstration</a>.</p>
         </article>
 
         <nav class="project-page__pager" data-reveal aria-label="Project pager">
