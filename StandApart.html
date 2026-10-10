@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Stand Apart: iOS App to Build Custom Business Cards &amp; Portfolio Sites | Jing Hui Wong</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Building Stand Apart: a native iOS app, designed Apple Wallet business cards, and a public work page that turns sharing your details into a two-way connection." />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="stylesheet" href="assets/css/site.css?v=stand-apart-exchange-3" />
+    <noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-mark" href="index.html">JHW</a>
+      <nav class="site-nav" aria-label="Primary"><ul><li class="is-active" data-spy="hero"><a href="index.html">Projects</a></li><li data-spy="profile"><a href="profile.html">Profile</a></li><li data-spy="contact"><a href="index.html#footer">Contact</a></li></ul></nav>
+    </header>
+
+    <main>
+      <section class="project-page__hero" data-reveal>
+        <p class="eyebrow">/WORK · Selected project · <time datetime="2026-08">UPDATED August 2026</time></p>
+        <h1 class="project-page__title">Stand Apart:<br />iOS App to Build Custom Business Cards &amp; Portfolio Sites</h1>
+        <p class="project-page__meta">SwiftUI · Apple Wallet · React · Supabase · Vercel</p>
+      </section>
+
+      <figure class="project-page__media" data-reveal>
+        <img src="images/stand-apart/cover.jpg" alt="Stand Apart's website presenting three Apple Wallet cards with different visual identities" width="1440" height="900" fetchpriority="high" />
+      </figure>
+
+      <section class="project-demo-notice" aria-labelledby="try-stand-apart" data-reveal>
+        <p class="eyebrow">Live website · iOS TestFlight beta</p>
+        <div class="project-demo-notice__panel">
+          <h2 id="try-stand-apart">Try the experience</h2>
+          <p>Explore Stand Apart on the web and open a sample card to see what a recipient experiences. To create your own card, request access to the iOS TestFlight beta. The public website also has a “Notify me” waitlist for launch updates.</p>
+          <ul class="project-demo-notice__actions">
+            <li><a class="btn-pill" href="https://stand-apart.com/" target="_blank" rel="noopener">Demo ↗</a></li>
+            <li><a class="btn-pill" href="https://stand-apart.com/u/f5oofgnjvf" target="_blank" rel="noopener">Open the live example ↗</a></li>
+            <li><a class="btn-pill" href="https://stand-apart.com/#notify" target="_blank" rel="noopener">Notify me ↗</a></li>
+            <li><a class="btn-pill" href="mailto:hello@stand-apart.com?subject=Stand%20Apart%20TestFlight%20beta%20access">Request beta access</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <article class="project-page__body">
+        <p class="project-page__lede">I built StandApart as a native iOS app that creates a custom Apple Wallet business card and a matching website, so someone can discover your portfolio, save your contact, and automatically send their contact to your phone.</p>
+
+        <h2>Why I Built Stand Apart</h2>
+        <p>A good conversation deserves a useful next step. Too often, after meeting someone, the conversation quietly fades after sharing contacts. A LinkedIn profile, phone number, and portfolio may describe someone, but they rarely preserve why the introduction mattered or make it easy for the other person to continue the exchange.</p>
+        <p>I wanted one place to present a person’s work with the same care they put into it. Stand Apart brings a designed card, a personal work page, and contact exchange into one flow. It is built for founders, designers, freelancers, and professionals who want their first impression to carry through to the follow-up.</p>
+
+        <hr class="section-divider" />
+        <h2>Problem Statement</h2>
+        <p>Exchanging a contact is easy. Keeping enough context to reconnect is harder:</p>
+        <ul>
+          <li><strong>Details are scattered.</strong> A business card, résumé, portfolio, and social profile often live in different places.</li>
+          <li><strong>Sharing is usually one-way.</strong> Giving someone your details does not mean you receive theirs.</li>
+          <li><strong>The introduction loses its context.</strong> A name in Contacts may not tell you where you met or why you wanted to follow up.</li>
+          <li><strong>Presentation matters.</strong> A generic contact page gives little room for the personality and work behind the name.</li>
+          <li><strong>Extra steps interrupt the moment.</strong> Asking a recipient to install an app or create an account adds friction to a simple exchange.</li>
+        </ul>
+        <p>The design question was: how can a single shared link help two people remember each other and continue the conversation?</p>
+
+        <hr class="section-divider" />
+        <h2>How Stand Apart Works</h2>
+        <p>Stand Apart brings together three parts of the experience:</p>
+        <ul>
+          <li><strong>The iOS app</strong> is where you create your profile, customize your card and website, and see who has connected with you.</li>
+          <li><strong>The Apple Wallet pass</strong> keeps your custom card ready to share in person. Its QR code opens your portfolio website.</li>
+          <li><strong>The portfolio website</strong> presents your bio, work, gallery, and links. Visitors can save your contact or send their details back.</li>
+        </ul>
+        <p>You need an iPhone to create a card in the Stand Apart app. Recipients can open your website on iPhone or Android without installing the app or creating an account.</p>
+
+        <hr class="section-divider" />
+        <h2>Product Walkthrough</h2>
+        <p>From joining the beta to sharing your first card, here is the complete holder journey.</p>
+        <ol class="stand-apart-walkthrough">
+          <li>
+            <div class="stand-apart-step__body">
+              <h3><span class="stand-apart-step__number" aria-hidden="true">01</span>Request early access</h3>
+              <p>Join the <a href="https://stand-apart.com/#notify" target="_blank" rel="noopener">Notify me waitlist</a> for launch updates, or <a href="mailto:hello@stand-apart.com?subject=Stand%20Apart%20TestFlight%20beta%20access">request a TestFlight invitation</a> to try the current beta.</p>
+            </div>
+          </li>
+          <li>
+            <div class="stand-apart-step__body">
+              <h3><span class="stand-apart-step__number" aria-hidden="true">02</span>Install with TestFlight</h3>
+              <p>Open the invitation on your iPhone. Install Apple’s free TestFlight app if prompted, then tap <strong>Accept</strong>, <strong>Install</strong>, and <strong>Open</strong>.</p>
+            </div>
+          </li>
+          <li>
+            <div class="stand-apart-step__body">
+              <h3><span class="stand-apart-step__number" aria-hidden="true">03</span>Open the app and create your profile</h3>
+              <p>Sign in and add your name, photo, role, bio, contact details, and links. Stand Apart uses them to build both your Wallet card and portfolio website.</p>
+            </div>
+          </li>
+          <li>
+            <div class="stand-apart-step__body">
+              <h3><span class="stand-apart-step__number" aria-hidden="true">04</span>Review and customize your design</h3>
+              <p>Preview your card, then refine its content, colours, portfolio, gallery, and Wallet design. One edit keeps your card and website in sync.</p>
+              <div class="stand-apart-shots">
+                <figure>
+                  <img src="images/stand-apart/create.jpg" alt="Stand Apart iOS app showing a preview of a custom Apple Wallet card" width="599" height="1298" loading="lazy" />
+                  <figcaption>Preview before saving.</figcaption>
+                </figure>
+                <figure>
+                  <img src="images/stand-apart/editor.jpg" alt="Stand Apart editor for profile, website, portfolio, gallery, and Wallet pass settings" width="599" height="1298" loading="lazy" />
+                  <figcaption>Customize your card and site together.</figcaption>
+                </figure>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="stand-apart-step__body">
+              <h3><span class="stand-apart-step__number" aria-hidden="true">05</span>Add your card to Apple Wallet</h3>
+              <p>Save the finished pass to Apple Wallet so it is ready whenever you meet someone. The QR code opens your portfolio website.</p>
+              <figure class="stand-apart-shot">
+                <img src="images/stand-apart/wallet.jpg" alt="Custom black and gold Stand Apart business card in Apple Wallet" width="600" height="720" loading="lazy" />
+                <figcaption>Your card stays ready to share in Apple Wallet.</figcaption>
+              </figure>
+            </div>
+          </li>
+          <li>
+            <div class="stand-apart-step__body">
+              <h3><span class="stand-apart-step__number" aria-hidden="true">06</span>Share it your way</h3>
+              <p>Show your Wallet QR in person, send your website link in a message, or use a linked NFC sticker. Every option opens the same portfolio and contact experience.</p>
+              <div class="stand-apart-receiver">
+                <p class="eyebrow">Interactive preview · Example profile</p>
+                <div class="stand-apart-receiver__phone">
+                  <span class="stand-apart-receiver__avatar" aria-hidden="true">JC</span>
+                  <p class="stand-apart-receiver__name">Jane Chen</p>
+                  <p class="stand-apart-receiver__role">Founder · Atlas AI</p>
+                  <button type="button" data-receiver-open="save">Save my contact</button>
+                  <button type="button" data-receiver-open="send">Send yours back →</button>
+                </div>
+                <p class="stand-apart-receiver__note">Tap either button to explore. This preview does not save or send contacts.</p>
+                <a href="https://stand-apart.com/u/f5oofgnjvf" target="_blank" rel="noopener">Try the real recipient experience ↗</a>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <hr class="section-divider" />
+        <h2>What Happens During an Exchange</h2>
+        <p>The holder shares once. The recipient opens the website in their browser, and both people leave with an easy way to reconnect.</p>
+        <ol class="stand-apart-exchange-flow">
+          <li><strong>Share</strong><span>The holder shows their Wallet QR or sends their website link.</span></li>
+          <li><strong>Choose</strong><span>The recipient saves the holder’s contact, sends their own details back, or does both.</span></li>
+          <li><strong>Reconnect</strong><span>The holder sees the new contact in the app and can follow up while the meeting is still fresh.</span></li>
+        </ol>
+        <div class="stand-apart-exchange-screens">
+          <figure>
+            <p class="eyebrow">Recipient’s phone</p>
+            <div class="stand-apart-contact-crop">
+              <img src="images/stand-apart/save-contact.jpg" alt="Recipient phone showing the Save my contact form with optional meeting context" width="275" height="609" loading="lazy" />
+            </div>
+            <figcaption>No app or account is needed. The recipient can save the holder’s details and add where they met.</figcaption>
+          </figure>
+          <figure>
+            <p class="eyebrow">Holder’s iPhone</p>
+            <img src="images/stand-apart/activity.jpg" alt="Holder iPhone showing a newly received contact in the Stand Apart Activity view" width="599" height="1298" loading="lazy" />
+            <figcaption>The returned contact appears in Activity, ready to save and follow up.</figcaption>
+          </figure>
+        </div>
+        <div class="stand-apart-message-examples">
+          <figure class="stand-apart-exchange-form">
+            <p class="eyebrow">Recipient → Holder</p>
+            <img src="images/stand-apart/exchange.jpg" alt="Recipient website form for sending contact details back to the holder" width="1080" height="818" loading="lazy" />
+            <figcaption>“Send yours back” lets the recipient choose which details to share.</figcaption>
+          </figure>
+          <figure class="stand-apart-exchange-form">
+            <p class="eyebrow">Holder → Recipient</p>
+            <a href="https://stand-apart.com/u/f5oofgnjvf" target="_blank" rel="noopener">
+              <img src="images/stand-apart/whatsapp-share.svg" alt="Illustrative WhatsApp message from a card holder: Hi Mateo, great meeting you today! Here is my Stand Apart card — save my contact and explore my work. Includes the live Stand Apart card link." width="360" height="510" loading="lazy" />
+            </a>
+            <figcaption>Example WhatsApp message sharing the holder’s card. Tap the illustration to open the live example. Sample wording, not an actual conversation.</figcaption>
+          </figure>
+        </div>
+
+        <hr class="section-divider" />
+        <h2>Architecture Overview</h2>
+        <p>A native SwiftUI app handles the holder’s experience, while a Vite and React site serves the public work page. Supabase supplies authentication, PostgreSQL, file storage, and access policies. Vercel hosts the website and the server functions used for validation, contact exports, exchange submissions, and Wallet pass generation.</p>
+        <figure class="stand-apart-architecture" aria-labelledby="architecture-caption">
+          <ol class="stand-apart-architecture__flow">
+            <li>
+              <p class="eyebrow">01 / Clients</p>
+              <div class="stand-apart-architecture__nodes">
+                <div><strong>Native iOS app</strong><span>SwiftUI · Create, edit, Wallet, activity</span></div>
+                <div><strong>Public website</strong><span>React + Vite · Work page, save, exchange</span></div>
+              </div>
+            </li>
+            <li>
+              <p class="eyebrow">02 / APIs &amp; data</p>
+              <div class="stand-apart-architecture__nodes">
+                <div><strong>Vercel functions</strong><span>Validate requests · Render QR · Sign passes</span></div>
+                <div><strong>Supabase</strong><span>Auth · PostgreSQL + RLS · Storage · Edge Functions</span></div>
+              </div>
+            </li>
+            <li>
+              <p class="eyebrow">03 / Delivery</p>
+              <div class="stand-apart-architecture__nodes">
+                <div><strong>Apple Wallet + APNs</strong><span>Install and update passes · Notify holders</span></div>
+                <div><strong>Contacts + email</strong><span>vCard export · Resend transactional mail</span></div>
+              </div>
+            </li>
+          </ol>
+          <figcaption id="architecture-caption">The app and browser use Supabase directly for permitted data operations, and Vercel for workflows that need server-side validation or private credentials.</figcaption>
+        </figure>
+        <p>The distinction between those two request paths keeps the design practical. Routine owner-scoped reads and edits use the Supabase SDK with row-level security (RLS). Issuing a Wallet pass goes through a server function, where the user’s token and card ownership are checked before server-held Apple certificates sign the <code>.pkpass</code> file.</p>
+        <p>The public page loads an allow-listed card view through a Supabase function. That gives a recipient the information needed to render the page without exposing the holder’s private account data or Wallet authentication tokens.</p>
+
+        <hr class="section-divider" />
+        <h2>Engineering Decisions</h2>
+        <h3>Native creation, browser-based receiving</h3>
+        <p>I moved card creation into a native iOS app to make Wallet installation, previews, sharing, and contact handling feel at home on the device. Keeping the recipient’s experience on the web removes the installation step at the moment of meeting.</p>
+        <h3>One identity across several surfaces</h3>
+        <p>The card’s data powers the app preview, public page, contact export, and Wallet pass. The QR renderer uses a real encoded QR matrix with deterministic styling. The pass stays static, while the public page can use motion and richer portfolio content.</p>
+        <h3>Update the card without replacing the link</h3>
+        <p>A stable page URL lets the holder update their details without distributing a new link or rewriting an NFC sticker. The PassKit web service registers installed passes and supplies updated signed versions after a change notification.</p>
+        <h3>Keep consent visible</h3>
+        <p>Contact imports require confirmation. Return exchanges use an explicit form, and messaging links open drafts for the user to send. Activity counts describe actions on the page; a save-button action is not proof that someone completed the Contacts import.</p>
+
+        <hr class="section-divider" />
+        <h2>Technology Stack</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th scope="col">Layer</th><th scope="col">Tools and role</th></tr></thead>
+            <tbody>
+              <tr><td>iOS app</td><td>Swift, SwiftUI, PassKit, CoreNFC, native Contacts integration</td></tr>
+              <tr><td>Public website</td><td>React, Vite, Tailwind CSS, Motion</td></tr>
+              <tr><td>Backend and hosting</td><td>Vercel Node.js functions and static hosting</td></tr>
+              <tr><td>Identity and data</td><td>Supabase Auth, PostgreSQL with RLS, Storage, Edge Functions</td></tr>
+              <tr><td>Wallet and QR</td><td>passkit-generator, node-canvas, qrcode</td></tr>
+              <tr><td>Notifications and email</td><td>Apple Push Notification service (APNs), Resend</td></tr>
+              <tr><td>iOS distribution</td><td>Xcode, fastlane, TestFlight</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="section-divider" />
+        <h2>Current Stage &amp; What Comes Next</h2>
+        <p>The public website and receiver experience are live, and the native app is being tested through TestFlight. This version uses manual card creation and focuses on one professional card per user, the Wallet experience, and two-way exchange. LinkedIn-to-card generation is a future direction rather than a requirement for using the beta.</p>
+        <p>The next step is learning from real introductions: whether people find their pass quickly, whether recipients understand the exchange, and whether the saved context helps them reconnect. Those observations will guide refinements to onboarding and sharing as the app moves toward public release.</p>
+        <p>Explore <a href="https://stand-apart.com/u/f5oofgnjvf" target="_blank" rel="noopener">the live example</a>, <a href="https://stand-apart.com/#notify" target="_blank" rel="noopener">join the launch waitlist</a>, or <a href="mailto:hello@stand-apart.com?subject=Stand%20Apart%20TestFlight%20beta%20access">get in touch to try the iOS beta</a>.</p>
+      </article>
+
+      <nav class="project-page__pager" data-reveal aria-label="Project pager">
+        <a href="index.html#main">← All projects</a>
+        <a rel="next" href="DeliveryRouteOptimisation.html">Next →</a>
+      </nav>
+    </main>
+
+    <section id="contact" class="contact" data-reveal>
+      <h2 class="contact__title">Keep in touch</h2>
+      <p class="contact__eyebrow eyebrow--with-arrow">Contact</p>
+      <a class="contact__email" data-user="jinghui.me" data-domain="gmail.com" aria-label="Email me">Email me</a><noscript><span class="contact__email-fallback">jinghui dot me [at] gmail dot com</span></noscript>
+      <p class="contact__location"><span>Based in</span><br />Singapore</p>
+    </section>
+    <footer id="footer" class="site-footer">
+      <p class="site-footer__eyebrow">Follow me</p>
+      <ul class="site-footer__socials">
+        <li><a href="https://www.linkedin.com/in/jinghuiwong/?trk=public_profile_browsemap" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://github.com/Jhwong19" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+      </ul>
+      <button class="btn-to-top" aria-label="Scroll to top"><span aria-hidden="true">↑</span></button>
+      <p class="site-footer__copyright">© Jing Hui Wong · AI Engineer</p>
+    </footer>
+    <dialog class="stand-apart-receiver-dialog" aria-labelledby="receiver-dialog-title">
+      <button type="button" class="stand-apart-receiver-dialog__close" aria-label="Close preview">×</button>
+      <h2 id="receiver-dialog-title">Contact preview</h2>
+      <form id="receiver-save" hidden>
+        <p>Save Jane’s details with a reminder of where you met.</p>
+        <p><strong>Jane Chen</strong><br />Founder · Atlas AI</p>
+        <label>Where we met<input name="where" value="SaaStr Annual · San Francisco" /></label>
+        <label>How we met<select name="how"><option>Conference / Event</option><option>Meeting</option><option>Coffee chat</option><option>Networking</option><option>Introduction</option></select></label>
+        <button type="submit">Preview saving to my phone</button>
+      </form>
+      <form id="receiver-send" hidden>
+        <p>Try the return exchange using fictional details.</p>
+        <label>Name<input name="name" value="Mateo Ferraro" required /></label>
+        <label>Phone<input name="phone" type="tel" value="+65 9000 0001" /></label>
+        <label>Email<input name="email" type="email" value="mateo@example.com" /></label>
+        <label>Company<input name="company" value="Pixel Studio" /></label>
+        <button type="submit">Choose how to send →</button>
+      </form>
+      <div id="receiver-channels" hidden>
+        <p>Choose a channel to preview the final step.</p>
+        <button type="button" data-receiver-channel>WhatsApp</button>
+        <button type="button" data-receiver-channel>Telegram</button>
+        <button type="button" data-receiver-channel>SMS</button>
+        <button type="button" data-receiver-channel>Email</button>
+      </div>
+      <p id="receiver-status" role="status"></p>
+      <p class="stand-apart-receiver__note">Demo only. Nothing is downloaded, stored, or sent.</p>
+    </dialog>
+    <script defer src="assets/js/site.js"></script>
+    <script defer src="assets/js/stand-apart-demo.js"></script>
+  </body>
+</html>

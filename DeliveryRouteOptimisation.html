@@ -13,6 +13,51 @@
     <link rel="manifest" href="favicon/site.webmanifest">
 
     <link rel="stylesheet" href="assets/css/site.css" />
+    <style>
+      /* Page-specific sizing for the embedded Hugging Face demo. */
+      #delivery-route-demo {
+        width: min(calc(100% - 3rem), 80ch);
+        margin: var(--space-5) auto 0;
+        font-family: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      #delivery-route-demo > .eyebrow {
+        margin: 0 0 var(--space-2);
+      }
+
+      #delivery-route-demo .hf-embed__frame {
+        box-sizing: border-box;
+        width: 100%;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        background: #111;
+      }
+
+      #delivery-route-demo iframe {
+        display: block;
+        width: 100%;
+        height: clamp(34rem, 75vh, 52rem);
+        border: 0;
+      }
+
+      #delivery-route-demo .hf-embed__fallback {
+        margin: var(--space-2) 0 0;
+        color: var(--color-muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      #delivery-route-demo .hf-embed__fallback a {
+        color: var(--color-fg);
+      }
+
+      @media (min-width: 900px) {
+        #delivery-route-demo {
+          width: min(calc(100% - 8rem), 80ch);
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
@@ -33,12 +78,14 @@
           <img src="gif/delivery_route_optimisation.gif" alt="Animated demo of the optimiser scheduler producing routes on a map." />
         </figure>
 
-        <section class="hf-embed" data-reveal>
+        <section id="delivery-route-demo" class="hf-embed" data-reveal>
           <p class="eyebrow">Live demo</p>
           <div class="hf-embed__frame">
             <iframe
               src="https://jing997-deliveryrouteoptimisation.hf.space"
               title="Delivery Route Optimisation live demo on Hugging Face Spaces"
+              width="100%"
+              height="800"
               loading="lazy"
               allow="clipboard-read; clipboard-write; fullscreen"
               referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -320,7 +367,7 @@
         </article>
 
         <nav class="project-page__pager" data-reveal aria-label="Project pager">
-          <a rel="prev" href="index.html">← Previous</a>
+          <a rel="prev" href="StandApart.html">← Previous</a>
           <a rel="next" href="ChaptiveAI.html">Next →</a>
         </nav>
 

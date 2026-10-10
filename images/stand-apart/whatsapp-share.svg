@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="510" viewBox="0 0 360 510" role="img" aria-labelledby="title desc">
+  <title id="title">Sample WhatsApp card share</title>
+  <desc id="desc">A fictional holder shares a Stand Apart card link with Mateo. This is an illustration, not a real conversation.</desc>
+  <defs>
+    <clipPath id="screen"><rect width="360" height="510" rx="22"/></clipPath>
+    <pattern id="texture" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M10 8l5 5-5 5M25 26h4" fill="none" stroke="#ffffff" stroke-opacity=".035" stroke-width="1.5"/></pattern>
+  </defs>
+  <g clip-path="url(#screen)" font-family="Arial, Helvetica, sans-serif">
+    <rect width="360" height="510" fill="#0b141a"/>
+    <rect y="92" width="360" height="418" fill="url(#texture)"/>
+    <rect width="360" height="92" fill="#202c33"/>
+    <text x="20" y="24" fill="#e9edef" font-size="11">9:41</text>
+    <text x="287" y="24" fill="#e9edef" font-size="10">● ▰</text>
+    <path d="M23 52l-8 8 8 8" stroke="#aebac1" stroke-width="2" fill="none"/>
+    <circle cx="51" cy="61" r="18" fill="#6d8d7d"/>
+    <text x="51" y="66" fill="#fff" text-anchor="middle" font-size="14">M</text>
+    <text x="80" y="58" fill="#e9edef" font-size="16" font-weight="bold">Mateo</text>
+    <text x="80" y="76" fill="#aebac1" font-size="10">Sample conversation</text>
+    <path d="M291 53q-6 10 8 16l4-4-5-4-3 2-3-5 2-3z" fill="none" stroke="#aebac1" stroke-width="1.5"/>
+    <circle cx="332" cy="55" r="1.5" fill="#aebac1"/><circle cx="332" cy="61" r="1.5" fill="#aebac1"/><circle cx="332" cy="67" r="1.5" fill="#aebac1"/>
+    <rect x="150" y="110" width="60" height="24" rx="6" fill="#18252c"/>
+    <text x="180" y="126" fill="#aebac1" text-anchor="middle" font-size="10">TODAY</text>
+    <rect x="40" y="153" width="298" height="235" rx="10" fill="#005c4b"/>
+    <path d="M330 153h17l-9 13" fill="#005c4b"/>
+    <text x="56" y="179" fill="#e9edef" font-size="14">
+      <tspan x="56">Hi Mateo, great meeting you today!</tspan>
+      <tspan x="56" dy="24">Here’s my Stand Apart card —</tspan>
+      <tspan x="56" dy="21">save my contact and explore</tspan>
+      <tspan x="56" dy="21">my work.</tspan>
+    </text>
+    <rect x="52" y="276" width="274" height="65" rx="6" fill="#044c40"/>
+    <text x="64" y="298" fill="#e9edef" font-size="12" font-weight="bold">Stand Apart · My digital card</text>
+    <text x="64" y="321" fill="#80d9f7" font-size="12">stand-apart.com/u/f5oofgnjvf</text>
+    <text x="272" y="370" fill="#a5c8be" font-size="10">9:41</text>
+    <path d="M299 366l3 3 7-7m-2 4l3 3 7-7" fill="none" stroke="#53bdeb" stroke-width="1.5"/>
+    <rect x="18" y="438" width="282" height="46" rx="23" fill="#202c33"/>
+    <circle cx="40" cy="461" r="8" fill="none" stroke="#8696a0" stroke-width="1.5"/>
+    <path d="M36 464q4 4 8 0" fill="none" stroke="#8696a0"/>
+    <text x="59" y="466" fill="#8696a0" font-size="14">Message</text>
+    <circle cx="327" cy="461" r="23" fill="#00a884"/>
+    <rect x="323" y="451" width="8" height="13" rx="4" fill="#082e26"/>
+    <path d="M320 460v2a7 7 0 0014 0v-2m-7 9v4" fill="none" stroke="#082e26" stroke-width="2"/>
+  </g>
+</svg>

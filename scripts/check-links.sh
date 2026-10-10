@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Walk the four top-level HTML pages, extract internal href/src values
+# Walk the portfolio HTML pages, extract internal href/src values
 # (relative paths only — skip http*, mailto:, anchors), and HEAD-check
 # each one against http://localhost:8000. Print non-200s. Exit non-zero
 # if any fail. Assumes scripts/serve.sh is already running.
@@ -7,7 +7,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-PAGES="index.html profile.html DeliveryRouteOptimisation.html ChaptiveAI.html"
+PAGES="index.html profile.html StandApart.html DeliveryRouteOptimisation.html ChaptiveAI.html"
 BASE="http://localhost:8000"
 
 SEEN_FILE="$(mktemp -t check-links-seen.XXXXXX)"
