@@ -1814,6 +1814,314 @@ body[data-page-transitions] {
   list-style: none;
 }
 
+/* ---- Stand Apart case study ------------------------------------------ */
+.stand-apart-shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.stand-apart-shots figure,
+.stand-apart-shot,
+.stand-apart-architecture {
+  margin: var(--space-3) 0;
+}
+.stand-apart-shot {
+  max-width: 320px;
+  margin-inline: auto;
+}
+.stand-apart-shots figcaption,
+.stand-apart-shot figcaption,
+.stand-apart-architecture figcaption {
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: var(--color-muted);
+  text-align: center;
+}
+.project-page__body .stand-apart-architecture__flow {
+  list-style: none;
+  padding: 0;
+}
+.stand-apart-architecture__flow > li {
+  margin: 0;
+}
+.stand-apart-architecture__flow > li + li::before {
+  content: "↓";
+  display: block;
+  margin: var(--space-2) 0;
+  color: var(--color-muted);
+  text-align: center;
+}
+.stand-apart-architecture__nodes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.stand-apart-architecture__nodes > div {
+  padding: var(--space-2);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.stand-apart-architecture__nodes strong,
+.stand-apart-architecture__nodes span {
+  display: block;
+}
+.stand-apart-architecture__nodes span {
+  margin-top: var(--space-1);
+  font-size: 0.9em;
+}
+
+.project-page__body ol.stand-apart-walkthrough {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+.project-page__body ol.stand-apart-walkthrough > li {
+  display: block;
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+}
+.project-page__body ol.stand-apart-walkthrough > li::before {
+  content: none;
+}
+.stand-apart-step__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--accent-gradient);
+  color: #070707;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.stand-apart-step__body {
+  min-width: 0;
+}
+.project-page__body .stand-apart-step__body h3 {
+  margin: 0 0 var(--space-1);
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+}
+.project-page__body .stand-apart-step__body > p:last-child {
+  margin-bottom: 0;
+}
+
+.stand-apart-receiver { text-align: center; margin-top: var(--space-3); }
+.stand-apart-receiver__phone {
+  box-sizing: border-box;
+  max-width: 280px;
+  min-height: 460px;
+  margin: var(--space-2) auto;
+  padding: 65px 20px 35px;
+  border: 8px solid #1b1b1f;
+  border-radius: 36px;
+  background: radial-gradient(ellipse at 15% 10%, #6e492b, transparent 65%), radial-gradient(ellipse at 90% 70%, #28554d, transparent 70%), #0c1116;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+}
+.stand-apart-receiver__avatar {
+  display: inline-grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #c5ab83;
+  color: #141414;
+  font-weight: 700;
+}
+.project-page__body .stand-apart-receiver__name { margin: 15px 0 0; font-weight: 700; }
+.project-page__body .stand-apart-receiver__role { font-size: 0.8rem; margin: 4px 0 28px; }
+.stand-apart-receiver button, .stand-apart-receiver-dialog button {
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 10px;
+  border: 1px solid #ffffff60;
+  border-radius: 24px;
+  background: #ffffff0d;
+  color: #fff;
+  font: inherit;
+  font-size: 0.85rem;
+}
+.stand-apart-receiver button:first-of-type, .stand-apart-receiver-dialog button[type="submit"] {
+  background: linear-gradient(110deg, #854320, #6a6e30);
+}
+.stand-apart-receiver button:hover, .stand-apart-receiver-dialog button:hover { border-color: #fff; }
+.stand-apart-receiver button:focus-visible, .stand-apart-receiver-dialog :focus-visible { outline: 2px solid #c5ab83; outline-offset: 3px; }
+.project-page__body .stand-apart-receiver__note, .stand-apart-receiver__note { font-size: 0.8rem; color: #aaa; line-height: 1.5; }
+.stand-apart-receiver-dialog {
+  box-sizing: border-box;
+  width: min(420px, calc(100% - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  padding: 28px;
+  border: 1px solid #ffffff30;
+  border-radius: 24px;
+  background: #0c1116;
+  color: #eee;
+  font-family: var(--font-body, "Inter", sans-serif);
+}
+.stand-apart-receiver-dialog::backdrop { background: #000b; }
+.stand-apart-receiver-dialog h2 { font-size: 1.25rem; padding-right: 25px; }
+.stand-apart-receiver-dialog p { font-size: 0.9rem; line-height: 1.5; }
+.stand-apart-receiver-dialog label { display: block; margin-top: 14px; font-size: 0.8rem; }
+.stand-apart-receiver-dialog input, .stand-apart-receiver-dialog select {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ffffff30;
+  border-radius: 8px;
+  background: #192027;
+  color: #fff;
+  font: inherit;
+}
+.stand-apart-receiver-dialog .stand-apart-receiver-dialog__close { position: absolute; top: 8px; right: 12px; width: 36px; padding: 5px; font-size: 1.4rem; }
+.project-page__body .stand-apart-exchange-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  padding: 0;
+  margin: var(--space-4) 0;
+  list-style: none;
+  counter-reset: exchange-step;
+}
+.project-page__body .stand-apart-exchange-flow li {
+  counter-increment: exchange-step;
+  margin: 0;
+  padding: var(--space-2);
+  border-top: 2px solid rgba(255, 255, 255, 0.22);
+}
+.stand-apart-exchange-flow li::before {
+  content: "0" counter(exchange-step);
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+.stand-apart-exchange-flow strong,
+.stand-apart-exchange-flow span {
+  display: block;
+}
+.stand-apart-exchange-flow strong {
+  margin-bottom: 0.35rem;
+  color: var(--color-fg);
+  font-size: 1.05em;
+}
+.stand-apart-exchange-flow span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92em;
+  line-height: 1.5;
+}
+.stand-apart-exchange-screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.stand-apart-exchange-screens figure {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: clamp(1rem, 3vw, 1.75rem);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.project-page__body .stand-apart-exchange-screens .eyebrow {
+  margin-bottom: var(--space-2);
+  color: var(--color-muted);
+}
+.project-page__body .stand-apart-exchange-screens img {
+  width: auto;
+  max-width: 100%;
+  max-height: 560px;
+  margin: 0 auto var(--space-2);
+  border-radius: 18px;
+}
+.stand-apart-contact-crop {
+  width: 100%;
+  max-width: 275px;
+  aspect-ratio: 275 / 535;
+  overflow: hidden;
+  border-radius: 18px;
+  margin: 0 auto var(--space-2);
+}
+.project-page__body .stand-apart-contact-crop img {
+  display: block;
+  width: 100%;
+  max-height: none;
+  margin: 0;
+  border-radius: 0;
+  transform: translateY(-12.15%);
+}
+.stand-apart-message-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  align-items: start;
+}
+.stand-apart-message-examples figure {
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+}
+.project-page__body .stand-apart-message-examples .eyebrow { font-size: 0.7rem; }
+.stand-apart-exchange-screens figcaption,
+.stand-apart-exchange-form figcaption {
+  color: var(--color-muted);
+  font-size: 0.9em;
+  line-height: 1.5;
+  text-align: center;
+}
+.stand-apart-exchange-form {
+  margin: var(--space-3) 0 0;
+}
+.project-page__body .stand-apart-exchange-form img {
+  margin-bottom: var(--space-1);
+}
+@media (max-width: 599px) {
+  .stand-apart-shots,
+  .stand-apart-architecture__nodes,
+  .stand-apart-exchange-screens,
+  .stand-apart-message-examples,
+  .project-page__body .stand-apart-exchange-flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stand-apart-shots figure {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+  .project-page__body ol.stand-apart-walkthrough > li {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    padding: var(--space-2);
+  }
+  .project-page__body ol.stand-apart-walkthrough > li::before {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.72rem;
+  }
+}
+
 /* ---- Inline math (no MathJax — pure HTML/Unicode) ----------------------- */
 .project-page__body var {
   font-family: 'JetBrains Mono', 'Cambria Math', Cambria, serif;
